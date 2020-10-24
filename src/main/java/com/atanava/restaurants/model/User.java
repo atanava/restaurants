@@ -10,10 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
@@ -57,10 +54,20 @@ public class User extends AbstractNamedEntity {
     @BatchSize(size = 200)
     private Set<Role> roles;
 
+    //TODO add other annotations
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Vote> votes;
 
     public User() {
+    }
+
+    public User(User user) {
+        this(user.getId(), user.getName(), user.getEmail(), user.getPassword(),
+                user.getRegistered(), user.isEnabled(), user.getRoles(), user.getVotes());
+    }
+
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, new Date(), true, EnumSet.of(role, roles), Collections.emptyList());
     }
 
     public User(Integer id, String name, String email, String password, Date registered,

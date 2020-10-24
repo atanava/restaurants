@@ -11,8 +11,7 @@ VALUES  ('Admin', 'admin@gmail.com', 'admin'),
         ('User2', 'user2@hot.ee', 'password');
 
 INSERT INTO user_roles (role, user_id)
-VALUES  ('USER', 100000),
-        ('ADMIN', 100000),
+VALUES  ('ADMIN', 100000),
         ('USER', 100001),
         ('USER', 100002);
 
@@ -33,5 +32,5 @@ VALUES  (100003, 'Salat', 400),
         (100004, 'Juice', 120);
 
 INSERT INTO votes (restaurant_id, user_id)
-VALUES (100004, 100000),
-       (100004, 100001);
+VALUES (100003, 100001),
+       (100004, 100002);
