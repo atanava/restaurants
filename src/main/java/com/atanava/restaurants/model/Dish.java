@@ -3,7 +3,7 @@ package com.atanava.restaurants.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name =  "dishes")
+@Table(name =  "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "unique_dish_idx")})
 public class Dish extends AbstractNamedEntity{
 
 

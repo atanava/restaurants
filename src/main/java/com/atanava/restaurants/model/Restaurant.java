@@ -10,8 +10,8 @@ import java.util.Set;
 @Table(name = "restaurants")
 public class Restaurant extends AbstractNamedEntity {
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<Dish> dishes;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+//    private Set<Dish> dishes;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<Vote> votes;
@@ -21,18 +21,18 @@ public class Restaurant extends AbstractNamedEntity {
 
     public Restaurant(Integer id, String name, Set<Dish> dishes, Set<Vote> votes) {
         super(id, name);
-        this.dishes = dishes;
+//        this.dishes = dishes;
         this.votes = votes;
     }
 
 
-    public Set<Dish> getDishes() {
-        return dishes;
-    }
-
-    public void setDishes(Set<Dish> dishes) {
-        this.dishes = dishes;
-    }
+//    public Set<Dish> getDishes() {
+//        return dishes;
+//    }
+//
+//    public void setDishes(Set<Dish> dishes) {
+//        this.dishes = dishes;
+//    }
 
     public Set<Vote> getVotes() {
         return votes;
