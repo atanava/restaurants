@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static com.atanava.restaurants.DbSequence.*;
 import static com.atanava.restaurants.UserTestData.*;
 
 @ContextConfiguration({
@@ -45,38 +46,38 @@ public class UserRepositoryTest {
 
     @Test
     public void delete() {
-        repository.delete(USER1_ID);
-        assertNull(repository.get(USER1_ID));
+        repository.delete(USER1_ID.value);
+        assertNull(repository.get(USER1_ID.value));
     }
 
     @Test
     public void get() {
-        User user = repository.get(USER1_ID);
-        USER_MATCHER.assertMatch(user, USER1);
+        User user = repository.get(USER1_ID.value);
+        USER_MATCHER.assertMatch(user, expectedUser1);
     }
 
     @Test
     public void getNotFound() throws Exception {
-        assertNull(repository.get(NOT_FOUND));
+        assertNull(repository.get(NOT_FOUND.value));
     }
 
     @Test
     public void getByEmail() {
         User user = repository.getByEmail("admin@gmail.com");
-        USER_MATCHER.assertMatch(user, ADMIN);
+        USER_MATCHER.assertMatch(user, expectedAdmin);
     }
 
     @Test
     public void update() throws Exception {
         User updated = getUpdated();
         repository.save(updated);
-        USER_MATCHER.assertMatch(repository.get(USER1_ID), getUpdated());
+        USER_MATCHER.assertMatch(repository.get(USER1_ID.value), getUpdated());
     }
 
     @Test
     public void getAll() {
         List<User> all = repository.getAll();
-        USER_MATCHER.assertMatch(all, ADMIN, USER1, USER2);
+        USER_MATCHER.assertMatch(all, expectedAdmin, expectedUser1, expectedUser2);
     }
 
 //    @Test

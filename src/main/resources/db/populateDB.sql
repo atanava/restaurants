@@ -21,7 +21,7 @@ VALUES  ('Gloria'),
         ('Troika');
 
 INSERT INTO dishes (name)
-VALUES  ('Salat'),
+VALUES  ('Salad'),
         ('Soup'),
         ('Meat'),
         ('Fish'),
