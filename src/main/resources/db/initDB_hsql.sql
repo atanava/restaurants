@@ -48,7 +48,7 @@ CREATE TABLE menus
     restaurant_id INTEGER                   NOT NULL,
     date          DATE DEFAULT CURRENT_DATE NOT NULL,
     price         INTEGER                   NOT NULL,
-    FOREIGN KEY (dish_id) REFERENCES dishes (id),
+    FOREIGN KEY (dish_id) REFERENCES dishes (id) ON DELETE CASCADE,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX unique_dish_restaurant_date_idx on menus (dish_id, restaurant_id, date);

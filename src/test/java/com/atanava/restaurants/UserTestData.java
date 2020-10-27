@@ -8,11 +8,6 @@ import static com.atanava.restaurants.DbSequence.*;
 public class UserTestData {
     public static TestMatcher<User> USER_MATCHER = TestMatcher.usingFieldsComparator("registered", "roles", "votes");
 
-//    public static final int NOT_FOUND = 10;
-//    public static final int ADMIN_ID = START_SEQ;
-//    public static final int USER1_ID = START_SEQ + 1;
-//    public static final int USER2_ID = START_SEQ + 2;
-
     public static final User expectedAdmin = new User(ADMIN_ID.value, "Admin", "admin@gmail.com", "admin", Role.ADMIN);
     public static final User expectedUser1 = new User(USER1_ID.value, "User1", "user1@yandex.ru", "password", Role.USER);
     public static final User expectedUser2 = new User(USER2_ID.value, "User2", "user2@hot.ee", "password", Role.USER);

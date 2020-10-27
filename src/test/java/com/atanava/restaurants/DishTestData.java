@@ -2,6 +2,10 @@ package com.atanava.restaurants;
 
 import com.atanava.restaurants.model.Dish;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import static com.atanava.restaurants.DbSequence.*;
 
 public class DishTestData {
@@ -20,5 +24,16 @@ public class DishTestData {
         Dish updated = new Dish(expectedDish1);
         updated.setName("UpdatedName");
         return updated;
+    }
+
+    public static List<Dish> getSorted() {
+        List<Dish> expectedList = new ArrayList<>();
+        expectedList.add(expectedDish1);
+        expectedList.add(expectedDish2);
+        expectedList.add(expectedDish3);
+        expectedList.add(expectedDish4);
+        expectedList.add(expectedDish5);
+        expectedList.sort(Comparator.comparing(Dish::getName));
+        return expectedList;
     }
 }
