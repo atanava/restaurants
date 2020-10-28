@@ -20,29 +20,29 @@ INSERT INTO restaurants (name)
 VALUES  ('Gloria'),
         ('Troika');
 
-INSERT INTO dishes (restaurant_id, name, is_in_menu)
-VALUES  (100003, 'Salad', true),
-        (100003, 'Soup', true),
-        (100003, 'Meat', true),
-        (100003, 'Fish', true),
-        (100003, 'Juice', true),
-        (100004, 'Salad', true),
-        (100004, 'Soup', true),
-        (100004, 'Meat', true),
-        (100004, 'Fish', true),
-        (100004, 'Juice', true);
+INSERT INTO dishes (restaurant_id, name, is_in_menu, price)
+VALUES  (100003, 'Salad', true, 400),
+        (100003, 'Soup', true, 530),
+        (100003, 'Meat', true, 750),
+        (100003, 'Fish', true, 960),
+        (100003, 'Juice', true, 200),
+        (100004, 'Salad', true, 320),
+        (100004, 'Soup', true, 400),
+        (100004, 'Meat', true, 550),
+        (100004, 'Fish', true, 650),
+        (100004, 'Juice', true, 120);
 
-INSERT INTO menus (dish_id, price)
-VALUES  (100005, 400),
-        (100006, 530),
-        (100007, 750),
-        (100008, 960),
-        (100009, 200),
-        (100010, 320),
-        (100011, 400),
-        (100012, 550),
-        (100013, 650),
-        (100014, 120);
+INSERT INTO menus (restaurant_id, dish_id)
+VALUES  (100003, 100005),
+        (100003, 100006),
+        (100003, 100007),
+        (100003, 100008),
+        (100003, 100009),
+        (100004, 100010),
+        (100004, 100011),
+        (100004, 100012),
+        (100004, 100013),
+        (100004, 100014);
 
 INSERT INTO votes (restaurant_id, user_id)
 VALUES (100003, 100001),

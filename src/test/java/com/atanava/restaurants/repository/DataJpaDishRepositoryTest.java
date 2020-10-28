@@ -40,7 +40,7 @@ public class DataJpaDishRepositoryTest {
     @Test
     public void duplicateSaved() throws Exception {
         assertThrows(DataAccessException.class, () -> repository.save(new Dish(
-                null, gloria, "Salad", true, false)));
+                null, gloria, "Salad", true, false, 300)));
     }
 
     @Test
