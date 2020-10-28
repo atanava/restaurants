@@ -39,7 +39,8 @@ public class DataJpaDishRepositoryTest {
 
     @Test
     public void duplicateSaved() throws Exception {
-        assertThrows(DataAccessException.class, () -> repository.save(new Dish(null ,"Salad")));
+        assertThrows(DataAccessException.class, () -> repository.save(new Dish(
+                null, gloria, "Salad", true, false)));
     }
 
     @Test
@@ -50,8 +51,8 @@ public class DataJpaDishRepositoryTest {
 
     @Test
     public void get() {
-        Dish dish = repository.get(DISH1_ID.value);
-        assertThat(dish).isEqualTo(expectedDish1);
+        Dish dish = repository.get(DISH4_ID.value);
+        assertThat(dish).isEqualTo(getSorted().get(0));
     }
 
     @Test
@@ -63,12 +64,12 @@ public class DataJpaDishRepositoryTest {
     public void update() throws Exception {
         Dish updated = getUpdated();
         repository.save(updated);
-        assertThat(repository.get(DISH1_ID.value)).isEqualTo(getUpdated());
+        assertThat(repository.get(DISH4_ID.value)).isEqualTo(getUpdated());
     }
 
     @Test
     public void getAll() {
-        List<Dish> all = repository.getAll();
+        List<Dish> all = repository.getAll(RESTAURANT1_ID.value);
         assertThat(all).isEqualTo(getSorted());
     }
 }

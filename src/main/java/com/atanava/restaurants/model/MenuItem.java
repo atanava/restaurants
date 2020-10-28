@@ -11,12 +11,6 @@ import java.util.Date;
 @Table(name = "menus")
 public class MenuItem extends AbstractNamedEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
-    private Restaurant restaurant;
-
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
     @NotNull
     Date date = new Date();
@@ -28,19 +22,10 @@ public class MenuItem extends AbstractNamedEntity {
     public MenuItem() {
     }
 
-    public MenuItem(Integer id, String name, Restaurant restaurant, Date date, Integer price) {
+    public MenuItem(Integer id, String name, Date date, Integer price) {
         super(id, name);
-        this.restaurant = restaurant;
         this.date = date;
         this.price = price;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
     }
 
     public Date getDate() {

@@ -74,6 +74,7 @@ public class UserRepositoryTest {
         USER_MATCHER.assertMatch(repository.get(USER1_ID.value), getUpdated());
     }
 
+    // TODO refactor for sorting
     @Test
     public void getAll() {
         List<User> all = repository.getAll();
