@@ -5,8 +5,9 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "menus")
@@ -18,23 +19,29 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private Restaurant restaurant;
 
-////    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dish_id")
-//    @JoinTable(name = "dishes")
-//    @NotNull
-//    private List<Dish> dishes;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "dishes_menus",
+            joinColumns = @JoinColumn(name = "menu_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id"))
+    private Set<Dish> dishes;
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
     @NotNull
     private Date date = new Date();
 
-
     public Menu() {
     }
 
-    public Menu(Integer id, Restaurant restaurant, List<Dish> dishes, Date date) {
+    public Menu(Integer id, Restaurant restaurant) {
         super(id);
         this.restaurant = restaurant;
-//        this.dishes = dishes;
+        this.dishes = Collections.emptySet();
+    }
+
+    public Menu(Integer id, Restaurant restaurant, Set<Dish> dishes, Date date) {
+        super(id);
+        this.restaurant = restaurant;
+        this.dishes = dishes;
         this.date = date;
     }
 
@@ -46,14 +53,14 @@ public class Menu extends AbstractBaseEntity {
         this.restaurant = restaurant;
     }
 
-//    public List<Dish> getDishes() {
-//        return dishes;
-//    }
-//
-//    public void setDishes(List<Dish> dishes) {
-//        this.dishes = dishes;
-//    }
-//
+    public Set<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(Set<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
     public Date getDate() {
         return date;
     }
