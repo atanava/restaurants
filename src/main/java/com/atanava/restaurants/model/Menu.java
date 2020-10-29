@@ -18,10 +18,10 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private Restaurant restaurant;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dish_id")
-    @JoinTable(name = "dishes")
-    @NotNull
-    private List<Dish> dishes;
+////    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dish_id")
+//    @JoinTable(name = "dishes")
+//    @NotNull
+//    private List<Dish> dishes;
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
     @NotNull
@@ -34,7 +34,7 @@ public class Menu extends AbstractBaseEntity {
     public Menu(Integer id, Restaurant restaurant, List<Dish> dishes, Date date) {
         super(id);
         this.restaurant = restaurant;
-        this.dishes = dishes;
+//        this.dishes = dishes;
         this.date = date;
     }
 
@@ -46,14 +46,14 @@ public class Menu extends AbstractBaseEntity {
         this.restaurant = restaurant;
     }
 
-    public List<Dish> getDishes() {
-        return dishes;
-    }
-
-    public void setDishes(List<Dish> dishes) {
-        this.dishes = dishes;
-    }
-
+//    public List<Dish> getDishes() {
+//        return dishes;
+//    }
+//
+//    public void setDishes(List<Dish> dishes) {
+//        this.dishes = dishes;
+//    }
+//
     public Date getDate() {
         return date;
     }

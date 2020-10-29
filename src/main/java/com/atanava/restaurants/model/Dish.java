@@ -36,6 +36,8 @@ public class Dish extends AbstractNamedEntity{
     @NotNull
     private Integer price;
 
+    
+
     public Dish() {
     }
 
