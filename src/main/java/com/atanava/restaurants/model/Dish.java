@@ -5,6 +5,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
@@ -13,9 +15,9 @@ import javax.validation.constraints.NotNull;
 })
 
 @Entity
-@Table(name =  "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id","name"}
-                                                , name = "unique_restaurant_id_dish_name_idx")})
-public class Dish extends AbstractNamedEntity{
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "name"}
+        , name = "unique_restaurant_id_dish_name_idx")})
+public class Dish extends AbstractNamedEntity {
 
     public static final String DELETE = "Dish.delete";
     public static final String BY_RESTAURANT = "Dish.getByRestaurant";
@@ -26,32 +28,40 @@ public class Dish extends AbstractNamedEntity{
     @NotNull
     private Restaurant restaurant;
 
-    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
-    private boolean enabled = true;
-
-    @Column(name = "is_in_menu", nullable = false, columnDefinition = "bool default false")
-    private boolean isInMenu = false;
-
     @Column(name = "price", nullable = false)
     @NotNull
     private Integer price;
 
-    
+    @Column(name = "active", nullable = false, columnDefinition = "bool default true")
+    private boolean active = true;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "dishes_menus",
+            joinColumns = @JoinColumn(name = "dish_id"),
+            inverseJoinColumns = @JoinColumn(name = "menu_id"))
+    Set<Menu> menus;
 
     public Dish() {
     }
 
-    public Dish(Dish d) {
-        this(d.getId(), d.getRestaurant(), d.getName(), d.isEnabled(), d.isInMenu(), d.getPrice());
-    }
-
-    public Dish(Integer id, Restaurant restaurant, String name, boolean enabled, boolean isInMenu, Integer price) {
+    public Dish(Integer id, Restaurant restaurant, String name, Integer price) {
         super(id, name);
         this.restaurant = restaurant;
-        this.enabled = enabled;
-        this.isInMenu = isInMenu;
         this.price = price;
+        this.menus = Collections.emptySet();
     }
+
+    public Dish(Dish d) {
+        this(d.getId(), d.getRestaurant(), d.getName(), d.getPrice());
+    }
+
+//    public Dish(Integer id, Restaurant restaurant, String name, Integer price, boolean active, Set<Menu> menus) {
+//        super(id, name);
+//        this.restaurant = restaurant;
+//        this.active = active;
+//        this.price = price;
+//        this.menus = menus;
+//    }
 
     public Restaurant getRestaurant() {
         return restaurant;
@@ -61,28 +71,28 @@ public class Dish extends AbstractNamedEntity{
         this.restaurant = restaurant;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public boolean isInMenu() {
-        return isInMenu;
-    }
-
-    public void setInMenu(boolean inMenu) {
-        isInMenu = inMenu;
-    }
-
     public Integer getPrice() {
         return price;
     }
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean enabled) {
+        this.active = enabled;
+    }
+
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
     }
 
     @Override

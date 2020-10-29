@@ -32,7 +32,7 @@ VALUES  (100003, 'Salad', 400, true),
         (100004, 'Fish', 650, true),
         (100004, 'Juice', 120, true);
 
-INSERT INTO menu_items (restaurant_id)
+INSERT INTO menus (restaurant_id)
 VALUES (100003),
         (100003),
         (100003),
@@ -44,7 +44,7 @@ VALUES (100003),
         (100004),
         (100004);
 
-INSERT INTO menus (dish_id, menu_item_id)
+INSERT INTO dishes_menus (dish_id, menu_id)
 VALUES  (100005, 100015),
         (100006, 100016),
         (100007, 100017),

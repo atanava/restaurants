@@ -20,7 +20,7 @@ public class DishTestData {
     public static final Restaurant gloria =  new Restaurant(RESTAURANT1_ID.value, "Gloria");
 
     public static Dish getNew() {
-        return new Dish(null, gloria, "New", true, false, 800);
+        return new Dish(null, gloria, "New", 800);
     }
 
     public static Dish getUpdated() {
@@ -31,11 +31,11 @@ public class DishTestData {
 
     public static List<Dish> getSorted() {
         List<Dish> expectedList = new ArrayList<>();
-        expectedList.add(new Dish(DISH1_ID.value, gloria, "Salad", true, true, 400));
-        expectedList.add(new Dish(DISH2_ID.value, gloria, "Soup", true, true, 530));
-        expectedList.add(new Dish(DISH3_ID.value, gloria, "Meat", true, true, 750));
-        expectedList.add(new Dish(DISH4_ID.value, gloria, "Fish", true, true, 960));
-        expectedList.add(new Dish(DISH5_ID.value, gloria, "Juice", true, true, 200));
+        expectedList.add(new Dish(DISH1_ID.value, gloria, "Salad", 400));
+        expectedList.add(new Dish(DISH2_ID.value, gloria, "Soup", 530));
+        expectedList.add(new Dish(DISH3_ID.value, gloria, "Meat", 750));
+        expectedList.add(new Dish(DISH4_ID.value, gloria, "Fish", 960));
+        expectedList.add(new Dish(DISH5_ID.value, gloria, "Juice", 200));
         expectedList.sort(Comparator.comparing(Dish::getName));
         return expectedList;
     }
