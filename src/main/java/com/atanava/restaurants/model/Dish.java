@@ -10,8 +10,7 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
-        @NamedQuery(name = Dish.BY_RESTAURANT, query = "SELECT d FROM Dish d "
-                + " WHERE d.restaurant.id=:restaurantId ORDER BY d.name"),
+        @NamedQuery(name = Dish.BY_RESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId ORDER BY d.name"),
 })
 
 @Entity

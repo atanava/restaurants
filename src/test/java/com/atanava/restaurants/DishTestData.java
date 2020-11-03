@@ -11,11 +11,7 @@ import static com.atanava.restaurants.DbSequence.*;
 
 public class DishTestData {
 
-//    public static final Dish expectedDish1 = new Dish(DISH1_ID.value, new Restaurant(), "Salad", true, true);
-//    public static final Dish expectedDish2 = new Dish(DISH2_ID.value, "Soup");
-//    public static final Dish expectedDish3 = new Dish(DISH3_ID.value, "Meat");
-//    public static final Dish expectedDish4 = new Dish(DISH4_ID.value, "Fish");
-//    public static final Dish expectedDish5 = new Dish(DISH5_ID.value, "Juice");
+    public static TestMatcher<Dish> DISH_MATCHER = TestMatcher.usingFieldsComparator("restaurant", "menus");
 
     public static final Restaurant gloria =  new Restaurant(RESTAURANT1_ID.value, "Gloria");
 
@@ -24,18 +20,23 @@ public class DishTestData {
     }
 
     public static Dish getUpdated() {
-        Dish updated = new Dish(getSorted().get(0));
+        Dish updated = new Dish(getAllSorted().get(0));
         updated.setName("UpdatedName");
         return updated;
     }
 
-    public static List<Dish> getSorted() {
+    public static List<Dish> getAll() {
         List<Dish> expectedList = new ArrayList<>();
         expectedList.add(new Dish(DISH1_ID.value, gloria, "Salad", 400));
         expectedList.add(new Dish(DISH2_ID.value, gloria, "Soup", 530));
         expectedList.add(new Dish(DISH3_ID.value, gloria, "Meat", 750));
         expectedList.add(new Dish(DISH4_ID.value, gloria, "Fish", 960));
         expectedList.add(new Dish(DISH5_ID.value, gloria, "Juice", 200));
+        return expectedList;
+    }
+
+    public static List<Dish> getAllSorted() {
+        List<Dish> expectedList = getAll();
         expectedList.sort(Comparator.comparing(Dish::getName));
         return expectedList;
     }

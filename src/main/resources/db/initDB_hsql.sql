@@ -58,7 +58,7 @@ CREATE TABLE dishes_menus
 (
     dish_id      INTEGER NOT NULL,
     menu_id INTEGER NOT NULL,
-    CONSTRAINT dish_menu_idx UNIQUE (dish_id, menu_id),
+    CONSTRAINT dish_id_menu_id_idx UNIQUE (dish_id, menu_id),
     FOREIGN KEY (dish_id) REFERENCES dishes (id) ON DELETE CASCADE,
     FOREIGN KEY (menu_id) REFERENCES menus (id) ON DELETE CASCADE
 );
@@ -71,5 +71,5 @@ CREATE TABLE votes
     date          DATE DEFAULT CURRENT_DATE NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-    CONSTRAINT unique_user_date_idx UNIQUE (user_id, date)
+    CONSTRAINT unique_user_id_date_idx UNIQUE (user_id, date)
 );

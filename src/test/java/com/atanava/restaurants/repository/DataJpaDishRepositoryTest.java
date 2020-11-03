@@ -1,7 +1,12 @@
 package com.atanava.restaurants.repository;
 
+import com.atanava.restaurants.TimingRules;
 import com.atanava.restaurants.model.Dish;
+import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExternalResource;
+import org.junit.rules.Stopwatch;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -24,6 +29,12 @@ import static com.atanava.restaurants.DishTestData.*;
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class DataJpaDishRepositoryTest {
+    @ClassRule
+    public static ExternalResource summary = TimingRules.SUMMARY;
+
+    @Rule
+    public Stopwatch stopwatch = TimingRules.STOPWATCH;
+
 
     @Autowired
     DishRepository repository;
@@ -52,7 +63,7 @@ public class DataJpaDishRepositoryTest {
     @Test
     public void get() {
         Dish dish = repository.get(DISH4_ID.value);
-        assertThat(dish).isEqualTo(getSorted().get(0));
+        assertThat(dish).isEqualTo(getAllSorted().get(0));
     }
 
     @Test
@@ -70,6 +81,6 @@ public class DataJpaDishRepositoryTest {
     @Test
     public void getAll() {
         List<Dish> all = repository.getAll(RESTAURANT1_ID.value);
-        assertThat(all).isEqualTo(getSorted());
+        assertThat(all).isEqualTo(getAllSorted());
     }
 }

@@ -54,8 +54,8 @@ public class User extends AbstractNamedEntity {
     @BatchSize(size = 200)
     private Set<Role> roles;
 
-    //TODO add other annotations
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OrderBy("date DESC")
     private List<Vote> votes;
 
     public User() {

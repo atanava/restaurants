@@ -23,7 +23,7 @@ import static com.atanava.restaurants.UserTestData.*;
 })
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class UserRepositoryTest {
+public class DataJpaUserRepositoryTest {
 
     @Autowired
     UserRepository repository;
@@ -39,7 +39,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void duplicateSaved() throws Exception {
+    public void duplicateMailSave() throws Exception {
         assertThrows(DataAccessException.class, () ->
                 repository.save(new User(null, "Duplicate", "user1@yandex.ru", "newPass", Role.USER)));
     }
@@ -48,6 +48,11 @@ public class UserRepositoryTest {
     public void delete() {
         repository.delete(USER1_ID.value);
         assertNull(repository.get(USER1_ID.value));
+    }
+
+    @Test
+    public void deletedNotFound() throws Exception {
+        assertFalse(repository.delete(NOT_FOUND.value));
     }
 
     @Test
