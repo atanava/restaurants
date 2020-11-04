@@ -34,10 +34,10 @@ public class Dish extends AbstractNamedEntity {
     @Column(name = "active", nullable = false, columnDefinition = "bool default true")
     private boolean active = true;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "dishes_menus",
-            joinColumns = @JoinColumn(name = "dish_id"),
-            inverseJoinColumns = @JoinColumn(name = "menu_id"))
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "dishes")
+//    @JoinTable(name = "dishes_menus",
+//            joinColumns = @JoinColumn(name = "dish_id"),
+//            inverseJoinColumns = @JoinColumn(name = "menu_id"))
     Set<Menu> menus;
 
     public Dish() {
