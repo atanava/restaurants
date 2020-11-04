@@ -45,7 +45,8 @@ public class DataJpaDishRepositoryTest {
         int newId = saved.id();
         Dish newDish = getNew();
         newDish.setId(newId);
-        assertEquals(repository.get(newId, RESTAURANT1_ID.value), newDish);
+        DISH_MATCHER.assertMatch(saved, newDish);
+        DISH_MATCHER.assertMatch(repository.get(newId, RESTAURANT1_ID.value), newDish);
     }
 
     @Test
@@ -61,14 +62,19 @@ public class DataJpaDishRepositoryTest {
 
     @Test
     public void deactivate() {
-        Dish deactivated = repository.deactivate(DISH1_ID.value, RESTAURANT1_ID.value);
-        assertThat(deactivated.isActive()).isEqualTo(getDeactivated().isActive());
+        repository.deactivate(DISH1_ID.value, RESTAURANT1_ID.value);
+        DISH_MATCHER.assertMatch(repository.get(DISH1_ID.value, RESTAURANT1_ID.value), getDeactivated());
+    }
+
+    @Test
+    public void deactivatedNotFound() {
+        assertNull(repository.deactivate(NEW_ID.value, RESTAURANT1_ID.value));
     }
 
     @Test
     public void get() {
-        Dish dish = repository.get(DISH4_ID.value, RESTAURANT1_ID.value);
-        assertThat(dish).isEqualTo(getAllSorted().get(0));
+        Dish dish = repository.get(DISH1_ID.value, RESTAURANT1_ID.value);
+        DISH_MATCHER.assertMatch(dish, getAllExpected().get(0));
     }
 
     @Test
@@ -82,13 +88,13 @@ public class DataJpaDishRepositoryTest {
         repository.save(updated, RESTAURANT1_ID.value);
         updated = getUpdated();
         updated.setId(NEW_ID.value);
-        assertThat(repository.get(NEW_ID.value, RESTAURANT1_ID.value)).isEqualTo(updated);
-        assertThat(repository.get(DISH1_ID.value, RESTAURANT1_ID.value)).isEqualTo(getDeactivated());
+        DISH_MATCHER.assertMatch(repository.get(NEW_ID.value, RESTAURANT1_ID.value), updated);
+        DISH_MATCHER.assertMatch(repository.get(DISH1_ID.value, RESTAURANT1_ID.value), getDeactivated());
     }
 
     @Test
     public void getAll() {
         List<Dish> all = repository.getAll(RESTAURANT1_ID.value);
-        assertThat(all).isEqualTo(getAllSorted());
+        DISH_MATCHER.assertMatch(all, getAllSorted());
     }
 }

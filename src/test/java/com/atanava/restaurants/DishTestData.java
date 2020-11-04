@@ -20,18 +20,18 @@ public class DishTestData {
     }
 
     public static Dish getUpdated() {
-        Dish updated = getAll().get(0);
+        Dish updated = getAllExpected().get(0);
         updated.setName("UpdatedName");
         return updated;
     }
 
     public static Dish getDeactivated() {
-        Dish deactivated = getAll().get(0);
+        Dish deactivated = getAllExpected().get(0);
         deactivated.setActive(false);
         return deactivated;
     }
 
-    public static List<Dish> getAll() {
+    public static List<Dish> getAllExpected() {
         List<Dish> expectedList = new ArrayList<>();
         expectedList.add(new Dish(DISH1_ID.value, gloria, "Salad", 400));
         expectedList.add(new Dish(DISH2_ID.value, gloria, "Soup", 530));
@@ -42,7 +42,7 @@ public class DishTestData {
     }
 
     public static List<Dish> getAllSorted() {
-        List<Dish> expectedList = getAll();
+        List<Dish> expectedList = getAllExpected();
         expectedList.sort(Comparator.comparing(Dish::getName));
         return expectedList;
     }

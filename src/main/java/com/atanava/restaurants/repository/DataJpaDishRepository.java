@@ -47,7 +47,18 @@ public class DataJpaDishRepository implements DishRepository {
             return null;
         }
         deactivated.setActive(false);
-        return crudDishRepository.save(deactivated);
+        return deactivated;
+    }
+
+    @Override
+    @Transactional
+    public Dish activate(int id, int restaurantId) {
+        Dish activated = get(id, restaurantId);
+        if (activated == null) {
+            return null;
+        }
+        activated.setActive(true);
+        return activated;
     }
 
     @Override

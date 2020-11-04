@@ -79,11 +79,10 @@ public class DataJpaUserRepositoryTest {
         USER_MATCHER.assertMatch(repository.get(USER1_ID.value), getUpdated());
     }
 
-    // TODO refactor for sorting
     @Test
     public void getAll() {
         List<User> all = repository.getAll();
-        USER_MATCHER.assertMatch(all, expectedAdmin, expectedUser1, expectedUser2);
+        USER_MATCHER.assertMatch(all, expectedUser1, expectedAdmin, expectedUser2);
     }
 
 //    @Test

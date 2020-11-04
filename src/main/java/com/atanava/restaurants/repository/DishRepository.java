@@ -12,6 +12,8 @@ public interface DishRepository {
 
     Dish deactivate(int id, int restaurantId);
 
+    Dish activate(int id, int restaurantId);
+
     Dish get(int id, int restaurantId);
 
     List<Dish> getAll(int restaurantId);
