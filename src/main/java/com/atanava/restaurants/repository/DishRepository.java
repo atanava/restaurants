@@ -13,8 +13,6 @@ public interface DishRepository {
         throw new UnsupportedOperationException();
     }
 
-    Dish softDelete(int id, int restaurantId);
-
     Dish get(int id, int restaurantId);
 
     List<Dish> getAll(int restaurantId);

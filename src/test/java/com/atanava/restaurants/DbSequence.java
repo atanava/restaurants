@@ -26,6 +26,8 @@ public enum DbSequence {
 
     VOTE1_ID(START_SEQ + 25),
     VOTE2_ID(START_SEQ + 26),
+
+    NEW_ID(START_SEQ + 27),
     ;
 
     public int value;

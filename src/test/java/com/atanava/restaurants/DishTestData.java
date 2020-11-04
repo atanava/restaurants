@@ -22,6 +22,7 @@ public class DishTestData {
     public static Dish getUpdated() {
         Dish updated = new Dish(getAllSorted().get(0));
         updated.setName("UpdatedName");
+        updated.setId(NEW_ID.value);
         return updated;
     }
 

@@ -2,7 +2,6 @@ package com.atanava.restaurants.repository;
 
 import com.atanava.restaurants.model.Dish;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,42 +11,47 @@ import java.util.List;
 public class DataJpaDishRepository implements DishRepository {
     private static final Sort SORT_NAME = Sort.by(Sort.Direction.ASC, "name");
 
-    private final CrudDishRepository crudRepository;
-//    private final
+    private final CrudDishRepository crudDishRepository;
+    private final CrudRestaurantRepository crudRestaurantRepository;
 
-    public DataJpaDishRepository(CrudDishRepository crudRepository) {
-        this.crudRepository = crudRepository;
+    public DataJpaDishRepository(CrudDishRepository crudDishRepository, CrudRestaurantRepository crudRestaurantRepository) {
+        this.crudDishRepository = crudDishRepository;
+        this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
     @Override
     @Transactional
     public Dish save(Dish dish, int restaurantId) {
-        return crudRepository.save(dish);
+        if (!dish.isNew()) {
+            if (deactivate(dish.getId(), restaurantId) == null) {
+                return null;
+            } else {
+                Dish newDish = new Dish(null, dish.getRestaurant(), dish.getName(), dish.getPrice());
+                return crudDishRepository.save(newDish);
+            }
+        }
+        dish.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
+        return crudDishRepository.save(dish);
     }
 
-//    @Override
-//    public boolean delete(int id) {
-//        return crudRepository.delete(id) != 0;
-//    }
-
-    @Override
-    public Dish softDelete(int id, int restaurantId) {
-        Dish dish = get(id);
-        if (dish == null) {
+    @Transactional
+    public Dish deactivate(int id, int restaurantId) {
+        Dish deactivated = get(id, restaurantId);
+        if (deactivated == null) {
             return null;
         }
-        dish.setActive(false);
-        return save(dish);
+        deactivated.setActive(false);
+        return crudDishRepository.save(deactivated);
     }
 
     @Override
-    public Dish get(int id) {
-        return crudRepository.findById(id).orElse(null);
+    public Dish get(int id, int restaurantId) {
+        return crudDishRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Dish> getAll(int restaurantId) {
-        return crudRepository.geAll(restaurantId);
+        return crudDishRepository.geAll(restaurantId);
     }
 
 }

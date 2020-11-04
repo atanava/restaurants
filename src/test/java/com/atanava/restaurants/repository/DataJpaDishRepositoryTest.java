@@ -56,26 +56,25 @@ public class DataJpaDishRepositoryTest {
 
     @Test
     public void delete() {
-        repository.delete(DISH1_ID.value);
-        assertNull(repository.get(DISH1_ID.value));
+        assertThrows(UnsupportedOperationException.class, () -> repository.delete(DISH1_ID.value, RESTAURANT1_ID.value));
     }
 
     @Test
     public void get() {
-        Dish dish = repository.get(DISH4_ID.value);
+        Dish dish = repository.get(DISH4_ID.value, RESTAURANT1_ID.value);
         assertThat(dish).isEqualTo(getAllSorted().get(0));
     }
 
     @Test
     public void getNotFound() throws Exception {
-        assertNull(repository.get(NOT_FOUND.value));
+        assertNull(repository.get(NOT_FOUND.value, RESTAURANT1_ID.value));
     }
 
     @Test
     public void update() throws Exception {
         Dish updated = getUpdated();
-        repository.save(updated);
-        assertThat(repository.get(DISH4_ID.value)).isEqualTo(getUpdated());
+        repository.save(updated, RESTAURANT1_ID.value);
+        assertThat(repository.get(NEW_ID.value, RESTAURANT1_ID.value)).isEqualTo(getUpdated());
     }
 
     @Test
