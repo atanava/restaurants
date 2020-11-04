@@ -20,10 +20,15 @@ public class DishTestData {
     }
 
     public static Dish getUpdated() {
-        Dish updated = new Dish(getAllSorted().get(0));
+        Dish updated = getAll().get(0);
         updated.setName("UpdatedName");
-        updated.setId(NEW_ID.value);
         return updated;
+    }
+
+    public static Dish getDeactivated() {
+        Dish deactivated = getAll().get(0);
+        deactivated.setActive(false);
+        return deactivated;
     }
 
     public static List<Dish> getAll() {

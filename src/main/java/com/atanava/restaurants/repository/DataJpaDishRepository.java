@@ -34,6 +34,12 @@ public class DataJpaDishRepository implements DishRepository {
         return crudDishRepository.save(dish);
     }
 
+    @Override
+    public boolean delete(int id, int restaurantId)  {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     @Transactional
     public Dish deactivate(int id, int restaurantId) {
         Dish deactivated = get(id, restaurantId);

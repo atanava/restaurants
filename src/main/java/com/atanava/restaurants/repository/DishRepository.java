@@ -8,10 +8,9 @@ public interface DishRepository {
 
     Dish save(Dish dish, int restaurantId);
 
-    default boolean delete(int id, int restaurantId) {
+    boolean delete(int id, int restaurantId);
 
-        throw new UnsupportedOperationException();
-    }
+    Dish deactivate(int id, int restaurantId);
 
     Dish get(int id, int restaurantId);
 

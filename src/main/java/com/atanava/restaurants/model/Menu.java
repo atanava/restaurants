@@ -10,16 +10,16 @@ import java.util.Date;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id"),
-        @NamedQuery(name = Dish.BY_RESTAURANT, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date"),
+        @NamedQuery(name = Menu.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id"),
+        @NamedQuery(name = Menu.BY_RESTAURANT, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date"),
 })
 
 @Entity
 @Table(name = "menus")
 public class Menu extends AbstractBaseEntity {
 
-    public static final String DELETE = "Dish.delete";
-    public static final String BY_RESTAURANT = "Dish.getByRestaurant";
+    public static final String DELETE = "Menu.delete";
+    public static final String BY_RESTAURANT = "Menu.getByRestaurant";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)

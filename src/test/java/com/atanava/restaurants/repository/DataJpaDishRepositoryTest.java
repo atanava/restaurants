@@ -41,22 +41,28 @@ public class DataJpaDishRepositoryTest {
 
     @Test
     public void save() {
-        Dish saved = repository.save(getNew());
+        Dish saved = repository.save(getNew(), RESTAURANT1_ID.value);
         int newId = saved.id();
         Dish newDish = getNew();
         newDish.setId(newId);
-        assertEquals(repository.get(newId), newDish);
+        assertEquals(repository.get(newId, RESTAURANT1_ID.value), newDish);
     }
 
     @Test
     public void duplicateSaved() throws Exception {
         assertThrows(DataAccessException.class, () -> repository.save(new Dish(
-                null, gloria, "Salad", 300)));
+                null, gloria, "Salad", 300), RESTAURANT1_ID.value));
     }
 
     @Test
     public void delete() {
         assertThrows(UnsupportedOperationException.class, () -> repository.delete(DISH1_ID.value, RESTAURANT1_ID.value));
+    }
+
+    @Test
+    public void deactivate() {
+        Dish deactivated = repository.deactivate(DISH1_ID.value, RESTAURANT1_ID.value);
+        assertThat(deactivated.isActive()).isEqualTo(getDeactivated().isActive());
     }
 
     @Test
@@ -74,7 +80,10 @@ public class DataJpaDishRepositoryTest {
     public void update() throws Exception {
         Dish updated = getUpdated();
         repository.save(updated, RESTAURANT1_ID.value);
-        assertThat(repository.get(NEW_ID.value, RESTAURANT1_ID.value)).isEqualTo(getUpdated());
+        updated = getUpdated();
+        updated.setId(NEW_ID.value);
+        assertThat(repository.get(NEW_ID.value, RESTAURANT1_ID.value)).isEqualTo(updated);
+        assertThat(repository.get(DISH1_ID.value, RESTAURANT1_ID.value)).isEqualTo(getDeactivated());
     }
 
     @Test
