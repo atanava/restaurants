@@ -1,15 +1,11 @@
 package com.atanava.restaurants.repository;
 
+import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.Role;
 import com.atanava.restaurants.model.User;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -17,13 +13,7 @@ import static org.junit.Assert.*;
 import static com.atanava.restaurants.DbSequence.*;
 import static com.atanava.restaurants.UserTestData.*;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class DataJpaUserRepositoryTest {
+public class DataJpaUserRepositoryTest extends AbstractTest {
 
     @Autowired
     UserRepository repository;

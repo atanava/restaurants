@@ -1,40 +1,18 @@
 package com.atanava.restaurants.repository;
 
-import com.atanava.restaurants.TimingRules;
+import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.Dish;
-import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExternalResource;
-import org.junit.rules.Stopwatch;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.atanava.restaurants.DbSequence.*;
 import static com.atanava.restaurants.DishTestData.*;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class DataJpaDishRepositoryTest {
-    @ClassRule
-    public static ExternalResource summary = TimingRules.SUMMARY;
-
-    @Rule
-    public Stopwatch stopwatch = TimingRules.STOPWATCH;
-
+public class DataJpaDishRepositoryTest extends AbstractTest {
 
     @Autowired
     DishRepository repository;
