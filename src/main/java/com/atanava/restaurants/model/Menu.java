@@ -11,7 +11,7 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = Menu.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id"),
-        @NamedQuery(name = Menu.BY_RESTAURANT, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date"),
+        @NamedQuery(name = Menu.BY_RESTAURANT, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC"),
         @NamedQuery(name = Menu.BY_DATE, query = "SELECT m FROM Menu m WHERE m.date=:date"),
 })
 
@@ -43,15 +43,12 @@ public class Menu extends AbstractBaseEntity {
     public Menu() {
     }
 
-    public Menu(Integer id, Restaurant restaurant) {
-        super(id);
-        this.restaurant = restaurant;
-        this.dishes = Collections.emptySet();
+    public Menu(Set<Dish> dishes, Date date) {
+        this(null, dishes, date);
     }
 
-    public Menu(Integer id, Restaurant restaurant, Set<Dish> dishes, Date date) {
+    public Menu(Integer id, Set<Dish> dishes, Date date) {
         super(id);
-        this.restaurant = restaurant;
         this.dishes = dishes;
         this.date = date;
     }

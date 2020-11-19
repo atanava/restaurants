@@ -7,14 +7,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.List;
+
 @Transactional(readOnly = true)
 public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
-    @Override
-    @Transactional
-    Menu save(Menu menu);
+//    @Override
+//    @Transactional
+//    Menu save(Menu menu);
 
     @Transactional
     @Modifying
     @Query(name = Menu.DELETE)
-    int delete(@Param("id") int id);
+    int delete(@Param("id") int id, @Param("restaurantId") int restaurantId);
+
+    @Query(name = Menu.BY_RESTAURANT)
+    List<Menu> getAllByRestaurant(@Param("restaurantId") int restaurantId);
+
+    @Query(name = Menu.BY_DATE)
+    List<Menu> getAllByDate(@Param("date") Date date);
 }
