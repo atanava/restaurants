@@ -3,6 +3,7 @@ package com.atanava.restaurants.repository;
 import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.Role;
 import com.atanava.restaurants.model.User;
+import com.atanava.restaurants.repository.user.UserRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -36,24 +37,24 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
 
     @Test
     public void delete() {
-        repository.delete(USER1_ID.value);
-        assertNull(repository.get(USER1_ID.value));
+        repository.delete(USER_1.id);
+        assertNull(repository.get(USER_1.id));
     }
 
     @Test
     public void deletedNotFound() throws Exception {
-        assertFalse(repository.delete(NOT_FOUND.value));
+        assertFalse(repository.delete(NOT_FOUND.id));
     }
 
     @Test
     public void get() {
-        User user = repository.get(USER1_ID.value);
+        User user = repository.get(USER_1.id);
         USER_MATCHER.assertMatch(user, expectedUser1);
     }
 
     @Test
     public void getNotFound() throws Exception {
-        assertNull(repository.get(NOT_FOUND.value));
+        assertNull(repository.get(NOT_FOUND.id));
     }
 
     @Test
@@ -66,7 +67,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     public void update() throws Exception {
         User updated = getUpdated();
         repository.save(updated);
-        USER_MATCHER.assertMatch(repository.get(USER1_ID.value), getUpdated());
+        USER_MATCHER.assertMatch(repository.get(USER_1.id), getUpdated());
     }
 
     @Test
@@ -77,5 +78,9 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
 
 //    @Test
 //    public void getWithVotes() {
+//        User user = repository.getWithVotes(USER1_ID.value);
+//        User expected = getWithOneVote();
+//        TestMatcher.usingFieldsComparator("registered", "roles")
+//                .assertMatch(user, expected);
 //    }
 }

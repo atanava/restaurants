@@ -9,17 +9,17 @@ import java.util.Collections;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
+//        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
         @NamedQuery(name = Dish.BY_RESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId ORDER BY d.name"),
 })
 
 @Entity
-@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "name"}
-        , name = "unique_restaurant_id_dish_name_idx")})
-public class Dish extends AbstractNamedEntity {
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "name"},
+        name = "unique_restaurant_id_dish_name_idx")})
+public class  Dish extends AbstractNamedEntity {
 
-    public static final String DELETE = "Dish.delete";
-    public static final String BY_RESTAURANT = "Dish.getByRestaurant";
+//    public static final String DELETE = "Dish.delete";
+    public static final String BY_RESTAURANT = "Dish.getAllByRestaurant";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)

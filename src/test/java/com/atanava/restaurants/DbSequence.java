@@ -3,36 +3,33 @@ package com.atanava.restaurants;
 import static com.atanava.restaurants.model.AbstractBaseEntity.START_SEQ;
 
 public enum DbSequence {
-    NOT_FOUND(10),
+    NOT_FOUND(100),
 
-    ADMIN_ID(START_SEQ),
-    USER1_ID(START_SEQ + 1),
-    USER2_ID(START_SEQ + 2),
+    ADMIN(0),
+    USER_1(1),
+    USER_2(2),
 
-    RESTAURANT1_ID(START_SEQ + 3),
-    RESTAURANT2_ID(START_SEQ + 4),
+    RESTAURANT_1(3),
+    RESTAURANT_2(4),
 
-    DISH1_ID(START_SEQ + 5),
-    DISH2_ID(START_SEQ + 6),
-    DISH3_ID(START_SEQ + 7),
-    DISH4_ID(START_SEQ + 8),
-    DISH5_ID(START_SEQ + 9),
+    DISH_1(5),
+    DISH_2(6),
+    DISH_3(7),
+    DISH_4(8),
+    DISH_5(9),
 
-    MENU1_ID(START_SEQ + 15),
-    MENU2_ID(START_SEQ + 16),
-    MENU3_ID(START_SEQ + 17),
-    MENU4_ID(START_SEQ + 18),
-    MENU5_ID(START_SEQ + 19),
+    MENU_1(15),
+    MENU_2(16),
 
-    VOTE1_ID(START_SEQ + 25),
-    VOTE2_ID(START_SEQ + 26),
+    VOTE_1(17),
+    VOTE_2(18),
 
-    NEW_ID(START_SEQ + 27),
+    NEW_ITEM(19),
     ;
 
-    public int value;
+    public int id;
 
     DbSequence(int value) {
-        this.value = value;
+        this.id = START_SEQ + value;
     }
 }

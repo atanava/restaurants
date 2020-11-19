@@ -1,4 +1,4 @@
-package com.atanava.restaurants.repository;
+package com.atanava.restaurants.repository.dish;
 
 import com.atanava.restaurants.model.Dish;
 

@@ -13,7 +13,7 @@ public class DishTestData {
 
     public static TestMatcher<Dish> DISH_MATCHER = TestMatcher.usingFieldsComparator("restaurant", "menus");
 
-    public static final Restaurant gloria =  new Restaurant(RESTAURANT1_ID.value, "Gloria");
+    public static final Restaurant gloria =  new Restaurant(RESTAURANT_1.id, "Gloria");
 
     public static Dish getNew() {
         return new Dish(null, gloria, "New", 800);
@@ -33,11 +33,11 @@ public class DishTestData {
 
     public static List<Dish> getAllExpected() {
         List<Dish> expectedList = new ArrayList<>();
-        expectedList.add(new Dish(DISH1_ID.value, gloria, "Salad", 400));
-        expectedList.add(new Dish(DISH2_ID.value, gloria, "Soup", 530));
-        expectedList.add(new Dish(DISH3_ID.value, gloria, "Meat", 750));
-        expectedList.add(new Dish(DISH4_ID.value, gloria, "Fish", 960));
-        expectedList.add(new Dish(DISH5_ID.value, gloria, "Juice", 200));
+        expectedList.add(new Dish(DISH_1.id, gloria, "Salad", 400));
+        expectedList.add(new Dish(DISH_2.id, gloria, "Soup", 530));
+        expectedList.add(new Dish(DISH_3.id, gloria, "Meat", 750));
+        expectedList.add(new Dish(DISH_4.id, gloria, "Fish", 960));
+        expectedList.add(new Dish(DISH_5.id, gloria, "Juice", 200));
         return expectedList;
     }
 

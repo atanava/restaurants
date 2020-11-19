@@ -1,4 +1,4 @@
-package com.atanava.restaurants.repository;
+package com.atanava.restaurants.repository.user;
 
 import com.atanava.restaurants.model.User;
 import org.springframework.data.domain.Sort;
@@ -40,5 +40,10 @@ public class DataJpaUserRepository implements UserRepository {
     public List<User> getAll() {
         return crudRepository.findAll(SORT_NAME_EMAIL);
     }
+//
+//    @Override
+//    public User getWithVotes(int id) {
+//        return crudRepository.getWithVotes(id);
+//    }
 }
 

@@ -12,6 +12,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = Menu.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id"),
         @NamedQuery(name = Menu.BY_RESTAURANT, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date"),
+        @NamedQuery(name = Menu.BY_DATE, query = "SELECT m FROM Menu m WHERE m.date=:date"),
 })
 
 @Entity
@@ -19,7 +20,8 @@ import java.util.Set;
 public class Menu extends AbstractBaseEntity {
 
     public static final String DELETE = "Menu.delete";
-    public static final String BY_RESTAURANT = "Menu.getByRestaurant";
+    public static final String BY_RESTAURANT = "Menu.getAllByRestaurant";
+    public static final String BY_DATE = "Menu.getAllByDate";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)

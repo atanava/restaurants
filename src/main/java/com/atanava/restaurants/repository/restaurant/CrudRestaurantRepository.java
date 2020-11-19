@@ -1,4 +1,4 @@
-package com.atanava.restaurants.repository;
+package com.atanava.restaurants.repository.restaurant;
 
 import com.atanava.restaurants.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;

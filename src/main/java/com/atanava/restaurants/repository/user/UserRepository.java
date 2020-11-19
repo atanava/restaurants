@@ -1,4 +1,4 @@
-package com.atanava.restaurants.repository;
+package com.atanava.restaurants.repository.user;
 
 import com.atanava.restaurants.model.User;
 
@@ -19,8 +19,8 @@ public interface UserRepository {
 
     List<User> getAll();
 
-    default User getWithVotes(int id){
-        throw new UnsupportedOperationException();
-    }
+//    default User getWithVotes(int id){
+//        throw new UnsupportedOperationException();
+//    }
 
 }
