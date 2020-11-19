@@ -5,7 +5,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Set;
 

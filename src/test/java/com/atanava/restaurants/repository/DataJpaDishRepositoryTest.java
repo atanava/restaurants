@@ -10,8 +10,8 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static com.atanava.restaurants.DbSequence.*;
-import static com.atanava.restaurants.DishTestData.*;
+import static com.atanava.restaurants.testdata.DbSequence.*;
+import static com.atanava.restaurants.testdata.DishTestData.*;
 
 public class DataJpaDishRepositoryTest extends AbstractTest {
 
@@ -31,7 +31,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     @Test
     public void duplicateSaved() throws Exception {
         assertThrows(DataAccessException.class, () -> repository.save(new Dish(
-                null, gloria, "Salad", 300), RESTAURANT_1.id));
+                null, troika, "Salad", 300), RESTAURANT_1.id));
     }
 
     @Test

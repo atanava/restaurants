@@ -21,6 +21,7 @@ public class  Dish extends AbstractNamedEntity {
 //    public static final String DELETE = "Dish.delete";
     public static final String BY_RESTAURANT = "Dish.getAllByRestaurant";
 
+    //TODO try to replace with restaurantId
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

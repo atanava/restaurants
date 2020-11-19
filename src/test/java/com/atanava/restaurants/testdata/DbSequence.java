@@ -1,4 +1,4 @@
-package com.atanava.restaurants;
+package com.atanava.restaurants.testdata;
 
 import static com.atanava.restaurants.model.AbstractBaseEntity.START_SEQ;
 
@@ -17,6 +17,11 @@ public enum DbSequence {
     DISH_3(7),
     DISH_4(8),
     DISH_5(9),
+    DISH_6(10),
+    DISH_7(11),
+    DISH_8(12),
+    DISH_9(13),
+    DISH_10(14),
 
     MENU_1(15),
     MENU_2(16),

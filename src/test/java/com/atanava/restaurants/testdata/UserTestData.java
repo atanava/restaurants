@@ -1,9 +1,10 @@
-package com.atanava.restaurants;
+package com.atanava.restaurants.testdata;
 
+import com.atanava.restaurants.TestMatcher;
 import com.atanava.restaurants.model.Role;
 import com.atanava.restaurants.model.User;
 
-import static com.atanava.restaurants.DbSequence.*;
+import static com.atanava.restaurants.testdata.DbSequence.*;
 
 public class UserTestData {
     public static TestMatcher<User> USER_MATCHER = TestMatcher.usingFieldsComparator("registered", "roles", "votes");

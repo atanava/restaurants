@@ -17,8 +17,8 @@ VALUES  ('ADMIN', 100000),
         ('USER', 100002);
 
 INSERT INTO restaurants (name)
-VALUES  ('Gloria'),
-        ('Troika');
+VALUES  ('Troika'),
+        ('Gloria');
 
 INSERT INTO dishes (restaurant_id, name, price, active)
 VALUES  (100003, 'Salad', 400, true),

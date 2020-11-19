@@ -11,8 +11,8 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static com.atanava.restaurants.DbSequence.*;
-import static com.atanava.restaurants.UserTestData.*;
+import static com.atanava.restaurants.testdata.DbSequence.*;
+import static com.atanava.restaurants.testdata.UserTestData.*;
 
 public class DataJpaUserRepositoryTest extends AbstractTest {
 
