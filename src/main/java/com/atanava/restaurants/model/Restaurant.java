@@ -1,14 +1,18 @@
 package com.atanava.restaurants.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurants_unique_name_idx")})
 public class Restaurant extends AbstractNamedEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<Dish> dishes;
+    private List<Dish> dishes;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<Menu> menus;
@@ -23,18 +27,22 @@ public class Restaurant extends AbstractNamedEntity {
         this(r.getId(), r.getName(), r.getDishes(), r.getMenus(), r.getVotes());
     }
 
-    public Restaurant(Integer id, String name, Set<Dish> dishes, Set<Menu> menus, Set<Vote> votes) {
+    public Restaurant(Integer id, String name) {
+        this(id, name, emptyList(), emptySet(), emptySet());
+    }
+
+    public Restaurant(Integer id, String name, List<Dish> dishes, Set<Menu> menus, Set<Vote> votes) {
         super(id, name);
         this.dishes = dishes;
         this.menus = menus;
         this.votes = votes;
     }
 
-    public Set<Dish> getDishes() {
+    public List<Dish> getDishes() {
         return dishes;
     }
 
-    public void setDishes(Set<Dish> dishes) {
+    public void setDishes(List<Dish> dishes) {
         this.dishes = dishes;
     }
 

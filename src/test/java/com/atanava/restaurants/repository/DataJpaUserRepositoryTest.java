@@ -36,6 +36,13 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     }
 
     @Test
+    public void update() throws Exception {
+        User updated = getUpdated();
+        repository.save(updated);
+        USER_MATCHER.assertMatch(repository.get(USER_1.id), getUpdated());
+    }
+
+    @Test
     public void delete() {
         repository.delete(USER_1.id);
         assertNull(repository.get(USER_1.id));
@@ -61,13 +68,6 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     public void getByEmail() {
         User user = repository.getByEmail("admin@gmail.com");
         USER_MATCHER.assertMatch(user, expectedAdmin);
-    }
-
-    @Test
-    public void update() throws Exception {
-        User updated = getUpdated();
-        repository.save(updated);
-        USER_MATCHER.assertMatch(repository.get(USER_1.id), getUpdated());
     }
 
     @Test

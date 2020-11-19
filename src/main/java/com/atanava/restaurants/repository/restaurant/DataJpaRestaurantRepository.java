@@ -2,9 +2,11 @@ package com.atanava.restaurants.repository.restaurant;
 
 import com.atanava.restaurants.model.Restaurant;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class DataJpaRestaurantRepository implements RestaurantRepository {
     private static final Sort SORT_NAME = Sort.by(Sort.Direction.ASC, "name");
 

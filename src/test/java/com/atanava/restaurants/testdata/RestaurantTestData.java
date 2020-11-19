@@ -8,11 +8,11 @@ import static com.atanava.restaurants.testdata.DbSequence.*;
 public class RestaurantTestData {
     public static TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingFieldsComparator("dishes", "menus", "votes");
 
-    public static final Restaurant troika =  new Restaurant(RESTAURANT_1.id, "Troika", null, null, null);
-    public static final Restaurant gloria =  new Restaurant(RESTAURANT_2.id, "Gloria", null, null, null);
+    public static final Restaurant troika =  new Restaurant(RESTAURANT_1.id, "Troika");
+    public static final Restaurant gloria =  new Restaurant(RESTAURANT_2.id, "Gloria");
 
     public static Restaurant getNew() {
-        return new Restaurant(null, "New", null, null, null);
+        return new Restaurant(null, "New");
     }
 
     public static Restaurant getUpdated() {
@@ -20,4 +20,5 @@ public class RestaurantTestData {
         updated.setName("UpdatedName");
         return updated;
     }
+
 }

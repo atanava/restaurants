@@ -1,0 +1,92 @@
+package com.atanava.restaurants.repository;
+
+import com.atanava.restaurants.AbstractTest;
+import com.atanava.restaurants.model.Restaurant;
+import com.atanava.restaurants.repository.restaurant.RestaurantRepository;
+import com.atanava.restaurants.testdata.DishTestData;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+import static org.junit.Assert.*;
+import static com.atanava.restaurants.testdata.DbSequence.*;
+import static com.atanava.restaurants.testdata.RestaurantTestData.*;
+
+public class DataJpaRestaurantRepositoryTest extends AbstractTest {
+
+    @Autowired
+    RestaurantRepository repository;
+
+    @Test
+    public void save() {
+        Restaurant saved = repository.save(getNew());
+        int newId = saved.id();
+        Restaurant newRest = getNew();
+        newRest.setId(newId);
+        RESTAURANT_MATCHER.assertMatch(saved, newRest);
+        RESTAURANT_MATCHER.assertMatch(repository.get(newId), newRest);
+    }
+
+    @Test
+    public void duplicateNameSave() throws Exception {
+        assertThrows(DataAccessException.class, () ->
+                repository.save(new Restaurant(null, "Troika")));
+    }
+
+    @Test
+    public void update() throws Exception {
+        Restaurant updated = getUpdated();
+        repository.save(updated);
+        RESTAURANT_MATCHER.assertMatch(repository.get(RESTAURANT_2.id), getUpdated());
+    }
+
+    @Test
+    public void delete() {
+        repository.delete(RESTAURANT_1.id);
+        assertNull(repository.get(RESTAURANT_1.id));
+    }
+
+    @Test
+    public void deletedNotFound() throws Exception {
+        assertFalse(repository.delete(NOT_FOUND.id));
+    }
+
+    @Test
+    public void get() {
+        Restaurant restaurant = repository.get(RESTAURANT_2.id);
+        RESTAURANT_MATCHER.assertMatch(restaurant, gloria);
+    }
+
+    @Test
+    public void getNotFound() throws Exception {
+        assertNull(repository.get(NOT_FOUND.id));
+    }
+
+    @Test
+    public void getAll() {
+        List<Restaurant> all = repository.getAll();
+        RESTAURANT_MATCHER.assertMatch(all, gloria, troika);
+    }
+
+    @Test
+    public void getWithDishes() {
+        Restaurant withDishes = repository.getWithDishes(RESTAURANT_1.id);
+        troika.setDishes(DishTestData.getAllExpected());
+        assertTrue(Objects.deepEquals(
+            withDishes.getDishes() != null ? withDishes.getDishes().toArray() : withDishes,
+                troika.getDishes().toArray()
+        ));
+    }
+
+    @Test
+    public void getWithMenus() {
+    }
+
+    @Test
+    public void getWithVotes() {
+    }
+}

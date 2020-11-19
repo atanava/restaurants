@@ -1,4 +1,4 @@
-package com.atanava.restaurants.repository.menu;
+package com.atanava.restaurants.repository;
 
 import org.junit.Test;
 
