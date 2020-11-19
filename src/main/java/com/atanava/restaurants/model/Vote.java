@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "votes")
+@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date"}, name = "unique_user_id_date_idx")})
 public class Vote extends AbstractBaseEntity {
 
     @Column(name = "date", columnDefinition = "date default current_date",  nullable = false)

@@ -16,7 +16,8 @@ import java.util.Set;
 })
 
 @Entity
-@Table(name = "menus")
+@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "date"},
+        name = "restaurant_id_date_idx")})
 public class Menu extends AbstractBaseEntity {
 
     public static final String DELETE = "Menu.delete";
