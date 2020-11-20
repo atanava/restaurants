@@ -51,11 +51,11 @@ public class  Dish extends AbstractNamedEntity {
         this.menus = Collections.emptySet();
     }
 
-    public Dish(Dish d) {
-        this(d.getId(), d.getRestaurant(), d.getName(), d.getPrice());
-    }
-
-//    public Dish(Integer id, Restaurant restaurant, String name, Integer price, boolean active, Set<Menu> menus) {
+//    public Dish(Dish d) {
+//        this(d.getId(), d.getRestaurant(), d.getName(), d.getPrice(), d.isActive(), d.getMenus());
+//    }
+//
+//    private Dish(Integer id, Restaurant restaurant, String name, Integer price, boolean active, Set<Menu> menus) {
 //        super(id, name);
 //        this.restaurant = restaurant;
 //        this.active = active;

@@ -5,8 +5,10 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = Menu.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id"),
@@ -33,21 +35,30 @@ public class Menu extends AbstractBaseEntity {
     @JoinTable(name = "dishes_menus",
             joinColumns = @JoinColumn(name = "menu_id"),
             inverseJoinColumns = @JoinColumn(name = "dish_id"))
-    private Set<Dish> dishes;
+    private List<Dish> dishes;
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
     @NotNull
-    private Date date = new Date();
+    private LocalDate date;
 
     public Menu() {
     }
 
-    public Menu(Set<Dish> dishes, Date date) {
-        this(null, dishes, date);
+    public Menu(Restaurant restaurant, List<Dish> dishes) {
+        this(restaurant, dishes, null);
     }
 
-    public Menu(Integer id, Set<Dish> dishes, Date date) {
+    public Menu(Restaurant restaurant, List<Dish> dishes, LocalDate date) {
+        this(null, restaurant, dishes, date);
+    }
+
+    public Menu(Menu m) {
+        this(m.getId(), m.getRestaurant(), m.getDishes(), m.getDate());
+    }
+
+    public Menu(Integer id, Restaurant restaurant, List<Dish> dishes, LocalDate date) {
         super(id);
+        this.restaurant = restaurant;
         this.dishes = dishes;
         this.date = date;
     }
@@ -60,19 +71,19 @@ public class Menu extends AbstractBaseEntity {
         this.restaurant = restaurant;
     }
 
-    public Set<Dish> getDishes() {
+    public List<Dish> getDishes() {
         return dishes;
     }
 
-    public void setDishes(Set<Dish> dishes) {
+    public void setDishes(List<Dish> dishes) {
         this.dishes = dishes;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
