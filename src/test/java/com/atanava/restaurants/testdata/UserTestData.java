@@ -17,6 +17,10 @@ public class UserTestData {
         return new User(null, "New", "new@gmail.com", "newPass", Role.USER);
     }
 
+    public static User getDuplicate() {
+        return new User(null, "Duplicate", expectedUser1.getEmail(), "newPass", Role.USER);
+    }
+
     public static User getUpdated() {
         User updated = new User(expectedUser1);
         updated.setName("UpdatedName");

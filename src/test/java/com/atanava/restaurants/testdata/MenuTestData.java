@@ -1,13 +1,11 @@
 package com.atanava.restaurants.testdata;
 
 import com.atanava.restaurants.TestMatcher;
+import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.model.Restaurant;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import static com.atanava.restaurants.testdata.DbSequence.*;
@@ -26,9 +24,15 @@ public class MenuTestData {
         return new Menu(troika, DishTestData.getAllExpected(), dateNew);
     }
 
+    public static Menu getDuplicate() {
+        return  new Menu(troika, DishTestData.getAllExpected(), dateOld);
+    }
+
     public static Menu getUpdated() {
         Menu updated = getAllExpected().get(0);
-        updated.setDate(dateNew);
+        List<Dish> dishes = updated.getDishes();
+        dishes.remove(0);
+        dishes.get(0).setPrice(500);
         return updated;
     }
 
@@ -37,4 +41,6 @@ public class MenuTestData {
         Menu menuOfGloria = new Menu(MENU_2.id, gloria, DishTestData.getAllExpected(), dateOld);
         return List.of(menuOfTroika, menuOfGloria);
     }
+    //TODO add menus from one restaurant
+
 }

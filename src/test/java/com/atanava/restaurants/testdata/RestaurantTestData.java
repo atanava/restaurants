@@ -15,6 +15,10 @@ public class RestaurantTestData {
         return new Restaurant(null, "New");
     }
 
+    public static Restaurant getDuplicate() {
+        return new Restaurant(null, "Troika");
+    }
+
     public static Restaurant getUpdated() {
         Restaurant updated = new Restaurant(troika);
         updated.setName("UpdatedName");

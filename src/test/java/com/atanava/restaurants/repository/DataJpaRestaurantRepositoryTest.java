@@ -1,17 +1,13 @@
 package com.atanava.restaurants.repository;
 
 import com.atanava.restaurants.AbstractTest;
-import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.repository.restaurant.RestaurantRepository;
-import com.atanava.restaurants.testdata.DishTestData;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 import static com.atanava.restaurants.testdata.DbSequence.*;
@@ -34,8 +30,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
 
     @Test
     public void duplicateNameSave() throws Exception {
-        assertThrows(DataAccessException.class, () ->
-                repository.save(new Restaurant(null, "Troika")));
+        assertThrows(DataAccessException.class, () -> repository.save(getDuplicate()));
     }
 
     @Test
@@ -72,13 +67,4 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
         List<Restaurant> all = repository.getAll();
         RESTAURANT_MATCHER.assertMatch(all, gloria, troika);
     }
-
-//    @Test
-//    public void getWithDishes() {
-//        Restaurant withDishes = repository.getWithDishes(RESTAURANT_1.id);
-//        troika.setDishes(DishTestData.getAllExpected());
-//        assertTrue(Objects.deepEquals(
-//            (withDishes.getDishes() == null ? new Dish[0] : withDishes.getDishes().toArray()), troika.getDishes().toArray()
-//        ));
-//    }
 }

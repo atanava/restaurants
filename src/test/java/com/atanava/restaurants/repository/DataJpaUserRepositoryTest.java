@@ -1,7 +1,6 @@
 package com.atanava.restaurants.repository;
 
 import com.atanava.restaurants.AbstractTest;
-import com.atanava.restaurants.model.Role;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.repository.user.UserRepository;
 import org.junit.Test;
@@ -32,7 +31,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     @Test
     public void duplicateMailSave() throws Exception {
         assertThrows(DataAccessException.class, () ->
-                repository.save(new User(null, "Duplicate", "user1@yandex.ru", "newPass", Role.USER)));
+                repository.save(getDuplicate()));
     }
 
     @Test
@@ -75,12 +74,4 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
         List<User> all = repository.getAll();
         USER_MATCHER.assertMatch(all, expectedUser1, expectedAdmin, expectedUser2);
     }
-
-//    @Test
-//    public void getWithVotes() {
-//        User user = repository.getWithVotes(USER1_ID.value);
-//        User expected = getWithOneVote();
-//        TestMatcher.usingFieldsComparator("registered", "roles")
-//                .assertMatch(user, expected);
-//    }
 }

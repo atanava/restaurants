@@ -20,6 +20,10 @@ public class DishTestData {
         return new Dish(null, troika, "New", 800);
     }
 
+    public static Dish getDuplicate() {
+        return new Dish(new Dish(null, troika, getAllExpected().get(0).getName(), 300));
+    }
+
     public static Dish getUpdated() {
         Dish updated = getAllExpected().get(0);
         updated.setName("UpdatedName");
