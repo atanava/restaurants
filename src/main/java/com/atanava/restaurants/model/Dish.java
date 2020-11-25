@@ -36,9 +36,6 @@ public class  Dish extends AbstractNamedEntity {
     private boolean active = true;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "dishes")
-//    @JoinTable(name = "dishes_menus",
-//            joinColumns = @JoinColumn(name = "dish_id"),
-//            inverseJoinColumns = @JoinColumn(name = "menu_id"))
     Set<Menu> menus;
 
     public Dish() {
@@ -50,18 +47,6 @@ public class  Dish extends AbstractNamedEntity {
         this.price = price;
         this.menus = Collections.emptySet();
     }
-
-//    public Dish(Dish d) {
-//        this(d.getId(), d.getRestaurant(), d.getName(), d.getPrice(), d.isActive(), d.getMenus());
-//    }
-//
-//    private Dish(Integer id, Restaurant restaurant, String name, Integer price, boolean active, Set<Menu> menus) {
-//        super(id, name);
-//        this.restaurant = restaurant;
-//        this.active = active;
-//        this.price = price;
-//        this.menus = menus;
-//    }
 
     public Restaurant getRestaurant() {
         return restaurant;

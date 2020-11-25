@@ -13,23 +13,16 @@ public class DataJpaMenuRepository implements MenuRepository {
     private static final Sort SORT_DATE = Sort.by(Sort.Direction.DESC, "date");
 
     private final CrudMenuRepository crudMenuRepository;
-//    private final CrudRestaurantRepository crudRestaurantRepository;
 
     public DataJpaMenuRepository(CrudMenuRepository crudMenuRepository) {
         this.crudMenuRepository = crudMenuRepository;
     }
 
-//    public DataJpaMenuRepository(CrudMenuRepository crudMenuRepository, CrudRestaurantRepository crudRestaurantRepository) {
-//        this.crudMenuRepository = crudMenuRepository;
-//        this.crudRestaurantRepository = crudRestaurantRepository;
-//    }
-
     @Override
     public Menu save(Menu menu, int restaurantId) {
-        if (!menu.isNew() && get(menu.getId(), restaurantId) == null) {
+        if ( ! menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;
         }
-//        menu.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
         return crudMenuRepository.save(menu);
     }
 

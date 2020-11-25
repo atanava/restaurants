@@ -32,7 +32,7 @@ public enum DbSequence {
     NEW_ITEM(19),
     ;
 
-    public int id;
+    public final int id;
 
     DbSequence(int value) {
         this.id = START_SEQ + value;

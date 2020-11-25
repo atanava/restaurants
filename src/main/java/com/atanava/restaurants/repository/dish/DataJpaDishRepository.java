@@ -23,7 +23,7 @@ public class DataJpaDishRepository implements DishRepository {
     @Override
     @Transactional
     public Dish save(Dish dish, int restaurantId) {
-        if (!dish.isNew()) {
+        if ( ! dish.isNew()) {
             if (deactivate(dish.getId(), restaurantId) == null) {
                 return null;
             } else {

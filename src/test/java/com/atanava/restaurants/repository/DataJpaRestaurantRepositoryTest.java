@@ -1,6 +1,7 @@
 package com.atanava.restaurants.repository;
 
 import com.atanava.restaurants.AbstractTest;
+import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.repository.restaurant.RestaurantRepository;
 import com.atanava.restaurants.testdata.DishTestData;
@@ -41,7 +42,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     public void update() throws Exception {
         Restaurant updated = getUpdated();
         repository.save(updated);
-        RESTAURANT_MATCHER.assertMatch(repository.get(RESTAURANT_2.id), getUpdated());
+        RESTAURANT_MATCHER.assertMatch(repository.get(RESTAURANT_1.id), getUpdated());
     }
 
     @Test
@@ -57,8 +58,8 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
 
     @Test
     public void get() {
-        Restaurant restaurant = repository.get(RESTAURANT_2.id);
-        RESTAURANT_MATCHER.assertMatch(restaurant, gloria);
+        Restaurant restaurant = repository.get(RESTAURANT_1.id);
+        RESTAURANT_MATCHER.assertMatch(restaurant, troika);
     }
 
     @Test
@@ -72,21 +73,12 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
         RESTAURANT_MATCHER.assertMatch(all, gloria, troika);
     }
 
-    @Test
-    public void getWithDishes() {
-        Restaurant withDishes = repository.getWithDishes(RESTAURANT_1.id);
-        troika.setDishes(DishTestData.getAllExpected());
-        assertTrue(Objects.deepEquals(
-            withDishes.getDishes() != null ? withDishes.getDishes().toArray() : withDishes,
-                troika.getDishes().toArray()
-        ));
-    }
-
-    @Test
-    public void getWithMenus() {
-    }
-
-    @Test
-    public void getWithVotes() {
-    }
+//    @Test
+//    public void getWithDishes() {
+//        Restaurant withDishes = repository.getWithDishes(RESTAURANT_1.id);
+//        troika.setDishes(DishTestData.getAllExpected());
+//        assertTrue(Objects.deepEquals(
+//            (withDishes.getDishes() == null ? new Dish[0] : withDishes.getDishes().toArray()), troika.getDishes().toArray()
+//        ));
+//    }
 }

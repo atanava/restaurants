@@ -16,7 +16,7 @@ public class RestaurantTestData {
     }
 
     public static Restaurant getUpdated() {
-        Restaurant updated = new Restaurant(gloria);
+        Restaurant updated = new Restaurant(troika);
         updated.setName("UpdatedName");
         return updated;
     }
