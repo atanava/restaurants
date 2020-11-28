@@ -2,7 +2,6 @@ package com.atanava.restaurants.repository.dish;
 
 import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.repository.restaurant.CrudRestaurantRepository;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +9,6 @@ import java.util.List;
 
 @Repository
 public class DataJpaDishRepository implements DishRepository {
-    private static final Sort SORT_NAME = Sort.by(Sort.Direction.ASC, "name");
 
     private final CrudDishRepository crudDishRepository;
     private final CrudRestaurantRepository crudRestaurantRepository;

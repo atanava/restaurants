@@ -9,14 +9,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Transactional(readOnly = true)
 public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
-//    @Override
-//    @Transactional
-//    Menu save(Menu menu);
     @Transactional
     @Modifying
     @Query(name = Menu.UPDATE)

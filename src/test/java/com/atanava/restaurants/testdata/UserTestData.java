@@ -27,11 +27,4 @@ public class UserTestData {
         updated.setEmail("updated@gmail.com");
         return updated;
     }
-//
-//    public static User getWithOneVote() {
-//        Vote vote = new Vote(VOTE1_ID.value, new Date(), null, null);
-//        User user = new User(USER1_ID.value, "Fedja", "user1@yandex.ru", "password", Role.USER);
-//        user.setVotes(List.of(vote));
-//        return user;
-//    }
 }

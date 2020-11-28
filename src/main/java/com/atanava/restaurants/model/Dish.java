@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Set;
 
 @NamedQueries({
-//        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
         @NamedQuery(name = Dish.BY_RESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId ORDER BY d.name"),
 })
 
@@ -18,7 +17,6 @@ import java.util.Set;
         name = "unique_restaurant_id_dish_name_idx")})
 public class  Dish extends AbstractNamedEntity {
 
-//    public static final String DELETE = "Dish.delete";
     public static final String BY_RESTAURANT = "Dish.getAllByRestaurant";
 
     //TODO try to replace with restaurantId

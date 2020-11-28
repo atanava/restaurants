@@ -29,12 +29,12 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void duplicateNameSave() throws Exception {
+    public void duplicateNameSave() {
         assertThrows(DataAccessException.class, () -> repository.save(getDuplicate()));
     }
 
     @Test
-    public void update() throws Exception {
+    public void update() {
         Restaurant updated = getUpdated();
         repository.save(updated);
         RESTAURANT_MATCHER.assertMatch(repository.get(RESTAURANT_1.id), getUpdated());
@@ -47,7 +47,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void deletedNotFound() throws Exception {
+    public void deletedNotFound() {
         assertFalse(repository.delete(NOT_FOUND.id));
     }
 
@@ -58,7 +58,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void getNotFound() throws Exception {
+    public void getNotFound() {
         assertNull(repository.get(NOT_FOUND.id));
     }
 

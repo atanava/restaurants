@@ -29,7 +29,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void duplicateNameSave() throws Exception {
+    public void duplicateNameSave() {
         assertThrows(DataAccessException.class, () -> repository.save(getDuplicate(), RESTAURANT_1.id));
     }
 
@@ -56,12 +56,12 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void getNotFound() throws Exception {
+    public void getNotFound() {
         assertNull(repository.get(NOT_FOUND.id, RESTAURANT_1.id));
     }
 
     @Test
-    public void update() throws Exception {
+    public void update() {
         Dish updated = getUpdated();
         repository.save(updated, RESTAURANT_1.id);
         updated = getUpdated();

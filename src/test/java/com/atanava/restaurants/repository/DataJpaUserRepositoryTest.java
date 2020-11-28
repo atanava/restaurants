@@ -29,13 +29,13 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void duplicateMailSave() throws Exception {
+    public void duplicateMailSave() {
         assertThrows(DataAccessException.class, () ->
                 repository.save(getDuplicate()));
     }
 
     @Test
-    public void update() throws Exception {
+    public void update() {
         User updated = getUpdated();
         repository.save(updated);
         USER_MATCHER.assertMatch(repository.get(USER_1.id), getUpdated());
@@ -48,7 +48,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void deletedNotFound() throws Exception {
+    public void deletedNotFound() {
         assertFalse(repository.delete(NOT_FOUND.id));
     }
 
@@ -59,7 +59,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void getNotFound() throws Exception {
+    public void getNotFound() {
         assertNull(repository.get(NOT_FOUND.id));
     }
 

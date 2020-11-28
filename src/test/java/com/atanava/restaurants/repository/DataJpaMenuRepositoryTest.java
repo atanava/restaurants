@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,7 +44,7 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
     }
 
     @Test
-//    @Ignore
+    @Ignore
     public void update() {
         Menu updated = repository.save(getUpdated(), RESTAURANT_1.id);
         int updatedId = updated.id();
