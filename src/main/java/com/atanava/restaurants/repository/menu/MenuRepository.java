@@ -1,13 +1,16 @@
 package com.atanava.restaurants.repository.menu;
 
+import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Menu;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MenuRepository {
 
     Menu save(Menu menu, int restaurantId);
+
+//    Menu update(Menu menu, int restaurantId);
 
     boolean delete(int id, int restaurantId);
 
@@ -17,6 +20,6 @@ public interface MenuRepository {
 
     List<Menu> getAllByRestaurant(int restaurantId);
 
-    List<Menu> getAllByDate(Date date);
+    List<Menu> getAllByDate(LocalDate date);
 
 }

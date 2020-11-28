@@ -17,19 +17,25 @@ public class MenuTestData {
     private static final Restaurant troika = RestaurantTestData.troika;
     private static final Restaurant gloria = RestaurantTestData.gloria;
 
-    private static final LocalDate dateOld = LocalDate.parse("2020-11-19");
-    private static final LocalDate  dateNew = LocalDate.parse("2020-11-20");
+    public static final LocalDate date1 = LocalDate.parse("2020-11-19");
+    private static final LocalDate date2 = LocalDate.parse("2020-11-20");
+    private static final LocalDate today = LocalDate.now();
+
+    public static Menu menuOfTroika1 = new Menu(MENU_1.id, troika, DishTestData.getAllExpected(), date1);
+    public static Menu menuOfTroika2 = new Menu(MENU_3.id, troika, DishTestData.getAllExpected(), date2);
+    public static Menu menuOfGloria = new Menu(MENU_2.id, gloria, DishTestData.getAllExpected(), date1);
+
 
     public static Menu getNew() {
-        return new Menu(troika, DishTestData.getAllExpected(), dateNew);
+        return new Menu(troika, DishTestData.getAllExpected(), today);
     }
 
     public static Menu getDuplicate() {
-        return  new Menu(troika, DishTestData.getAllExpected(), dateOld);
+        return  new Menu(troika, DishTestData.getAllExpected(), date1);
     }
 
     public static Menu getUpdated() {
-        Menu updated = getAllExpected().get(0);
+        Menu updated = menuOfTroika1;
         List<Dish> dishes = updated.getDishes();
         dishes.remove(0);
         dishes.get(0).setPrice(500);
@@ -37,10 +43,14 @@ public class MenuTestData {
     }
 
     public static List<Menu> getAllExpected() {
-        Menu menuOfTroika = new Menu(MENU_1.id, troika, DishTestData.getAllExpected(), dateOld);
-        Menu menuOfGloria = new Menu(MENU_2.id, gloria, DishTestData.getAllExpected(), dateOld);
-        return List.of(menuOfTroika, menuOfGloria);
+        return List.of(menuOfTroika2, menuOfTroika1, menuOfGloria);
     }
-    //TODO add menus from one restaurant
 
+    public static List<Menu> getAllExpByRestaurant() {
+        return List.of(menuOfTroika2, menuOfTroika1);
+    }
+
+    public static List<Menu> getAllExpByDate() {
+        return List.of(menuOfTroika1, menuOfGloria);
+    }
 }

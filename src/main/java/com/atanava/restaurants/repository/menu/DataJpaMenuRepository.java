@@ -1,15 +1,16 @@
 package com.atanava.restaurants.repository.menu;
 
+import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Menu;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Repository
 public class DataJpaMenuRepository implements MenuRepository {
-    //TODO add sort dy restaurant too
     private static final Sort SORT_DATE = Sort.by(Sort.Direction.DESC, "date");
 
     private final CrudMenuRepository crudMenuRepository;
@@ -29,11 +30,16 @@ public class DataJpaMenuRepository implements MenuRepository {
         }
         //TODO repair updating
         Menu updated = crudMenuRepository.get(menu.getId(), restaurantId);
-        updated.setDishes(menu.getDishes());
-        updated.setDate(menu.getDate());
+        List<Dish> dishes = menu.getDishes();
+        updated.setDishes(dishes);
 
-        return crudMenuRepository.save(updated);
+        return crudMenuRepository.update(dishes, menu.getId(), restaurantId) == 0 ? null : updated;
     }
+
+//    @Override
+//    public Menu update(Menu menu, int restaurantId) {
+//        return crudMenuRepository.update(menu.getDishes(), menu.getId(), restaurantId) != 0;
+//    }
 
     @Override
     public boolean delete(int id, int restaurantId) {
@@ -56,7 +62,7 @@ public class DataJpaMenuRepository implements MenuRepository {
     }
 
     @Override
-    public List<Menu> getAllByDate(Date date) {
+    public List<Menu> getAllByDate(LocalDate date) {
         return crudMenuRepository.getAllByDate(date);
     }
 }
