@@ -13,6 +13,8 @@ public interface MenuRepository {
 
     Menu get(int id, int restaurantId);
 
+    Menu getByRestAndDate(int restaurantId, LocalDate date);
+
     List<Menu> getAll();
 
     List<Menu> getAllByRestaurant(int restaurantId);

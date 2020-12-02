@@ -14,29 +14,30 @@ public class DishTestData {
 
     public static TestMatcher<Dish> DISH_MATCHER = TestMatcher.usingFieldsComparator("restaurant", "menus");
 
-    public static final Restaurant troika =  RestaurantTestData.troika;
+    private static final Restaurant troika =  RestaurantTestData.troika;
+    private static final Restaurant gloria = RestaurantTestData.gloria;
 
     public static Dish getNew() {
         return new Dish(null, troika, "New", 800);
     }
 
     public static Dish getDuplicate() {
-        return new Dish(new Dish(null, troika, getAllExpected().get(0).getName(), 300));
+        return new Dish(new Dish(null, troika, getAllFromTroika().get(0).getName(), 300));
     }
 
     public static Dish getUpdated() {
-        Dish updated = getAllExpected().get(0);
+        Dish updated = getAllFromTroika().get(0);
         updated.setName("UpdatedName");
         return updated;
     }
 
     public static Dish getDeactivated() {
-        Dish deactivated = getAllExpected().get(0);
+        Dish deactivated = getAllFromTroika().get(0);
         deactivated.setActive(false);
         return deactivated;
     }
 
-    public static List<Dish> getAllExpected() {
+    public static List<Dish> getAllFromTroika() {
         List<Dish> expectedList = new ArrayList<>();
         expectedList.add(new Dish(DISH_1.id, troika, "Salad", 400));
         expectedList.add(new Dish(DISH_2.id, troika, "Soup", 530));
@@ -46,8 +47,18 @@ public class DishTestData {
         return expectedList;
     }
 
+    public static List<Dish> getAllFromGloria() {
+        List<Dish> expectedList = new ArrayList<>();
+        expectedList.add(new Dish(DISH_6.id, gloria, "Salad", 320));
+        expectedList.add(new Dish(DISH_7.id, gloria, "Soup", 400));
+        expectedList.add(new Dish(DISH_8.id, gloria, "Meat", 550));
+        expectedList.add(new Dish(DISH_9.id, gloria, "Fish", 650));
+        expectedList.add(new Dish(DISH_10.id, gloria, "Juice", 120));
+        return expectedList;
+    }
+
     public static List<Dish> getAllSorted() {
-        List<Dish> expectedList = getAllExpected();
+        List<Dish> expectedList = getAllFromTroika();
         expectedList.sort(Comparator.comparing(Dish::getName));
         return expectedList;
     }

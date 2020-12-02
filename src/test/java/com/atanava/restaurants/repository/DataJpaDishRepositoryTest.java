@@ -52,7 +52,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     @Test
     public void get() {
         Dish dish = repository.get(DISH_1.id, RESTAURANT_1.id);
-        DISH_MATCHER.assertMatch(dish, getAllExpected().get(0));
+        DISH_MATCHER.assertMatch(dish, getAllFromTroika().get(0));
     }
 
     @Test

@@ -13,10 +13,10 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
-    @Transactional
-    @Modifying
-    @Query(name = Menu.UPDATE)
-    int update(@Param("dishes") List<Dish> dishes, @Param("id") int id, @Param("restaurantId") int restaurantId);
+//    @Transactional
+//    @Modifying
+//    @Query(name = Menu.UPDATE)
+//    int update(@Param("dishes") List<Dish> dishes, @Param("id") int id, @Param("restaurantId") int restaurantId);
 //    int update(@Param("menu") Menu menu, @Param("id") int id, @Param("restaurantId") int restaurantId);
 
     @Transactional
@@ -26,6 +26,9 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
 
     @Query(name = Menu.GET)
     Menu get(@Param("id") int id, @Param("restaurantId") int restaurantId);
+
+    @Query(name = Menu.BY_REST_AND_DATE)
+    Menu getByRestAndDate(@Param("restaurantId") int restaurantId, @Param("date") LocalDate date);
 
     @Query(name = Menu.BY_RESTAURANT)
     List<Menu> getAllByRestaurant(@Param("restaurantId") int restaurantId);

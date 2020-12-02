@@ -12,8 +12,9 @@ import java.util.List;
         @NamedQuery(name = Menu.GET, query = "SELECT m FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
         @NamedQuery(name = Menu.BY_RESTAURANT, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC"),
         @NamedQuery(name = Menu.BY_DATE, query = "SELECT m FROM Menu m WHERE m.date=:date"),
+        @NamedQuery(name = Menu.BY_REST_AND_DATE, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId AND m.date=:date"),
         @NamedQuery(name = Menu.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
-        @NamedQuery(name = Menu.UPDATE, query = "UPDATE Menu m SET m.dishes=:dishes WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
+//        @NamedQuery(name = Menu.UPDATE, query = "UPDATE Menu m SET m.dishes=:dishes WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
 //        @NamedQuery(name = Menu.UPDATE, query = "UPDATE Menu m SET m=:menu WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
 
 })
@@ -26,8 +27,9 @@ public class Menu extends AbstractBaseEntity {
     public static final String GET = "Menu.get";
     public static final String BY_RESTAURANT = "Menu.getAllByRestaurant";
     public static final String BY_DATE = "Menu.getAllByDate";
+    public static final String BY_REST_AND_DATE = "Menu.getByRestAndDate";
     public static final String DELETE = "Menu.delete";
-    public static final String UPDATE = "Menu.update";
+//    public static final String UPDATE = "Menu.update";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)

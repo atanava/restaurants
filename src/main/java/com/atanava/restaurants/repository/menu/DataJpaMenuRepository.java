@@ -1,7 +1,7 @@
 package com.atanava.restaurants.repository.menu;
 
-import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Menu;
+import com.atanava.restaurants.repository.restaurant.CrudRestaurantRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -13,32 +13,22 @@ public class DataJpaMenuRepository implements MenuRepository {
     private static final Sort SORT_DATE = Sort.by(Sort.Direction.DESC, "date");
 
     private final CrudMenuRepository crudMenuRepository;
+    private final CrudRestaurantRepository crudRestaurantRepository;
 
-    public DataJpaMenuRepository(CrudMenuRepository crudMenuRepository) {
+    public DataJpaMenuRepository(CrudMenuRepository crudMenuRepository, CrudRestaurantRepository crudRestaurantRepository) {
         this.crudMenuRepository = crudMenuRepository;
+        this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
     //TODO Reduce the number of queries
     @Override
     public Menu save(Menu menu, int restaurantId) {
-        if (menu.isNew()) {
-            return crudMenuRepository.save(menu);
-        }
-        if (get(menu.getId(), restaurantId) == null) {
+        if ( ! menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;
         }
-        //TODO repair updating
-        Menu updated = crudMenuRepository.get(menu.getId(), restaurantId);
-        List<Dish> dishes = menu.getDishes();
-        updated.setDishes(dishes);
-
-        return crudMenuRepository.update(dishes, menu.getId(), restaurantId) == 0 ? null : updated;
+        menu.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
+        return crudMenuRepository.save(menu);
     }
-
-//    @Override
-//    public Menu update(Menu menu, int restaurantId) {
-//        return crudMenuRepository.update(menu.getDishes(), menu.getId(), restaurantId) != 0;
-//    }
 
     @Override
     public boolean delete(int id, int restaurantId) {
@@ -48,6 +38,11 @@ public class DataJpaMenuRepository implements MenuRepository {
     @Override
     public Menu get(int id, int restaurantId) {
         return crudMenuRepository.get(id, restaurantId);
+    }
+
+    @Override
+    public Menu getByRestAndDate(int restaurantId, LocalDate date) {
+        return crudMenuRepository.getByRestAndDate(restaurantId, date);
     }
 
     @Override
