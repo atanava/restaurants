@@ -4,6 +4,7 @@ import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.repository.restaurant.CrudRestaurantRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +37,7 @@ public class DataJpaMenuRepository implements MenuRepository {
     }
 
     @Override
+    @Transactional
     public Menu get(int id, int restaurantId) {
         return crudMenuRepository.get(id, restaurantId);
     }

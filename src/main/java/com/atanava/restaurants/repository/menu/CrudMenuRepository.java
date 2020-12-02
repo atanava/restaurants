@@ -1,7 +1,7 @@
 package com.atanava.restaurants.repository.menu;
 
-import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Menu;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +24,7 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @Query(name = Menu.DELETE)
     int delete(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
+    @EntityGraph(attributePaths = {"dishes"})
     @Query(name = Menu.GET)
     Menu get(@Param("id") int id, @Param("restaurantId") int restaurantId);
 

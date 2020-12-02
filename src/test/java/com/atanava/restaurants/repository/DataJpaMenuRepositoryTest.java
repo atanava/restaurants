@@ -36,10 +36,8 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
         MENU_MATCHER.assertMatch(actualFromDB, newMenu);
 
         //https://stackoverflow.com/questions/55621145/how-to-work-with-hibernates-persistentbag-not-obeying-list-equals-contract
-        assertTrue(Objects.deepEquals(
-              actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
-                newMenu.getDishes().toArray()
-        ));
+        assertArrayEquals(actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
+                newMenu.getDishes().toArray());
     }
 
     @Test
@@ -58,10 +56,8 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
         MENU_MATCHER.assertMatch(updated, expected);
         MENU_MATCHER.assertMatch(actualFromDB, expected);
 
-        assertTrue(Objects.deepEquals(
-                actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
-                expected.getDishes().toArray()
-        ));
+        assertArrayEquals(actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
+                expected.getDishes().toArray());
 
         assertTrue(Objects.deepEquals(actualFromDB.getDishes().get(4), newDish));
     }
@@ -70,6 +66,7 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
     public void delete() {
         menuRepository.delete(MENU_1.id, RESTAURANT_1.id);
         assertNull(menuRepository.get(MENU_1.id, RESTAURANT_1.id));
+        assertNotNull(dishRepository.get(DISH_1.id, RESTAURANT_1.id));
     }
 
     @Test
@@ -82,10 +79,9 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
         Menu expected = menuOfTroika1;
         Menu actualFromDB = menuRepository.get(MENU_1.id, RESTAURANT_1.id);
         MENU_MATCHER.assertMatch(actualFromDB, expected);
-        assertTrue(Objects.deepEquals(
-                actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
-                expected.getDishes().toArray()
-        ));
+
+        assertArrayEquals(actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
+                expected.getDishes().toArray());
     }
 
     @Test
