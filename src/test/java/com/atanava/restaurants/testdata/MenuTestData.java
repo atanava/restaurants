@@ -6,7 +6,6 @@ import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.model.Restaurant;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,24 +15,24 @@ public class MenuTestData {
 
     public static TestMatcher<Menu> MENU_MATCHER = TestMatcher.usingFieldsComparator("dishes", "restaurant");
 
-    private static final Restaurant troika = RestaurantTestData.troika;
-    private static final Restaurant gloria = RestaurantTestData.gloria;
+    private static final Restaurant rest1 = RestaurantTestData.rest1;
+    private static final Restaurant rest2 = RestaurantTestData.rest2;
 
     public static final LocalDate date1 = LocalDate.parse("2020-11-19");
     public static final LocalDate date2 = LocalDate.parse("2020-11-20");
     public static final LocalDate today = LocalDate.now();
 
-    public static Menu menuOfTroika1 = new Menu(MENU_1.id, troika, DishTestData.getAllFromTroika(), date1);
-    public static Menu menuOfTroika2 = new Menu(MENU_3.id, troika, DishTestData.getAllFromTroika(), date2);
-    public static Menu menuOfGloria = new Menu(MENU_2.id, gloria, DishTestData.getAllFromGloria(), date1);
+    public static Menu menuOfTroika1 = new Menu(MENU_1.id, rest1, DishTestData.getAllFromTroika(), date1);
+    public static Menu menuOfTroika2 = new Menu(MENU_3.id, rest1, DishTestData.getAllFromTroika(), date2);
+    public static Menu menuOfGloria = new Menu(MENU_2.id, rest2, DishTestData.getAllFromGloria(), date1);
 
 
     public static Menu getNew() {
-        return new Menu(troika, DishTestData.getAllFromTroika(), today);
+        return new Menu(rest1, DishTestData.getAllFromTroika(), today);
     }
 
     public static Menu getDuplicate() {
-        return  new Menu(troika, DishTestData.getAllFromTroika(), date1);
+        return  new Menu(rest1, DishTestData.getAllFromTroika(), date1);
     }
 
     public static Menu getUpdated() {
@@ -43,7 +42,7 @@ public class MenuTestData {
             dishes.add(DishTestData.getNew());
             dishes.get(4).setId(NEW_ITEM.id);
         }
-        Menu updated = new Menu(MENU_1.id, troika, Collections.emptyList(), date1);
+        Menu updated = new Menu(MENU_1.id, rest1, Collections.emptyList(), date1);
         updated.setDishes(dishes);
         return updated;
     }

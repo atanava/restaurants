@@ -54,7 +54,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     @Test
     public void get() {
         Restaurant restaurant = repository.get(RESTAURANT_1.id);
-        RESTAURANT_MATCHER.assertMatch(restaurant, troika);
+        RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
     }
 
     @Test
@@ -65,6 +65,6 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     @Test
     public void getAll() {
         List<Restaurant> all = repository.getAll();
-        RESTAURANT_MATCHER.assertMatch(all, gloria, troika);
+        RESTAURANT_MATCHER.assertMatch(all, rest2, rest1);
     }
 }

@@ -14,8 +14,8 @@ public class DishTestData {
 
     public static TestMatcher<Dish> DISH_MATCHER = TestMatcher.usingFieldsComparator("restaurant", "menus");
 
-    private static final Restaurant troika =  RestaurantTestData.troika;
-    private static final Restaurant gloria = RestaurantTestData.gloria;
+    private static final Restaurant troika =  RestaurantTestData.rest1;
+    private static final Restaurant gloria = RestaurantTestData.rest2;
 
     public static Dish getNew() {
         return new Dish(null, troika, "New", 800);

@@ -55,7 +55,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     @Test
     public void get() {
         User user = repository.get(USER_1.id);
-        USER_MATCHER.assertMatch(user, expectedUser1);
+        USER_MATCHER.assertMatch(user, user1);
     }
 
     @Test
@@ -72,6 +72,6 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     @Test
     public void getAll() {
         List<User> all = repository.getAll();
-        USER_MATCHER.assertMatch(all, expectedUser1, expectedAdmin, expectedUser2);
+        USER_MATCHER.assertMatch(all, user1, expectedAdmin, user2);
     }
 }
