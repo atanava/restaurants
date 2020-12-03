@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
+import org.hibernate.persister.collection.AbstractCollectionPersister;
+
 import java.util.List;
 import java.util.Objects;
 

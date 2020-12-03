@@ -1,5 +1,6 @@
 package com.atanava.restaurants.repository.vote;
 
+import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.model.Vote;
 import com.atanava.restaurants.repository.restaurant.CrudRestaurantRepository;
 import com.atanava.restaurants.repository.user.CrudUserRepository;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Repository
 public class DataJpaVoteRepository implements VoteRepository {
-    private static final Sort SORT_DATE_REST = Sort.by(Sort.Direction.DESC, "date", "restaurant");
+    private static final Sort SORT_DATE = Sort.by(Sort.Direction.DESC, "date");
 
     private final CrudVoteRepository crudVoteRepository;
     private final CrudUserRepository crudUserRepository;
@@ -26,8 +27,14 @@ public class DataJpaVoteRepository implements VoteRepository {
 
     @Override
     public Vote save(Vote vote, int userId, int restaurantId) {
-        if ( ! vote.isNew() && get(userId, LocalDate.now()) == null) {
-            return null;
+        if ( ! vote.isNew()) {
+            if (get(vote.getId(), userId) == null || ! vote.getDate().equals(LocalDate.now())) {
+                return null;
+            } else {
+                Restaurant restaurant = crudRestaurantRepository.getOne(restaurantId);
+                vote.setRestaurant(restaurant);
+                return crudVoteRepository.update(vote.getId(), userId, restaurant) == 0 ? null : vote;
+            }
         }
         vote.setUser(crudUserRepository.getOne(userId));
         vote.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
@@ -35,13 +42,20 @@ public class DataJpaVoteRepository implements VoteRepository {
     }
 
     @Override
-    public Vote get(int userId, LocalDate date) {
-        return crudVoteRepository.get(userId, date);
+    public Vote get(int id, int userId) {
+        return crudVoteRepository.findById(id)
+                .filter(vote -> vote.getUser().getId() == userId)
+                .orElse(null);
+    }
+
+    @Override
+    public Vote getWithUserAndRest(int id) {
+        return crudVoteRepository.findById(id).orElse(null);
     }
 
     @Override
     public Set<Vote> getAll() {
-        return new LinkedHashSet<>(crudVoteRepository.findAll(SORT_DATE_REST));
+        return new LinkedHashSet<>(crudVoteRepository.findAll(SORT_DATE));
     }
 
     @Override

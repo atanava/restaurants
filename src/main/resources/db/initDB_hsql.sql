@@ -70,7 +70,8 @@ CREATE TABLE votes
     restaurant_id INTEGER                   NOT NULL,
     user_id       INTEGER                   NOT NULL,
     date          DATE DEFAULT CURRENT_DATE NOT NULL,
+    CONSTRAINT unique_user_id_date_idx UNIQUE (user_id, date),
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, --TODO try to remove delete cascade
-    CONSTRAINT unique_user_id_date_idx UNIQUE (user_id, date)
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE --TODO try to remove delete cascade
+
 );

@@ -13,7 +13,9 @@ public interface VoteRepository {
         throw new UnsupportedOperationException("You cannot delete existed vote");
     }
 
-    Vote get(int userId, LocalDate date);
+    Vote get(int id, int userId);
+
+    Vote getWithUserAndRest(int id);
 
     Set<Vote> getAll();
 
