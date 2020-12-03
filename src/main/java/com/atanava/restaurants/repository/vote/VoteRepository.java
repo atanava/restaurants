@@ -9,9 +9,11 @@ public interface VoteRepository {
 
     Vote save(Vote vote, int userId, int restaurantId);
 
-    boolean delete(int id, int restaurantId);
+    default boolean delete(int id, int userId) {
+        throw new UnsupportedOperationException("You cannot delete existed vote");
+    }
 
-    Vote get(int id, int restaurantId);
+    Vote get(int userId, LocalDate date);
 
     Set<Vote> getAll();
 

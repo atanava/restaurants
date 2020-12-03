@@ -29,8 +29,12 @@ public enum DbSequence {
 
     VOTE_1(18),
     VOTE_2(19),
+    VOTE_3(20),
+    VOTE_4(21),
+    VOTE_5(22),
+    VOTE_6(23),
 
-    NEW_ITEM(20),
+    NEW_ITEM(24),
     ;
 
     public final int id;

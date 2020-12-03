@@ -66,12 +66,12 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     @Test
     public void getByEmail() {
         User user = repository.getByEmail("admin@gmail.com");
-        USER_MATCHER.assertMatch(user, expectedAdmin);
+        USER_MATCHER.assertMatch(user, admin);
     }
 
     @Test
     public void getAll() {
         List<User> all = repository.getAll();
-        USER_MATCHER.assertMatch(all, user1, expectedAdmin, user2);
+        USER_MATCHER.assertMatch(all, user1, admin, user2);
     }
 }
