@@ -22,17 +22,17 @@ public class MenuTestData {
     public static final LocalDate date2 = LocalDate.parse("2020-11-20");
     public static final LocalDate today = LocalDate.now();
 
-    public static Menu menuOfTroika1 = new Menu(MENU_1.id, rest1, DishTestData.getAllFromTroika(), date1);
-    public static Menu menuOfTroika2 = new Menu(MENU_3.id, rest1, DishTestData.getAllFromTroika(), date2);
-    public static Menu menuOfGloria = new Menu(MENU_2.id, rest2, DishTestData.getAllFromGloria(), date1);
+    public static Menu menuOfTroika1 = new Menu(MENU_1.id, rest1, DishTestData.getAllFromRest1(), date1);
+    public static Menu menuOfTroika2 = new Menu(MENU_3.id, rest1, DishTestData.getAllFromRest1(), date2);
+    public static Menu menuOfGloria = new Menu(MENU_2.id, rest2, DishTestData.getAllFromRest2(), date1);
 
 
     public static Menu getNew() {
-        return new Menu(rest1, DishTestData.getAllFromTroika(), today);
+        return new Menu(rest1, DishTestData.getAllFromRest1(), today);
     }
 
     public static Menu getDuplicate() {
-        return  new Menu(rest1, DishTestData.getAllFromTroika(), date1);
+        return  new Menu(rest1, DishTestData.getAllFromRest1(), date1);
     }
 
     public static Menu getUpdated() {

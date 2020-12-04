@@ -72,6 +72,5 @@ CREATE TABLE votes
     date          DATE DEFAULT CURRENT_DATE NOT NULL,
     CONSTRAINT unique_user_id_date_idx UNIQUE (user_id, date),
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE --TODO try to remove delete cascade
-
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );

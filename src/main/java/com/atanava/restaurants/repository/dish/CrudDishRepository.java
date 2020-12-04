@@ -11,7 +11,10 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
 
-    @Query(name = Dish.BY_RESTAURANT)
+    @Query(name = Dish.ALL)
     List<Dish> geAll(@Param("restaurantId") int restaurantId);
+
+    @Query(name = Dish.BY_ACTIVE)
+    List<Dish> getByActive(@Param("restaurantId") int restaurantId, @Param("active") boolean active);
 
 }

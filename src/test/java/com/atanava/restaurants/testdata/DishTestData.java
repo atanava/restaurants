@@ -22,22 +22,22 @@ public class DishTestData {
     }
 
     public static Dish getDuplicate() {
-        return new Dish(new Dish(null, troika, getAllFromTroika().get(0).getName(), 300));
+        return new Dish(new Dish(null, troika, getAllFromRest1().get(0).getName(), 300));
     }
 
     public static Dish getUpdated() {
-        Dish updated = getAllFromTroika().get(0);
+        Dish updated = getAllFromRest1().get(0);
         updated.setName("UpdatedName");
         return updated;
     }
 
     public static Dish getDeactivated() {
-        Dish deactivated = getAllFromTroika().get(0);
+        Dish deactivated = getAllFromRest1().get(0);
         deactivated.setActive(false);
         return deactivated;
     }
 
-    public static List<Dish> getAllFromTroika() {
+    public static List<Dish> getAllFromRest1() {
         List<Dish> expectedList = new ArrayList<>();
         expectedList.add(new Dish(DISH_1.id, troika, "Salad", 400));
         expectedList.add(new Dish(DISH_2.id, troika, "Soup", 530));
@@ -47,7 +47,7 @@ public class DishTestData {
         return expectedList;
     }
 
-    public static List<Dish> getAllFromGloria() {
+    public static List<Dish> getAllFromRest2() {
         List<Dish> expectedList = new ArrayList<>();
         expectedList.add(new Dish(DISH_6.id, gloria, "Salad", 320));
         expectedList.add(new Dish(DISH_7.id, gloria, "Soup", 400));
@@ -57,8 +57,8 @@ public class DishTestData {
         return expectedList;
     }
 
-    public static List<Dish> getAllSorted() {
-        List<Dish> expectedList = getAllFromTroika();
+    public static List<Dish> getAllFromRest1Sorted() {
+        List<Dish> expectedList = getAllFromRest1();
         expectedList.sort(Comparator.comparing(Dish::getName));
         return expectedList;
     }

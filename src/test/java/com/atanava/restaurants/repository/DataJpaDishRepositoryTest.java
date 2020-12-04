@@ -40,19 +40,32 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
 
     @Test
     public void deactivate() {
-        repository.deactivate(DISH_1.id, RESTAURANT_1.id);
+        assertTrue(repository.deactivate(DISH_1.id, RESTAURANT_1.id));
         DISH_MATCHER.assertMatch(repository.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
     }
 
     @Test
     public void deactivatedNotFound() {
-        assertNull(repository.deactivate(NEW_ITEM.id, RESTAURANT_1.id));
+        assertFalse(repository.deactivate(NEW_ITEM.id, RESTAURANT_1.id));
+    }
+
+    @Test
+    public void activate() {
+        repository.deactivate(DISH_1.id, RESTAURANT_1.id);
+        DISH_MATCHER.assertMatch(repository.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
+        assertTrue(repository.activate(DISH_1.id, RESTAURANT_1.id));
+        DISH_MATCHER.assertMatch(repository.get(DISH_1.id, RESTAURANT_1.id), getAllFromRest1().get(0));
+    }
+
+    @Test
+    public void activateNotFound() {
+        assertFalse(repository.activate(NEW_ITEM.id, RESTAURANT_1.id));
     }
 
     @Test
     public void get() {
         Dish dish = repository.get(DISH_1.id, RESTAURANT_1.id);
-        DISH_MATCHER.assertMatch(dish, getAllFromTroika().get(0));
+        DISH_MATCHER.assertMatch(dish, getAllFromRest1().get(0));
     }
 
     @Test
@@ -73,6 +86,17 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     @Test
     public void getAll() {
         List<Dish> all = repository.getAll(RESTAURANT_1.id);
-        DISH_MATCHER.assertMatch(all, getAllSorted());
+        DISH_MATCHER.assertMatch(all, getAllFromRest1Sorted());
     }
+
+    @Test
+    public void getByActive() {
+        repository.deactivate(DISH_4.id, RESTAURANT_1.id);
+        List<Dish> dishes =  getAllFromRest1Sorted();
+        Dish deactivated = dishes.remove(0);
+        deactivated.setActive(false);
+        DISH_MATCHER.assertMatch(repository.getByActive(RESTAURANT_1.id, true), dishes);
+        DISH_MATCHER.assertMatch(repository.getByActive(RESTAURANT_1.id, false).get(0), deactivated);
+    }
+
 }

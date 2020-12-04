@@ -22,7 +22,7 @@ public class DataJpaDishRepository implements DishRepository {
     @Transactional
     public Dish save(Dish dish, int restaurantId) {
         if ( ! dish.isNew()) {
-            if (deactivate(dish.getId(), restaurantId) == null) {
+            if ( ! deactivate(dish.getId(), restaurantId)) {
                 return null;
             } else {
                 Dish newDish = new Dish(null, dish.getRestaurant(), dish.getName(), dish.getPrice());
@@ -34,30 +34,25 @@ public class DataJpaDishRepository implements DishRepository {
     }
 
     @Override
-    public boolean delete(int id, int restaurantId)  {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     @Transactional
-    public Dish deactivate(int id, int restaurantId) {
+    public boolean deactivate(int id, int restaurantId) {
         Dish deactivated = get(id, restaurantId);
         if (deactivated == null) {
-            return null;
+            return false;
         }
         deactivated.setActive(false);
-        return deactivated;
+        return true;
     }
 
     @Override
     @Transactional
-    public Dish activate(int id, int restaurantId) {
+    public boolean activate(int id, int restaurantId) {
         Dish activated = get(id, restaurantId);
         if (activated == null) {
-            return null;
+            return false;
         }
         activated.setActive(true);
-        return activated;
+        return true;
     }
 
     @Override
@@ -70,6 +65,11 @@ public class DataJpaDishRepository implements DishRepository {
     @Override
     public List<Dish> getAll(int restaurantId) {
         return crudDishRepository.geAll(restaurantId);
+    }
+
+    @Override
+    public List<Dish> getByActive(int restaurantId, boolean active) {
+        return crudDishRepository.getByActive(restaurantId, active);
     }
 
 }

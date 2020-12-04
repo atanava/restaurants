@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = Dish.BY_RESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId ORDER BY d.name"),
+        @NamedQuery(name = Dish.ALL, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId ORDER BY d.name"),
+        @NamedQuery(name = Dish.BY_ACTIVE, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId AND d.active=:active ORDER BY d.name"),
 })
 
 @Entity
@@ -17,7 +18,8 @@ import java.util.Set;
         name = "unique_restaurant_id_dish_name_idx")})
 public class  Dish extends AbstractNamedEntity {
 
-    public static final String BY_RESTAURANT = "Dish.getAllByRestaurant";
+    public static final String ALL = "Dish.getAllByRestaurant";
+    public static final String BY_ACTIVE = "Dish.getByActive";
 
     //TODO try to replace with restaurantId
     @ManyToOne(fetch = FetchType.LAZY)
