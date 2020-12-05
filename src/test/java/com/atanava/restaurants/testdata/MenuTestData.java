@@ -28,11 +28,11 @@ public class MenuTestData {
 
 
     public static Menu getNew() {
-        return new Menu(rest1, DishTestData.getAllFromRest1(), today);
+        return new Menu(null, rest1, DishTestData.getAllFromRest1(), today);
     }
 
     public static Menu getDuplicate() {
-        return  new Menu(rest1, DishTestData.getAllFromRest1(), date1);
+        return  new Menu(null, rest1, DishTestData.getAllFromRest1(), date1);
     }
 
     public static Menu getUpdated() {

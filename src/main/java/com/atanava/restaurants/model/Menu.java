@@ -1,6 +1,5 @@
 package com.atanava.restaurants.model;
 
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -15,9 +14,6 @@ import java.util.List;
         @NamedQuery(name = Menu.BY_DATE, query = "SELECT m FROM Menu m WHERE m.date=:date"),
         @NamedQuery(name = Menu.BY_REST_AND_DATE, query = "SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId AND m.date=:date"),
         @NamedQuery(name = Menu.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
-//        @NamedQuery(name = Menu.UPDATE, query = "UPDATE Menu m SET m.dishes=:dishes WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
-//        @NamedQuery(name = Menu.UPDATE, query = "UPDATE Menu m SET m=:menu WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
-
 })
 
 @Entity
@@ -30,7 +26,6 @@ public class Menu extends AbstractBaseEntity {
     public static final String BY_DATE = "Menu.getAllByDate";
     public static final String BY_REST_AND_DATE = "Menu.getByRestAndDate";
     public static final String DELETE = "Menu.delete";
-//    public static final String UPDATE = "Menu.update";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -49,14 +44,6 @@ public class Menu extends AbstractBaseEntity {
     private LocalDate date;
 
     public Menu() {
-    }
-
-    public Menu(Restaurant restaurant, List<Dish> dishes) {
-        this(restaurant, dishes, null);
-    }
-
-    public Menu(Restaurant restaurant, List<Dish> dishes, LocalDate date) {
-        this(null, restaurant, dishes, date);
     }
 
     public Menu(Integer id, Restaurant restaurant, List<Dish> dishes, LocalDate date) {

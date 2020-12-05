@@ -25,7 +25,7 @@ public class DataJpaDishRepository implements DishRepository {
             if ( ! deactivate(dish.getId(), restaurantId)) {
                 return null;
             } else {
-                Dish newDish = new Dish(null, dish.getRestaurant(), dish.getName(), dish.getPrice());
+                Dish newDish = new Dish(null, dish.getName(), dish.getRestaurant(), dish.getPrice());
                 return crudDishRepository.save(newDish);
             }
         }

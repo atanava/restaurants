@@ -18,11 +18,11 @@ public class DishTestData {
     private static final Restaurant gloria = RestaurantTestData.rest2;
 
     public static Dish getNew() {
-        return new Dish(null, troika, "New", 800);
+        return new Dish(null, "New", troika, 800);
     }
 
     public static Dish getDuplicate() {
-        return new Dish(new Dish(null, troika, getAllFromRest1().get(0).getName(), 300));
+        return new Dish(new Dish(null, getAllFromRest1().get(0).getName(), troika, 300));
     }
 
     public static Dish getUpdated() {
@@ -39,21 +39,21 @@ public class DishTestData {
 
     public static List<Dish> getAllFromRest1() {
         List<Dish> expectedList = new ArrayList<>();
-        expectedList.add(new Dish(DISH_1.id, troika, "Salad", 400));
-        expectedList.add(new Dish(DISH_2.id, troika, "Soup", 530));
-        expectedList.add(new Dish(DISH_3.id, troika, "Meat", 750));
-        expectedList.add(new Dish(DISH_4.id, troika, "Fish", 960));
-        expectedList.add(new Dish(DISH_5.id, troika, "Juice", 200));
+        expectedList.add(new Dish(DISH_1.id, "Salad", troika, 400));
+        expectedList.add(new Dish(DISH_2.id, "Soup", troika, 530));
+        expectedList.add(new Dish(DISH_3.id, "Meat", troika, 750));
+        expectedList.add(new Dish(DISH_4.id, "Fish", troika, 960));
+        expectedList.add(new Dish(DISH_5.id, "Juice", troika, 200));
         return expectedList;
     }
 
     public static List<Dish> getAllFromRest2() {
         List<Dish> expectedList = new ArrayList<>();
-        expectedList.add(new Dish(DISH_6.id, gloria, "Salad", 320));
-        expectedList.add(new Dish(DISH_7.id, gloria, "Soup", 400));
-        expectedList.add(new Dish(DISH_8.id, gloria, "Meat", 550));
-        expectedList.add(new Dish(DISH_9.id, gloria, "Fish", 650));
-        expectedList.add(new Dish(DISH_10.id, gloria, "Juice", 120));
+        expectedList.add(new Dish(DISH_6.id, "Salad", gloria, 320));
+        expectedList.add(new Dish(DISH_7.id, "Soup", gloria, 400));
+        expectedList.add(new Dish(DISH_8.id, "Meat", gloria, 550));
+        expectedList.add(new Dish(DISH_9.id, "Fish", gloria, 650));
+        expectedList.add(new Dish(DISH_10.id, "Juice", gloria, 120));
         return expectedList;
     }
 

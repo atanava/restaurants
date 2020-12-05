@@ -19,13 +19,12 @@ public class User extends AbstractNamedEntity {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
-    //    https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
-    @Size(max = 254)
+    @Size(max = 254) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
     private String email;
 
     @Column(name = "password", nullable = false)
     @NotBlank
-    @Size(min = 5, max = 100)
+    @Size(min = 5, max = 32)
     private String password;
 
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")

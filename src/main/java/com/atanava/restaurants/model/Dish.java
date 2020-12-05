@@ -42,10 +42,10 @@ public class  Dish extends AbstractNamedEntity {
     }
 
     public Dish(Dish dish) {
-        this(dish.getId(), dish.getRestaurant(), dish.getName(), dish.getPrice());
+        this(dish.getId(), dish.getName(), dish.getRestaurant(), dish.getPrice());
     }
 
-    public Dish(Integer id, Restaurant restaurant, String name, Integer price) {
+    public Dish(Integer id, String name, Restaurant restaurant, Integer price) {
         super(id, name);
         this.restaurant = restaurant;
         this.price = price;
@@ -89,6 +89,7 @@ public class  Dish extends AbstractNamedEntity {
         return "Dish{" +
                 "id=" + id +
                 ", name=" + name +
+                ", price=" + price +
                 '}';
     }
 }
