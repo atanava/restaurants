@@ -7,9 +7,15 @@ import java.util.Set;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 
+@NamedQueries({
+        @NamedQuery(name = Restaurant.GET_WITH, query = "SELECT r FROM Restaurant r WHERE r.id=:id"),
+        @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
+})
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurants_unique_name_idx")})
 public class Restaurant extends AbstractNamedEntity {
+    public static final String GET_WITH = "Restaurant.getWith*";
+    public static final String DELETE = "Restaurant.Delete";
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private List<Dish> dishes;
