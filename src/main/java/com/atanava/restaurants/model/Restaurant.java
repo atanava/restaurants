@@ -1,10 +1,8 @@
 package com.atanava.restaurants.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
-import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 
 @NamedQueries({
@@ -18,7 +16,7 @@ public class Restaurant extends AbstractNamedEntity {
     public static final String DELETE = "Restaurant.Delete";
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private List<Dish> dishes;
+    private Set<Dish> dishes;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<Menu> menus;
@@ -34,21 +32,21 @@ public class Restaurant extends AbstractNamedEntity {
     }
 
     public Restaurant(Integer id, String name) {
-        this(id, name, emptyList(), emptySet(), emptySet());
+        this(id, name, emptySet(), emptySet(), emptySet());
     }
 
-    public Restaurant(Integer id, String name, List<Dish> dishes, Set<Menu> menus, Set<Vote> votes) {
+    public Restaurant(Integer id, String name, Set<Dish> dishes, Set<Menu> menus, Set<Vote> votes) {
         super(id, name);
         this.dishes = dishes;
         this.menus = menus;
         this.votes = votes;
     }
 
-    public List<Dish> getDishes() {
+    public Set<Dish> getDishes() {
         return dishes;
     }
 
-    public void setDishes(List<Dish> dishes) {
+    public void setDishes(Set<Dish> dishes) {
         this.dishes = dishes;
     }
 

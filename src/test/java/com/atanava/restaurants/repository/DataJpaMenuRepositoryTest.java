@@ -118,7 +118,7 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
     @Test
     public void getAllByRestaurant() {
         List<Menu> allByRestaurant = menuRepository.getAllByRestaurant(RESTAURANT_1.id);
-        MENU_MATCHER.assertMatch(allByRestaurant, getAllExpByRestaurant());
+        MENU_MATCHER.assertMatch(allByRestaurant, getAllExpByRest());
     }
 
     @Test

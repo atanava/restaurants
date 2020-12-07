@@ -38,7 +38,7 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public Restaurant getWithVotes(int id) {
-        return crudRepository.getWithVotes(id);
+      return crudRepository.getWithVotes(id);
     }
 
     @Override
