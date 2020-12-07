@@ -28,6 +28,7 @@
         <!--    Tests  -->
         <junit.version>4.13</junit.version>
         <assertj.version>3.16.1</assertj.version>
+        <jsonassert.version>1.5.0</jsonassert.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.4.18.Final</hibernate.version>
@@ -215,6 +216,13 @@
             <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
