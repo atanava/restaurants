@@ -1,4 +1,4 @@
-package com.atanava.restaurants.web;
+package com.atanava.restaurants.web.user;
 
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.service.UserService;

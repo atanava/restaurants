@@ -1,4 +1,4 @@
-package com.atanava.restaurants;
+package com.atanava.restaurants.web;
 
 import com.atanava.restaurants.model.AbstractBaseEntity;
 
