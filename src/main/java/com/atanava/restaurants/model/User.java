@@ -2,6 +2,7 @@ package com.atanava.restaurants.model;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.BatchSize;
 import org.springframework.util.CollectionUtils;
 
@@ -44,6 +45,7 @@ public class User extends AbstractNamedEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @OrderBy("date DESC")
+    @JsonIgnore
     private List<Vote> votes;
 
     public User() {

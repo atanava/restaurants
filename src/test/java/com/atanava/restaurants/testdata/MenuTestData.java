@@ -6,6 +6,7 @@ import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.model.Restaurant;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class MenuTestData {
     }
 
     public static Menu getUpdated() {
-        List<Dish> dishes = new java.util.ArrayList<>(List.copyOf(menuOfTroika1.getDishes()));
+        List<Dish> dishes = new ArrayList<>(List.copyOf(menuOfTroika1.getDishes()));
         if ("Salad".equals(dishes.get(0).getName())) {
             dishes.remove(0);
             dishes.add(DishTestData.getNew());

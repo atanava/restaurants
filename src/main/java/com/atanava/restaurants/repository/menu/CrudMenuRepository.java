@@ -13,11 +13,6 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
-//    @Transactional
-//    @Modifying
-//    @Query(name = Menu.UPDATE)
-//    int update(@Param("dishes") List<Dish> dishes, @Param("id") int id, @Param("restaurantId") int restaurantId);
-//    int update(@Param("menu") Menu menu, @Param("id") int id, @Param("restaurantId") int restaurantId);
 
     @Transactional
     @Modifying

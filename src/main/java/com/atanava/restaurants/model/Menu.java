@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +34,7 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private Restaurant restaurant;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE, CascadeType.MERGE })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
     @JoinTable(name = "dishes_menus",
             joinColumns = @JoinColumn(name = "menu_id"),
             inverseJoinColumns = @JoinColumn(name = "dish_id"))
@@ -41,6 +42,7 @@ public class Menu extends AbstractBaseEntity {
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
     @NotNull
+    @FutureOrPresent
     private LocalDate date;
 
     public Menu() {

@@ -9,8 +9,7 @@ import com.atanava.restaurants.testdata.DishTestData;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-
-import org.hibernate.persister.collection.AbstractCollectionPersister;
+import org.springframework.transaction.TransactionSystemException;
 
 import java.util.List;
 import java.util.Objects;
@@ -43,8 +42,16 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
     }
 
     @Test
+    public void PastDateSave () {
+        Menu saved = getNew();
+        saved.setDate(today.minusDays(1));
+        assertThrows(TransactionSystemException.class, () -> menuRepository.save(saved, RESTAURANT_1.id));
+    }
+
+    @Test
     public void duplicateDateSave() {
-        assertThrows(DataAccessException.class, () -> menuRepository.save(getDuplicate(), RESTAURANT_1.id));
+        menuRepository.save(getNew(), RESTAURANT_1.id);
+        assertThrows(DataAccessException.class, () ->  menuRepository.save(getNew(), RESTAURANT_1.id));
     }
 
     @Test
