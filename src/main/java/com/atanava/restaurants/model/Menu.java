@@ -1,5 +1,7 @@
 package com.atanava.restaurants.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -42,7 +44,7 @@ public class Menu extends AbstractBaseEntity {
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
     @NotNull
-    @FutureOrPresent
+//    @FutureOrPresent
     private LocalDate date;
 
     public Menu() {

@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = AdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class AdminRestController {
-    private static final Logger log = LoggerFactory.getLogger(AdminRestController.class);
+@RequestMapping(value = AdminRestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class AdminRestaurantRestController {
+    private static final Logger log = LoggerFactory.getLogger(AdminRestaurantRestController.class);
 
-    static final String REST_URL = "/rest/admin";
+    static final String REST_URL = "/rest/admin/restaurants";
 
     public Restaurant get() {
         return null;
