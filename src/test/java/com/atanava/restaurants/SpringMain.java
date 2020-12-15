@@ -9,9 +9,7 @@ import com.atanava.restaurants.testdata.RestaurantTestData;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 public class SpringMain {
     public static void main(String[] args) {
