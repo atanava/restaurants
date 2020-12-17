@@ -106,7 +106,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
         Restaurant restaurant = restaurantRepository.getWithMenus(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
         assertArrayEquals(convertToSortedArray(restaurant.getMenus(), comparingById),
-                convertToSortedArray(MenuTestData.getAllExpByRest(), comparingById));
+                convertToSortedArray(MenuTestData.getAllExpByRest1(), comparingById));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
                 convertToSortedArray(VoteTestData.getAllExpByRest1(), comparingById));
 
         assertArrayEquals(convertToSortedArray(restaurant.getMenus(), comparingById),
-                convertToSortedArray(MenuTestData.getAllExpByRest(), comparingById));
+                convertToSortedArray(MenuTestData.getAllExpByRest1(), comparingById));
 
     }
 

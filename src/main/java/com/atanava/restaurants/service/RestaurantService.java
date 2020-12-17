@@ -41,6 +41,10 @@ public class RestaurantService {
         return repository.getAll();
     }
 
+    public List<Restaurant> getAllWithVotes() {
+        return repository.getAllWithVotes();
+    }
+
     public Restaurant getWithMenus(int id) {
         return checkNotFoundWithId(repository.getWithMenus(id), id);
     }

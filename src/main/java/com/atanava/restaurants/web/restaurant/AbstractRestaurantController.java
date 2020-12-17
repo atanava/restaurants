@@ -17,21 +17,6 @@ public abstract class AbstractRestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
-    public Restaurant get(int id) {
-        log.info("get restaurant {}", id);
-        return restaurantService.get(id);
-    }
-
-    public void delete(int id) {
-        log.info("delete restaurant {}", id);
-        restaurantService.delete(id);
-    }
-
-    public List<Restaurant> getAll() {
-        log.info("getAll restaurants");
-        return restaurantService.getAll();
-    }
-
     public Restaurant create(Restaurant restaurant) {
         checkNew(restaurant);
         log.info("create restaurant {}", restaurant.getName());
@@ -42,6 +27,41 @@ public abstract class AbstractRestaurantController {
         assureIdConsistent(restaurant, id);
         log.info("update restaurant {}",restaurant.getId());
         restaurantService.update(restaurant);
+    }
+
+    public void delete(int id) {
+        log.info("delete restaurant {}", id);
+        restaurantService.delete(id);
+    }
+
+    public Restaurant get(int id) {
+        log.info("get restaurant {}", id);
+        return restaurantService.get(id);
+    }
+
+    public Restaurant getWithVotes(int id) {
+        log.info("get restaurant {} with votes", id);
+        return restaurantService.getWithVotes(id);
+    }
+
+    public Restaurant getWithMenus(int id) {
+        log.info("get restaurant {} with menus", id);
+        return restaurantService.getWithMenus(id);
+    }
+
+    public Restaurant getWithVotesAndMenus(int id) {
+        log.info("get restaurant {} with votes and menus", id);
+        return restaurantService.getWithMenusAndVotes(id);
+    }
+
+    public List<Restaurant> getAll() {
+        log.info("get all restaurants");
+        return restaurantService.getAll();
+    }
+
+    public List<Restaurant> getAllWithVotes() {
+        log.info("get all restaurants with votes");
+        return restaurantService.getAllWithVotes();
     }
 
 }

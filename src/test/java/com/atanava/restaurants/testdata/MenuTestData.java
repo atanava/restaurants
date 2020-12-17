@@ -52,7 +52,7 @@ public class MenuTestData {
         return List.of(menuOfTroika2, menuOfTroika1, menuOfGloria);
     }
 
-    public static List<Menu> getAllExpByRest() {
+    public static List<Menu> getAllExpByRest1() {
         return List.of(menuOfTroika2, menuOfTroika1);
     }
 
