@@ -12,7 +12,7 @@ import static com.atanava.restaurants.util.ValidationUtil.assureIdConsistent;
 import static com.atanava.restaurants.util.ValidationUtil.checkNew;
 
 public abstract class AbstractUserController {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserService service;

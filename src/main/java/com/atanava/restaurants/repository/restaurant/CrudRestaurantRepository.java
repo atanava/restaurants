@@ -20,15 +20,15 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
 
     @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query(name = Restaurant.GET_WITH)
-    Restaurant getWithVotes(@Param("id") int id);
+    Restaurant getWithVotes(int id);
 
     @EntityGraph(attributePaths = {"menus"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query(name = Restaurant.GET_WITH)
-    Restaurant getWithMenus(@Param("id") int id);
+    Restaurant getWithMenus(int id);
 
     @EntityGraph(attributePaths = {"votes", "menus"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query(name = Restaurant.GET_WITH)
-    Restaurant getWithVotesAndMenus(@Param("id") int id);
+    Restaurant getWithVotesAndMenus(int id);
 
     @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Override

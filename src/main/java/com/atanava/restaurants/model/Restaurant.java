@@ -6,7 +6,7 @@ import java.util.Set;
 import static java.util.Collections.emptySet;
 
 @NamedQueries({
-        @NamedQuery(name = Restaurant.GET_WITH, query = "SELECT r FROM Restaurant r WHERE r.id=:id"),
+        @NamedQuery(name = Restaurant.GET_WITH, query = "SELECT r FROM Restaurant r WHERE r.id=?1"),
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
 })
 @Entity

@@ -12,7 +12,7 @@ import static com.atanava.restaurants.util.ValidationUtil.*;
 
 public abstract class AbstractRestaurantController {
 
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private RestaurantService restaurantService;
