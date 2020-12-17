@@ -4,7 +4,9 @@ import com.atanava.restaurants.model.Restaurant;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class DataJpaRestaurantRepository implements RestaurantRepository {
@@ -32,13 +34,8 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
-    public List<Restaurant> getAll() {
-        return crudRepository.findAll(SORT_NAME);
-    }
-
-    @Override
     public Restaurant getWithVotes(int id) {
-      return crudRepository.getWithVotes(id);
+        return crudRepository.getWithVotes(id);
     }
 
     @Override
@@ -49,6 +46,19 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     @Override
     public Restaurant getWithVotesAndMenus(int id) {
         return crudRepository.getWithVotesAndMenus(id);
+    }
+
+    @Override
+    public List<Restaurant> getAll() {
+        return crudRepository.findAll(SORT_NAME);
+    }
+
+    @Override
+    public List<Restaurant> getAllWithVotes() {
+        return crudRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Restaurant::getName))
+                .collect(Collectors.toList());
     }
 
 

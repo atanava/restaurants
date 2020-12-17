@@ -71,7 +71,7 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void getAllByRestaurant() {
-        VOTE_MATCHER.assertMatch(voteRepository.getAllByRestaurant(RESTAURANT_1.id), getAllExpByRest());
+        VOTE_MATCHER.assertMatch(voteRepository.getAllByRestaurant(RESTAURANT_1.id), getAllExpByRest1());
     }
 
     @Test

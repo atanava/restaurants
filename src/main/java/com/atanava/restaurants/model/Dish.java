@@ -1,6 +1,5 @@
 package com.atanava.restaurants.model;
 
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -22,7 +21,6 @@ public class  Dish extends AbstractNamedEntity {
     public static final String ALL = "Dish.getAllByRestaurant";
     public static final String BY_ACTIVE = "Dish.getByActive";
 
-    //TODO try to replace with restaurantId
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

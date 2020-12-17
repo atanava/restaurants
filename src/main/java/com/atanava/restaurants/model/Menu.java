@@ -46,7 +46,7 @@ public class Menu extends AbstractBaseEntity {
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
     @NotNull
-//    @FutureOrPresent
+    @FutureOrPresent
     private LocalDate date;
 
     public Menu() {

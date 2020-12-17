@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional(readOnly = true)
 public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
@@ -27,4 +29,10 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @EntityGraph(attributePaths = {"votes", "menus"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query(name = Restaurant.GET_WITH)
     Restaurant getWithVotesAndMenus(@Param("id") int id);
+
+    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Override
+    List<Restaurant> findAll();
+
+
 }
