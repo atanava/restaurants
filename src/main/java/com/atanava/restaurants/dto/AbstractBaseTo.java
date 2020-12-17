@@ -2,14 +2,14 @@ package com.atanava.restaurants.dto;
 
 import com.atanava.restaurants.HasId;
 
-public abstract class BaseTo implements HasId {
+public abstract class AbstractBaseTo implements HasId {
 
     protected Integer id;
 
-    public BaseTo() {
+    public AbstractBaseTo() {
     }
 
-    public BaseTo(Integer id) {
+    public AbstractBaseTo(Integer id) {
         this.id = id;
     }
 

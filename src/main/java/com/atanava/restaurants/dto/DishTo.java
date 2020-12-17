@@ -4,8 +4,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.beans.ConstructorProperties;
+import java.util.Objects;
 
-public class DishTo extends NamedTo {
+public class DishTo extends AbstractNamedTo {
 
     @NotNull
     @Positive
@@ -28,6 +29,22 @@ public class DishTo extends NamedTo {
 
     public Integer getPrice() {
         return price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DishTo dishTo = (DishTo) o;
+        return Objects.equals(id, dishTo.id) &&
+                Objects.equals(name, dishTo.name) &&
+                Objects.equals(restaurantId, dishTo.restaurantId) &&
+                Objects.equals(price, dishTo.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, restaurantId, price);
     }
 
     @Override
