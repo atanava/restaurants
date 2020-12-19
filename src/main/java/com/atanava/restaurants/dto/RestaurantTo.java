@@ -1,29 +1,27 @@
 package com.atanava.restaurants.dto;
 
-import com.atanava.restaurants.model.Menu;
-
 import java.beans.ConstructorProperties;
 import java.util.Objects;
 
 public class RestaurantTo extends AbstractNamedTo {
 
-    private final Menu todayMenu;
+    private final MenuTo todayMenuTo;
 
-    private final int votesQty;
+    private final int votesCount;
 
-    @ConstructorProperties({"id", "name", "todayMenu", "votesQty"})
-    public RestaurantTo(Integer id, String name, Menu todayMenu, int votesQty) {
+    @ConstructorProperties({"id", "name", "todayMenuTo", "votesCount"})
+    public RestaurantTo(Integer id, String name, MenuTo todayMenuTo, int votesCount) {
         super(id, name);
-        this.todayMenu = todayMenu;
-        this.votesQty = votesQty;
+        this.todayMenuTo = todayMenuTo;
+        this.votesCount = votesCount;
     }
 
-    public Menu getTodayMenu() {
-        return todayMenu;
+    public MenuTo getTodayMenuTo() {
+        return todayMenuTo;
     }
 
-    public int getVotesQty() {
-        return votesQty;
+    public int getVotesCount() {
+        return votesCount;
     }
 
     @Override
@@ -35,13 +33,13 @@ public class RestaurantTo extends AbstractNamedTo {
 
         return Objects.equals(id, restaurantTo.id) &&
                 Objects.equals(name, restaurantTo.name) &&
-                Objects.equals(votesQty, restaurantTo.votesQty) &&
-                Objects.equals(todayMenu, restaurantTo.todayMenu);
+                Objects.equals(votesCount, restaurantTo.votesCount) &&
+                Objects.equals(todayMenuTo, restaurantTo.todayMenuTo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, todayMenu, votesQty);
+        return Objects.hash(id, name, todayMenuTo, votesCount);
     }
 
     @Override
@@ -49,8 +47,8 @@ public class RestaurantTo extends AbstractNamedTo {
         return "RestaurantTo{" +
                 ", id=" + id +
                 ", name='" + name + '\'' +
-                "todayMenu=" + todayMenu +
-                ", votesQty=" + votesQty +
+                "todayMenuTo=" + todayMenuTo +
+                ", votesCount=" + votesCount +
                 '}';
     }
 }

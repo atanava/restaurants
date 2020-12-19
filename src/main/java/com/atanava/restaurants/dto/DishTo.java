@@ -1,7 +1,6 @@
 package com.atanava.restaurants.dto;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.beans.ConstructorProperties;
 import java.util.Objects;
@@ -9,22 +8,21 @@ import java.util.Objects;
 public class DishTo extends AbstractNamedTo {
 
     @NotNull
-    @Positive
-    private final Integer restaurantId;
+    private final RestaurantTo restaurantTo;
 
     @NotNull
     @PositiveOrZero
     private final Integer price;
 
-    @ConstructorProperties({"id", "name", "restaurantId", "price"})
-    public DishTo(Integer id, String name, Integer restaurantId, Integer price) {
+    @ConstructorProperties({"id", "name", "restaurantTo", "price"})
+    public DishTo(Integer id, String name, RestaurantTo restaurantTo, Integer price) {
         super(id, name);
         this.price = price;
-        this.restaurantId = restaurantId;
+        this.restaurantTo = restaurantTo;
     }
 
-    public Integer getRestaurantId() {
-        return restaurantId;
+    public RestaurantTo getRestaurantTo() {
+        return restaurantTo;
     }
 
     public Integer getPrice() {
@@ -38,13 +36,13 @@ public class DishTo extends AbstractNamedTo {
         DishTo dishTo = (DishTo) o;
         return Objects.equals(id, dishTo.id) &&
                 Objects.equals(name, dishTo.name) &&
-                Objects.equals(restaurantId, dishTo.restaurantId) &&
+                Objects.equals(restaurantTo.id, dishTo.restaurantTo.id) &&
                 Objects.equals(price, dishTo.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, restaurantId, price);
+        return Objects.hash(id, name, restaurantTo.id, price);
     }
 
     @Override
@@ -52,7 +50,7 @@ public class DishTo extends AbstractNamedTo {
         return "DishTo{" +
                 "id=" + id +
                 ", name=" + name +
-                ", restaurantId=" + restaurantId +
+                ", restaurantTo=" + restaurantTo.name +
                 ", price=" + price +
                 '}';
     }

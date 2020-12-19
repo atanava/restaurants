@@ -11,23 +11,22 @@ import java.util.Objects;
 public class MenuTo extends AbstractBaseTo {
 
     @NotNull
-    @Positive
-    private final Integer restaurantId;
+    private final RestaurantTo restaurantTo;
 
     private final List<DishTo> dishTos;
 
     private final LocalDate date;
 
-    @ConstructorProperties({"id", "restaurantId", "dishTos", "date"})
-    public MenuTo(Integer id, Integer restaurantId, List<DishTo> dishTos, LocalDate date) {
+    @ConstructorProperties({"id", "restaurantTo", "dishTos", "date"})
+    public MenuTo(Integer id, RestaurantTo restaurantTo, List<DishTo> dishTos, LocalDate date) {
         super(id);
-        this.restaurantId = restaurantId;
+        this.restaurantTo = restaurantTo;
         this.dishTos = dishTos;
         this.date = date;
     }
 
-    public Integer getRestaurantId() {
-        return restaurantId;
+    public RestaurantTo getRestaurantTo() {
+        return restaurantTo;
     }
 
     public List<DishTo> getDishTos() {
@@ -44,21 +43,21 @@ public class MenuTo extends AbstractBaseTo {
         if (o == null || getClass() != o.getClass()) return false;
         MenuTo menuTo = (MenuTo) o;
         return Objects.equals(id, menuTo.id) &&
-                Objects.equals(restaurantId, menuTo.restaurantId) &&
+                Objects.equals(restaurantTo.id, menuTo.restaurantTo.id) &&
                 Objects.equals(dishTos, menuTo.dishTos) &&
                 Objects.equals(date, menuTo.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, restaurantId, dishTos, date);
+        return Objects.hash(id, restaurantTo.id, dishTos, date);
     }
 
     @Override
     public String toString() {
         return "MenuTo{" +
                 ", id=" + id +
-                "restaurantId=" + restaurantId +
+                "restaurantTo name=" + restaurantTo.name +
                 ", dishTos=" + Arrays.toString(dishTos.toArray()) +
                 ", date=" + date +
                 '}';
