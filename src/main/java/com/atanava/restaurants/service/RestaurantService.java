@@ -1,59 +1,75 @@
 package com.atanava.restaurants.service;
 
+import com.atanava.restaurants.dto.RestaurantTo;
+import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.model.Restaurant;
+import com.atanava.restaurants.repository.menu.MenuRepository;
 import com.atanava.restaurants.repository.restaurant.RestaurantRepository;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static com.atanava.restaurants.util.ValidationUtil.checkNotFoundWithId;
+import static com.atanava.restaurants.util.DtoConverter.createToFromRestaurant;
 
 @Service
 public class RestaurantService {
 
-    private final RestaurantRepository repository;
+    private final RestaurantRepository restaurantRepository;
 
-    public RestaurantService(RestaurantRepository repository) {
-        this.repository = repository;
+    private final MenuRepository menuRepository;
+
+    public RestaurantService(RestaurantRepository restaurantRepository, MenuRepository menuRepository) {
+        this.restaurantRepository = restaurantRepository;
+        this.menuRepository = menuRepository;
     }
 
     public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        return repository.save(restaurant);
+        return restaurantRepository.save(restaurant);
     }
 
     public void delete(int id) throws NotFoundException {
-        checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
     public Restaurant get(int id) throws NotFoundException {
-        return checkNotFoundWithId(repository.get(id), id);
+        return checkNotFoundWithId(restaurantRepository.get(id), id);
+    }
+
+    public RestaurantTo getTo(int id, LocalDate date) {
+        Restaurant restaurant = getWithVotes(id);
+        Menu menu = menuRepository.getByRestAndDate(id, date);
+        restaurant.setMenus(Set.of(menu));
+        return createToFromRestaurant(restaurant);
     }
 
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
+        checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
     }
 
     public List<Restaurant> getAll() {
-        return repository.getAll();
+        return restaurantRepository.getAll();
     }
 
     public List<Restaurant> getAllWithVotes() {
-        return repository.getAllWithVotes();
+        return restaurantRepository.getAllWithVotes();
     }
 
     public Restaurant getWithMenus(int id) {
-        return checkNotFoundWithId(repository.getWithMenus(id), id);
+        return checkNotFoundWithId(restaurantRepository.getWithMenus(id), id);
     }
 
     public Restaurant getWithVotes(int id) {
-        return checkNotFoundWithId(repository.getWithVotes(id), id);
+        return checkNotFoundWithId(restaurantRepository.getWithVotes(id), id);
     }
 
     public Restaurant getWithMenusAndVotes(int id) {
-        return checkNotFoundWithId(repository.getWithVotesAndMenus(id), id);
+        return checkNotFoundWithId(restaurantRepository.getWithVotesAndMenus(id), id);
     }
 }

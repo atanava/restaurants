@@ -23,6 +23,7 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @Query(name = Menu.GET)
     Menu get(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
+    @EntityGraph(attributePaths = {"dishes"})
     @Query(name = Menu.BY_REST_AND_DATE)
     Menu getByRestAndDate(@Param("restaurantId") int restaurantId, @Param("date") LocalDate date);
 

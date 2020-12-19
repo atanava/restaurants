@@ -33,8 +33,8 @@ public class RestaurantTo extends AbstractNamedTo {
 
         return Objects.equals(id, restaurantTo.id) &&
                 Objects.equals(name, restaurantTo.name) &&
-                Objects.equals(votesCount, restaurantTo.votesCount) &&
-                Objects.equals(todayMenuTo, restaurantTo.todayMenuTo);
+                Objects.equals(todayMenuTo, restaurantTo.todayMenuTo) &&
+                Objects.equals(votesCount, restaurantTo.votesCount);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RestaurantTo extends AbstractNamedTo {
         return "RestaurantTo{" +
                 ", id=" + id +
                 ", name='" + name + '\'' +
-                "todayMenuTo=" + todayMenuTo +
+                ", todayMenuTo=" + todayMenuTo +
                 ", votesCount=" + votesCount +
                 '}';
     }

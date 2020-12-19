@@ -16,10 +16,9 @@ import java.util.Set;
 @Transactional(readOnly = true)
 public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
-    //Use for tests only
     @Override
     @EntityGraph(attributePaths = {"user", "restaurant"})
-    Optional<Vote> findById(Integer integer);
+    Optional<Vote> findById(Integer integer); //Use for tests only
 
     @Transactional
     @Modifying
@@ -37,4 +36,6 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
     @Query(name = Vote.BY_REST_AND_DATE)
     Set<Vote> getAllByRestAndDate(@Param("restaurantId") int restaurantId, @Param("date") LocalDate date);
+
+    //TODO create all by user and rest
 }

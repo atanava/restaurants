@@ -1,9 +1,6 @@
 package com.atanava.restaurants.util;
 
-import com.atanava.restaurants.dto.DishTo;
-import com.atanava.restaurants.dto.MenuTo;
-import com.atanava.restaurants.dto.RestaurantTo;
-import com.atanava.restaurants.dto.UserTo;
+import com.atanava.restaurants.dto.*;
 import com.atanava.restaurants.model.*;
 
 import java.util.ArrayList;
@@ -89,5 +86,10 @@ public class DtoConverter {
 
     public static UserTo createToFromUser(User user) {
         return new UserTo(user.id(), user.getName(), user.getEmail(), user.getPassword());
+    }
+
+    //TODO
+    public static Vote createVoteFromTo(VoteTo voteTo) {
+        return null;
     }
 }

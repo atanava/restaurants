@@ -1,5 +1,7 @@
 package com.atanava.restaurants.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.beans.ConstructorProperties;
@@ -11,6 +13,7 @@ import java.util.Objects;
 public class MenuTo extends AbstractBaseTo {
 
     @NotNull
+    @JsonBackReference
     private final RestaurantTo restaurantTo;
 
     private final List<DishTo> dishTos;
@@ -57,7 +60,7 @@ public class MenuTo extends AbstractBaseTo {
     public String toString() {
         return "MenuTo{" +
                 ", id=" + id +
-                "restaurantTo name=" + restaurantTo.name +
+                ", restaurant name='" + restaurantTo.name + '\'' +
                 ", dishTos=" + Arrays.toString(dishTos.toArray()) +
                 ", date=" + date +
                 '}';

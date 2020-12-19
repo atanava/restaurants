@@ -65,7 +65,7 @@ public class UserTo extends AbstractNamedTo {
         return "UserTo{" +
                 ", id=" + id +
                 ", name='" + name + '\'' +
-                "email='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

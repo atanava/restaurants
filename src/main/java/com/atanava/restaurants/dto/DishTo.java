@@ -49,8 +49,8 @@ public class DishTo extends AbstractNamedTo {
     public String toString() {
         return "DishTo{" +
                 "id=" + id +
-                ", name=" + name +
-                ", restaurantTo=" + restaurantTo.name +
+                ", name='" + name + '\'' +
+                ", restaurant name='" + restaurantTo.name + '\'' +
                 ", price=" + price +
                 '}';
     }
