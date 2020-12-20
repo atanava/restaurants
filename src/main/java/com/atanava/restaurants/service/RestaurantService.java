@@ -42,12 +42,12 @@ public class RestaurantService {
     }
 
     public RestaurantTo getTo(int id) {
-        Restaurant restaurant = getWithVotes(id);
+        Restaurant restaurant = checkNotFoundWithId(getWithVotes(id), id);
         return createToFromRestaurant(restaurant, null);
     }
 
     public RestaurantTo getToWithMenu(int id, LocalDate date) {
-        Restaurant restaurant = getWithVotes(id);
+        Restaurant restaurant = checkNotFoundWithId(getWithVotes(id), id);
         Menu menu = menuRepository.getByRestAndDate(id, date);
         return createToFromRestaurant(restaurant, menu);
     }
