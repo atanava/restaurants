@@ -57,5 +57,9 @@ public class VoteTestData {
     public static Set<Vote> getAllExpByRestAndDate() {
         return new LinkedHashSet<>(Arrays.asList(vote5, vote6));
     }
+
+    public static Set<Vote> getAllExpByUserAndRest() {
+        return new LinkedHashSet<>(Arrays.asList(vote1, vote4));
+    }
 }
 

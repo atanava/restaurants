@@ -87,6 +87,11 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     }
 
     @Test
+    public void getAllByUserAndRest() {
+        VOTE_MATCHER.assertMatch(voteRepository.getAllByUserAndRest(ADMIN.id, RESTAURANT_1.id), getAllExpByUserAndRest());
+    }
+
+    @Test
     public void delete() {
         assertThrows(UnsupportedOperationException.class, () -> voteRepository.delete(VOTE_1.id, ADMIN.id));
     }

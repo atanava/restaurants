@@ -77,4 +77,9 @@ public class DataJpaVoteRepository implements VoteRepository {
     public Set<Vote> getAllByRestAndDate(int restaurantId, LocalDate date) {
         return new LinkedHashSet<>(crudVoteRepository.getAllByRestAndDate(restaurantId, date));
     }
+
+    @Override
+    public Set<Vote> getAllByUserAndRest(int userId, int restaurantId) {
+        return new LinkedHashSet<>(crudVoteRepository.getAllByUserAndRest(userId, restaurantId));
+    }
 }

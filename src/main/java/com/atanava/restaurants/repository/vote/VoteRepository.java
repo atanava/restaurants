@@ -26,4 +26,6 @@ public interface VoteRepository {
     Set<Vote> getAllByDate(LocalDate date);
 
     Set<Vote> getAllByRestAndDate(int restaurantId, LocalDate date);
+
+    Set<Vote> getAllByUserAndRest(int userId, int restaurantId);
 }

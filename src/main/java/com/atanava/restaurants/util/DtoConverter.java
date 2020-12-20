@@ -44,6 +44,8 @@ public class DtoConverter {
     }
 
     public static MenuTo createToFromMenu(Menu menu) {
+        if (menu == null) return null;
+
         List<DishTo> dishTos = new ArrayList<>();
         for (Dish dish : menu.getDishes()) {
             dishTos.add(createToFromDish(dish));
@@ -62,13 +64,8 @@ public class DtoConverter {
         return restaurant;
     }
 
-    public static RestaurantTo createToFromRestaurant(Restaurant restaurant) {
-        MenuTo menuTo = createToFromMenu(Objects.requireNonNull(restaurant.getMenus()
-                .stream()
-                .findAny()
-                .orElse(null)));
-
-        return new RestaurantTo(restaurant.id(), restaurant.getName(), menuTo, restaurant.getVotes().size());
+    public static RestaurantTo createToFromRestaurant(Restaurant restaurant, Menu menu) {
+        return new RestaurantTo(restaurant.id(), restaurant.getName(), createToFromMenu(menu), restaurant.getVotes().size());
     }
 
     //---------User----------

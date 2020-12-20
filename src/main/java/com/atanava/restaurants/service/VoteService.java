@@ -55,6 +55,10 @@ public class VoteService {
         return repository.getAllByRestAndDate(restaurantId, date);
     }
 
+    public Set<Vote> getAllByUserAndRest(int userId, int restaurantId) {
+        return repository.getAllByUserAndRest(userId, restaurantId);
+    }
+
     public void update(Vote vote, int userId, int restaurantId) {
         Assert.notNull(vote, "vote must not be null");
         checkNotFoundWithId(repository.save(vote, userId, restaurantId), vote.getId());

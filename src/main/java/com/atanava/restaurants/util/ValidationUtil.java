@@ -4,6 +4,8 @@ import com.atanava.restaurants.model.AbstractBaseEntity;
 import com.atanava.restaurants.util.exception.NotFoundException;
 
 import javax.validation.*;
+import java.time.DateTimeException;
+import java.time.LocalTime;
 import java.util.Set;
 
 public class ValidationUtil {
@@ -73,4 +75,11 @@ public class ValidationUtil {
         }
         return result;
     }
+
+    public static void checkTimeExpired(LocalTime stopTime) {
+        if(LocalTime.now().isAfter(stopTime) ){
+            throw new DateTimeException("The time for re-voting has expired. Try to vote tomorrow.");
+        }
+    }
+
 }

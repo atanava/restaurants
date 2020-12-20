@@ -41,12 +41,17 @@ public class RestaurantService {
         return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    public RestaurantTo getTo(int id, LocalDate date) {
+    public RestaurantTo getTo(int id) {
+        Restaurant restaurant = getWithVotes(id);
+        return createToFromRestaurant(restaurant, null);
+    }
+
+    public RestaurantTo getToWithMenu(int id, LocalDate date) {
         Restaurant restaurant = getWithVotes(id);
         Menu menu = menuRepository.getByRestAndDate(id, date);
-        restaurant.setMenus(Set.of(menu));
-        return createToFromRestaurant(restaurant);
+        return createToFromRestaurant(restaurant, menu);
     }
+
 
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");

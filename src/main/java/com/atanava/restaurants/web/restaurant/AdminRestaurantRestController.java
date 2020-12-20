@@ -1,6 +1,9 @@
 package com.atanava.restaurants.web.restaurant;
 
 import com.atanava.restaurants.model.Restaurant;
+import com.atanava.restaurants.service.RestaurantService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +13,28 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+import static com.atanava.restaurants.util.ValidationUtil.*;
+
 @RestController
 @RequestMapping(value = AdminRestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class AdminRestaurantRestController extends AbstractRestaurantController {
+public class AdminRestaurantRestController {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     static final String REST_URL = "/rest/admin/restaurants";
 
+    private final RestaurantService service;
+
+    public AdminRestaurantRestController(RestaurantService service) {
+        this.service = service;
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
-        Restaurant created = super.create(restaurant);
+        checkNew(restaurant);
+        log.info("create restaurant {}", restaurant.getName());
+
+        Restaurant created = service.create(restaurant);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
@@ -27,53 +43,54 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
-        super.update(restaurant, id);
+        assureIdConsistent(restaurant, id);
+        log.info("update restaurant {}",restaurant.getId());
+        service.update(restaurant);
     }
 
-    @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-        super.delete(id);
+        log.info("delete restaurant {}", id);
+        service.delete(id);
     }
 
-    @Override
     @GetMapping("/{id}")
     public Restaurant get(@PathVariable int id) {
-        return super.get(id);
+        log.info("get restaurant {}", id);
+        return service.get(id);
     }
 
-    @Override
     @GetMapping("/with-votes/{id}")
     public Restaurant getWithVotes(@PathVariable int id) {
-        return super.getWithVotes(id);
+        log.info("get restaurant {} with votes", id);
+        return service.getWithVotes(id);
     }
 
-    @Override
     @GetMapping("/with-menus/{id}")
     public Restaurant getWithMenus(@PathVariable int id) {
-        return super.getWithMenus(id);
+        log.info("get restaurant {} with menus", id);
+        return service.getWithMenus(id);
     }
 
-    @Override
     @GetMapping("/with-votes-and-menus/{id}")
     public Restaurant getWithVotesAndMenus(@PathVariable int id) {
-        return super.getWithVotesAndMenus(id);
+        log.info("get restaurant {} with votes and menus", id);
+        return service.getWithMenusAndVotes(id);
     }
 
-    @Override
     @GetMapping
     public List<Restaurant> getAll() {
-        return super.getAll();
+        log.info("get all restaurants");
+        return service.getAll();
     }
 
-    @Override
     @GetMapping("/all-with-votes")
     public List<Restaurant> getAllWithVotes() {
-        return super.getAllWithVotes();
+        log.info("get all restaurants with votes");
+        return service.getAllWithVotes();
     }
 }

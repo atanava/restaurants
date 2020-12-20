@@ -37,5 +37,6 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
     @Query(name = Vote.BY_REST_AND_DATE)
     Set<Vote> getAllByRestAndDate(@Param("restaurantId") int restaurantId, @Param("date") LocalDate date);
 
-    //TODO create all by user and rest
+    @Query(name = Vote.BY_USER_AND_REST)
+    Set<Vote> getAllByUserAndRest(@Param("userId") int userId, @Param("restaurantId") int restaurantId);
 }

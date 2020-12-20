@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
         @NamedQuery(name = Vote.BY_RESTAURANT, query = "SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId ORDER BY v.date DESC"),
         @NamedQuery(name = Vote.BY_DATE, query = "SELECT v FROM Vote v WHERE v.date=:date"),
         @NamedQuery(name = Vote.BY_REST_AND_DATE, query = "SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId AND v.date=:date"),
+        @NamedQuery(name = Vote.BY_USER_AND_REST, query = "SELECT v FROM Vote v WHERE v.user.id=:userId AND v.restaurant.id=:restaurantId"),
         @NamedQuery(name = Vote.UPDATE, query = "UPDATE Vote v SET v.restaurant=:restaurant WHERE v.id=:id AND v.user.id=:userId"),
 })
 
@@ -26,6 +27,7 @@ public class Vote extends AbstractBaseEntity {
     public static final String BY_RESTAURANT = "Vote.getAllByRestaurant";
     public static final String BY_DATE = "Vote.getAllByDate";
     public static final String BY_REST_AND_DATE = "Vote.getByRestAndDate";
+    public static final String BY_USER_AND_REST = "Vote.getAllByUserAndRest";
     public static final String UPDATE = "Vote.update";
 
     @Column(name = "date", columnDefinition = "date default current_date",  nullable = false)
