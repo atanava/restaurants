@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-import static com.atanava.restaurants.util.ValidationUtil.*;
+import static com.atanava.restaurants.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class DishService {
