@@ -2,7 +2,6 @@ package com.atanava.restaurants.service;
 
 import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.repository.dish.DishRepository;
-import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -24,17 +23,12 @@ public class DishService {
         return repository.save(dish, restaurantId);
     }
 
-    public void update(Dish dish, int restaurantId) {
-        Assert.notNull(dish, "dish must not be null");
-        checkNotFoundWithId(repository.save(dish, restaurantId), dish.id());
+    public void deactivate(int id, int restaurantId) {
+        repository.deactivate(id, restaurantId);
     }
 
-    public boolean deactivate(int id, int restaurantId) {
-        return repository.deactivate(id, restaurantId);
-    }
-
-    public boolean activate(int id, int restaurantId) {
-        return repository.activate(id, restaurantId);
+    public void activate(int id, int restaurantId) {
+        repository.activate(id, restaurantId);
     }
 
     public Dish get(int id, int restaurantId) {

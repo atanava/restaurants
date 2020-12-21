@@ -47,7 +47,7 @@ public class AdminRestaurantRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
         assureIdConsistent(restaurant, id);
-        log.info("update restaurant {}",restaurant.getId());
+        log.info("update restaurant {}", id);
         service.update(restaurant);
     }
 
