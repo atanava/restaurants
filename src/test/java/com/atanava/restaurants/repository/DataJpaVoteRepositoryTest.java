@@ -29,7 +29,7 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void saveWithWrongDate() {
+    public void incorrectDateSave() {
         assertNull(voteRepository.save(vote1, ADMIN.id, RESTAURANT_2.id));
     }
 
@@ -93,6 +93,7 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void delete() {
-        assertThrows(UnsupportedOperationException.class, () -> voteRepository.delete(VOTE_1.id, ADMIN.id));
+        assertTrue(voteRepository.delete(VOTE_1.id, ADMIN.id));
+        assertNull(voteRepository.get(VOTE_1.id, ADMIN.id));
     }
 }

@@ -73,7 +73,7 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
 
     @Test
     public void delete() {
-        menuRepository.delete(MENU_1.id, RESTAURANT_1.id);
+        assertTrue(menuRepository.delete(MENU_1.id, RESTAURANT_1.id));
         assertNull(menuRepository.get(MENU_1.id, RESTAURANT_1.id));
         assertNotNull(dishRepository.get(DISH_1.id, RESTAURANT_1.id));
     }

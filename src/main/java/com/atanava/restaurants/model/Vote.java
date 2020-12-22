@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 
 @NamedQueries({
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
         @NamedQuery(name = Vote.BY_REST_AND_DATE, query = "SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId AND v.date=:date"),
         @NamedQuery(name = Vote.BY_USER_AND_REST, query = "SELECT v FROM Vote v WHERE v.user.id=:userId AND v.restaurant.id=:restaurantId"),
         @NamedQuery(name = Vote.UPDATE, query = "UPDATE Vote v SET v.restaurant=:restaurant WHERE v.id=:id AND v.user.id=:userId"),
+        @NamedQuery(name = Vote.DELETE, query = "DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
 })
 
 @Entity
@@ -29,6 +31,7 @@ public class Vote extends AbstractBaseEntity {
     public static final String BY_REST_AND_DATE = "Vote.getByRestAndDate";
     public static final String BY_USER_AND_REST = "Vote.getAllByUserAndRest";
     public static final String UPDATE = "Vote.update";
+    public static final String DELETE = "Vote.delete";
 
     @Column(name = "date", columnDefinition = "date default current_date",  nullable = false)
     @NotNull

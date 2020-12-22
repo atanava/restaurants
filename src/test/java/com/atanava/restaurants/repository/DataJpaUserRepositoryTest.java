@@ -43,7 +43,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
 
     @Test
     public void delete() {
-        repository.delete(USER_1.id);
+        assertTrue(repository.delete(USER_1.id));
         assertNull(repository.get(USER_1.id));
     }
 

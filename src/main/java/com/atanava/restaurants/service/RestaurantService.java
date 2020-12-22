@@ -41,19 +41,19 @@ public class RestaurantService {
         return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    public RestaurantTo getTo(int id) {
+    public RestaurantTo getTo(int id) throws NotFoundException {
         Restaurant restaurant = checkNotFoundWithId(getWithVotes(id), id);
         return createToFromRestaurant(restaurant, null);
     }
 
-    public RestaurantTo getToWithMenu(int id, LocalDate date) {
+    public RestaurantTo getToWithMenu(int id, LocalDate date) throws NotFoundException {
         Restaurant restaurant = checkNotFoundWithId(getWithVotes(id), id);
         Menu menu = menuRepository.getByRestAndDate(id, date);
         return createToFromRestaurant(restaurant, menu);
     }
 
 
-    public void update(Restaurant restaurant) {
+    public void update(Restaurant restaurant) throws NotFoundException {
         Assert.notNull(restaurant, "restaurant must not be null");
         checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
     }
@@ -74,7 +74,7 @@ public class RestaurantService {
         return checkNotFoundWithId(restaurantRepository.getWithVotes(id), id);
     }
 
-    public Restaurant getWithMenusAndVotes(int id) {
+    public Restaurant getWithMenusAndVotes(int id) throws NotFoundException {
         return checkNotFoundWithId(restaurantRepository.getWithVotesAndMenus(id), id);
     }
 }

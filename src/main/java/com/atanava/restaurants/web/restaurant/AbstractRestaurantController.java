@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.atanava.restaurants.util.ValidationUtil.*;
 
+//TODO delete this class
 public abstract class AbstractRestaurantController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());

@@ -59,9 +59,12 @@ public class VoteService {
         return repository.getAllByUserAndRest(userId, restaurantId);
     }
 
-    public void update(Vote vote, int userId, int restaurantId) {
+    public void update(Vote vote, int userId, int restaurantId) throws NotFoundException {
         Assert.notNull(vote, "vote must not be null");
         checkNotFoundWithId(repository.save(vote, userId, restaurantId), vote.getId());
     }
 
+    public void delete(int id, int userId) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(id, userId), id);
+    }
 }

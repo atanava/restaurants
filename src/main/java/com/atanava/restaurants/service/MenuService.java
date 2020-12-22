@@ -2,6 +2,7 @@ package com.atanava.restaurants.service;
 
 import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.repository.menu.MenuRepository;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -24,7 +25,7 @@ public class MenuService {
         return repository.save(menu, restaurantId);
     }
 
-    public void update(Menu menu, int restaurantId) {
+    public void update(Menu menu, int restaurantId) throws NotFoundException {
         Assert.notNull(menu, "menu must not be null");
         checkNotFoundWithId(repository.save(menu, restaurantId), menu.id());
     }

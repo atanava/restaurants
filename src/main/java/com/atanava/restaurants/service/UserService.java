@@ -2,6 +2,7 @@ package com.atanava.restaurants.service;
 
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.repository.user.UserRepository;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -24,15 +25,15 @@ public class UserService {
         return repository.save(user);
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
-    public User get(int id) {
+    public User get(int id) throws NotFoundException {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
-    public User getByEmail(String email) {
+    public User getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
@@ -41,7 +42,7 @@ public class UserService {
         return repository.getAll();
     }
 
-    public void update(User user) {
+    public void update(User user) throws NotFoundException {
         Assert.notNull(user, "user must not be null");
         checkNotFoundWithId(repository.save(user), user.id());
     }

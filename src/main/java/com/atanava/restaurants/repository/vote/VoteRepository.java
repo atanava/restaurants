@@ -9,9 +9,7 @@ public interface VoteRepository {
 
     Vote save(Vote vote, int userId, int restaurantId);
 
-    default boolean delete(int id, int userId) {
-        throw new UnsupportedOperationException("You cannot delete an existing vote. Try to re-vote");
-    }
+    boolean delete(int id, int userId);
 
     Vote get(int id, int userId);
 

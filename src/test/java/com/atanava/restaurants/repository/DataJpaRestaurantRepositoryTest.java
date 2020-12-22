@@ -52,7 +52,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
 
     @Test
     public void delete() {
-        restaurantRepository.delete(RESTAURANT_1.id);
+        assertTrue(restaurantRepository.delete(RESTAURANT_1.id));
         assertNull(restaurantRepository.get(RESTAURANT_1.id));
     }
 
