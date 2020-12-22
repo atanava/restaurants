@@ -1,9 +1,7 @@
 package com.atanava.restaurants.web.restaurant;
 
 import com.atanava.restaurants.dto.RestaurantTo;
-import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.service.RestaurantService;
-import com.atanava.restaurants.util.DtoConverter;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.atanava.restaurants.util.DtoConverter.createToFromRestaurant;
+import static com.atanava.restaurants.util.RestaurantUtil.createToFromRestaurant;
 
 @RestController
 @RequestMapping(value = ProfileRestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -9,20 +9,21 @@
     <http pattern="/rest/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
         <http-basic/>
         <intercept-url pattern="/rest/admin/**" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/rest/profile/register" access="isAnonymous()"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <csrf disabled="true"/>
     </http>
 
-    <beans:bean name="noopEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
+    <beans:bean class="org.springframework.security.crypto.factory.PasswordEncoderFactories" id="passwordEncoder" factory-method="createDelegatingPasswordEncoder"/>
 
     <authentication-manager>
-        <authentication-provider>
-            <password-encoder ref="noopEncoder"/>
-            <user-service>
-                <user name="user1@yandex.ru" password="password" authorities="ROLE_USER"/>
-                <user name="user2@hot.ee" password="password" authorities="ROLE_USER"/>
-                <user name="admin@gmail.com" password="admin" authorities="ROLE_ADMIN"/>
-            </user-service>
+        <authentication-provider user-service-ref="userService">
+            <password-encoder ref="passwordEncoder"/>
+<!--            <user-service>-->
+<!--                <user name="user1@yandex.ru" password="password" authorities="ROLE_USER"/>-->
+<!--                <user name="user2@hot.ee" password="password" authorities="ROLE_USER"/>-->
+<!--                <user name="admin@gmail.com" password="admin" authorities="ROLE_ADMIN"/>-->
+<!--            </user-service>-->
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

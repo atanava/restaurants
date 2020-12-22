@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.atanava.restaurants.util.ValidationUtil.checkNotFoundWithId;
-import static com.atanava.restaurants.util.DtoConverter.createToFromRestaurant;
+import static com.atanava.restaurants.util.RestaurantUtil.createToFromRestaurant;
 
 @Service
 public class RestaurantService {
