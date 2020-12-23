@@ -64,7 +64,7 @@ public class VoteService {
         checkNotFoundWithId(repository.save(vote, userId, restaurantId), vote.getId());
     }
 
-    public void delete(int id, int userId) throws NotFoundException {
-        checkNotFoundWithId(repository.delete(id, userId), id);
+    public void delete(int id) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(id), id);
     }
 }

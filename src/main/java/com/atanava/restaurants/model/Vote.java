@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
         @NamedQuery(name = Vote.BY_REST_AND_DATE, query = "SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId AND v.date=:date"),
         @NamedQuery(name = Vote.BY_USER_AND_REST, query = "SELECT v FROM Vote v WHERE v.user.id=:userId AND v.restaurant.id=:restaurantId"),
         @NamedQuery(name = Vote.UPDATE, query = "UPDATE Vote v SET v.restaurant=:restaurant WHERE v.id=:id AND v.user.id=:userId"),
-        @NamedQuery(name = Vote.DELETE, query = "DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
+        @NamedQuery(name = Vote.DELETE, query = "DELETE FROM Vote v WHERE v.id=:id")
 })
 
 @Entity

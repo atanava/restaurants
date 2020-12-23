@@ -94,7 +94,7 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void delete() {
-        assertTrue(voteRepository.delete(VOTE_1.id, ADMIN.id));
+        assertTrue(voteRepository.delete(VOTE_1.id));
         assertThrows(NotFoundException.class, () -> voteRepository.get(VOTE_1.id, ADMIN.id));
     }
 }
