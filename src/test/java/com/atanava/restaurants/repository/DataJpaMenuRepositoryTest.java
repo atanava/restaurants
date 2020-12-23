@@ -106,7 +106,7 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
 
     @Test
     public void getByRestAndDateNotFound() {
-        assertNull(menuRepository.getByRestAndDate(RESTAURANT_1.id, today));
+        assertNull(menuRepository.getByRestAndDate(RESTAURANT_1.id, today.minusDays(1)));
     }
 
     @Test

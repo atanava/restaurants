@@ -7,9 +7,9 @@ DELETE FROM restaurants;
 ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
 
 INSERT INTO users (name, email, password)
-VALUES  ('Vasja', 'admin@gmail.com', 'admin'),
-        ('Fedja', 'user1@yandex.ru', 'password'),
-        ('Vasja', 'user2@hot.ee', 'password');
+VALUES  ('Vasja', 'admin@gmail.com', '{noop}admin'),
+        ('Fedja', 'user1@yandex.ru', '{noop}password'),
+        ('Vasja', 'user2@hot.ee', '{noop}password');
 
 INSERT INTO user_roles (role, user_id)
 VALUES  ('ADMIN', 100000),
@@ -52,7 +52,8 @@ VALUES  (100005, 100015),
         (100006, 100017),
         (100007, 100017),
         (100008, 100017),
-        (100009, 100017);
+        (100009, 100017)
+        ;
 
 INSERT INTO votes (restaurant_id, user_id, date)
 VALUES (100003, 100000, '2020-11-19'),
@@ -61,3 +62,20 @@ VALUES (100003, 100000, '2020-11-19'),
        (100003, 100000, '2020-11-20'),
         (100004, 100001, '2020-11-20'),
        (100004, 100002, '2020-11-20');
+
+INSERT INTO menus (restaurant_id)
+VALUES (100003),
+        (100004);
+
+INSERT INTO dishes_menus (dish_id, menu_id)
+VALUES  (100005, 100024),
+        (100006, 100024),
+        (100007, 100024),
+        (100008, 100024),
+        (100009, 100024),
+        (100010, 100025),
+        (100011, 100025),
+        (100012, 100025),
+        (100013, 100025),
+        (100014, 100025);
+

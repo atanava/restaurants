@@ -1,8 +1,10 @@
 package com.atanava.restaurants.service;
 
 import com.atanava.restaurants.AuthorizedUser;
+import com.atanava.restaurants.dto.UserTo;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.repository.user.UserRepository;
+import com.atanava.restaurants.util.UserUtil;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -34,7 +36,7 @@ public class UserService implements UserDetailsService {
 
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
-        return repository.save(user);
+        return prepareAndSave(user);
     }
 
     public void delete(int id) throws NotFoundException {
@@ -56,7 +58,13 @@ public class UserService implements UserDetailsService {
 
     public void update(User user) throws NotFoundException {
         Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(repository.save(user), user.id());
+        prepareAndSave(user);
+    }
+
+    @Transactional
+    public void update(UserTo userTo) {
+        User user = get(userTo.id());
+        prepareAndSave(UserUtil.updateFromTo(user, userTo));
     }
 
     @Transactional
@@ -65,7 +73,7 @@ public class UserService implements UserDetailsService {
         user.setEnabled(enabled);
     }
 
-        @Override
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = repository.getByEmail(email.toLowerCase());
         if (user == null) {

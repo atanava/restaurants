@@ -11,8 +11,8 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = RootRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class RootRestController extends AbstractUserController {
+@RequestMapping(value = AdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class AdminRestController extends AbstractUserController {
 
     static final String REST_URL = "/rest/admin/users";
 
@@ -56,4 +56,12 @@ public class RootRestController extends AbstractUserController {
     public User getByMail(@RequestParam String email) {
         return super.getByMail(email);
     }
+
+    @Override
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void enable(@PathVariable int id, @RequestParam boolean enabled) {
+        super.enable(id, enabled);
+    }
+
 }

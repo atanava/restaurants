@@ -2,6 +2,7 @@ package com.atanava.restaurants.model;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.BatchSize;
 import org.springframework.util.CollectionUtils;
 
@@ -25,10 +26,12 @@ public class User extends AbstractNamedEntity {
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 32)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date registered = new Date();
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")

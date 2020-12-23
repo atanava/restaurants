@@ -4,8 +4,6 @@ import com.atanava.restaurants.dto.UserTo;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.util.UserUtil;
 
-import java.util.Set;
-
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     private static final long serialVersionUID = 1L;
 

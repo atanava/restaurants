@@ -6,11 +6,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import static org.hibernate.validator.constraints.SafeHtml.WhiteListType.NONE;
 
-public class UserTo extends AbstractNamedTo {
+public class UserTo extends AbstractNamedTo implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Email
     @NotBlank

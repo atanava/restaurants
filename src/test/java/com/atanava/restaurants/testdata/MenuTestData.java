@@ -25,11 +25,13 @@ public class MenuTestData {
 
     public static Menu menuOfTroika1 = new Menu(MENU_1.id, rest1, DishTestData.getAllFromRest1(), date1);
     public static Menu menuOfTroika2 = new Menu(MENU_3.id, rest1, DishTestData.getAllFromRest1(), date2);
-    public static Menu menuOfGloria = new Menu(MENU_2.id, rest2, DishTestData.getAllFromRest2(), date1);
+    public static Menu menuOfTroika3 = new Menu(MENU_4.id, rest1, DishTestData.getAllFromRest1(), today);
+    public static Menu menuOfGloria1 = new Menu(MENU_2.id, rest2, DishTestData.getAllFromRest2(), date1);
+    public static Menu menuOfGloria2 = new Menu(MENU_5.id, rest2, DishTestData.getAllFromRest2(), today);
 
 
     public static Menu getNew() {
-        return new Menu(null, rest1, DishTestData.getAllFromRest1(), today);
+        return new Menu(null, rest1, DishTestData.getAllFromRest1(), today.plusDays(1));
     }
 
     public static Menu getDuplicate() {
@@ -49,14 +51,14 @@ public class MenuTestData {
     }
 
     public static List<Menu> getAllExpected() {
-        return List.of(menuOfTroika2, menuOfTroika1, menuOfGloria);
+        return List.of(menuOfTroika3, menuOfGloria2, menuOfTroika2, menuOfTroika1, menuOfGloria1);
     }
 
     public static List<Menu> getAllExpByRest1() {
-        return List.of(menuOfTroika2, menuOfTroika1);
+        return List.of(menuOfTroika3, menuOfTroika2, menuOfTroika1);
     }
 
     public static List<Menu> getAllExpByDate() {
-        return List.of(menuOfTroika1, menuOfGloria);
+        return List.of(menuOfTroika1, menuOfGloria1);
     }
 }
