@@ -1,6 +1,7 @@
 package com.atanava.restaurants.repository.user;
 
 import com.atanava.restaurants.model.User;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +29,8 @@ public class DataJpaUserRepository implements UserRepository {
 
     @Override
     public User get(int id) {
-        return crudRepository.findById(id).orElse(null);
+        return crudRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User with id=" + id + " was not found"));
     }
 
     @Override

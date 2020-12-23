@@ -3,6 +3,7 @@ package com.atanava.restaurants.repository;
 import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.repository.user.UserRepository;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -30,8 +31,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
 
     @Test
     public void duplicateMailSave() {
-        assertThrows(DataAccessException.class, () ->
-                repository.save(getDuplicate()));
+        assertThrows(DataAccessException.class, () -> repository.save(getDuplicate()));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     @Test
     public void delete() {
         assertTrue(repository.delete(USER_1.id));
-        assertNull(repository.get(USER_1.id));
+        assertThrows(NotFoundException.class, () -> repository.get(USER_1.id));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
 
     @Test
     public void getNotFound() {
-        assertNull(repository.get(NOT_FOUND.id));
+        assertThrows(NotFoundException.class, () -> repository.get(NOT_FOUND.id));
     }
 
     @Test

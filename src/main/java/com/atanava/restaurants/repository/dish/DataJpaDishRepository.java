@@ -2,7 +2,7 @@ package com.atanava.restaurants.repository.dish;
 
 import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.repository.restaurant.CrudRestaurantRepository;
-import org.hibernate.Hibernate;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +60,8 @@ public class DataJpaDishRepository implements DishRepository {
     public Dish get(int id, int restaurantId) {
         return crudDishRepository.findById(id)
                 .filter(dish -> dish.getRestaurant().getId() == restaurantId)
-                .orElse(null);
+                .orElseThrow(() -> new NotFoundException("Dish with id=" +
+                        id + "  and restaurantId=" + restaurantId + " was not found"));
     }
 
     @Override

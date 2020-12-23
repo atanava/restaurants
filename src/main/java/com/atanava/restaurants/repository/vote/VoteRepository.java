@@ -13,7 +13,7 @@ public interface VoteRepository {
 
     Vote get(int id, int userId);
 
-    Vote getWithUserAndRest(int id);
+    Vote getById(int id);
 
     Set<Vote> getAll();
 

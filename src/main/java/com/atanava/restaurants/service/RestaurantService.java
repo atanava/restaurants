@@ -38,7 +38,7 @@ public class RestaurantService {
     }
 
     public Restaurant get(int id) throws NotFoundException {
-        return checkNotFoundWithId(restaurantRepository.get(id), id);
+        return restaurantRepository.get(id);
     }
 
     public RestaurantTo getTo(int id) throws NotFoundException {
@@ -66,11 +66,11 @@ public class RestaurantService {
         return restaurantRepository.getAllWithVotes();
     }
 
-    public Restaurant getWithMenus(int id) {
+    public Restaurant getWithMenus(int id) throws NotFoundException {
         return checkNotFoundWithId(restaurantRepository.getWithMenus(id), id);
     }
 
-    public Restaurant getWithVotes(int id) {
+    public Restaurant getWithVotes(int id) throws NotFoundException {
         return checkNotFoundWithId(restaurantRepository.getWithVotes(id), id);
     }
 

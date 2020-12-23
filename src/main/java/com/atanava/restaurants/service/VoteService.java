@@ -25,12 +25,12 @@ public class VoteService {
         return repository.save(vote, userId, restaurantId);
     }
 
-    public Vote get(int id, int userId) throws NotFoundException {
-        return checkNotFoundWithId(repository.get(id, userId), id);
+    public Vote get(int id, int userId) {
+        return repository.get(id, userId);
     }
 
-    public Vote getWithUserAndRest(int id) {
-        return checkNotFoundWithId(repository.getWithUserAndRest(id), id);
+    public Vote getById(int id) {
+        return repository.getById(id);
     }
 
     public Set<Vote> getAll() {

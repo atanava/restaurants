@@ -21,7 +21,6 @@ public class DataJpaMenuRepository implements MenuRepository {
         this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
-    //TODO Reduce the number of queries
     @Override
     public Menu save(Menu menu, int restaurantId) {
         if ( ! menu.isNew() && get(menu.getId(), restaurantId) == null) {

@@ -7,6 +7,7 @@ import com.atanava.restaurants.repository.restaurant.RestaurantRepository;
 import com.atanava.restaurants.repository.vote.VoteRepository;
 import com.atanava.restaurants.testdata.MenuTestData;
 import com.atanava.restaurants.testdata.VoteTestData;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -53,7 +54,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     @Test
     public void delete() {
         assertTrue(restaurantRepository.delete(RESTAURANT_1.id));
-        assertNull(restaurantRepository.get(RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> restaurantRepository.get(RESTAURANT_1.id));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
 
     @Test
     public void getNotFound() {
-        assertNull(restaurantRepository.get(NOT_FOUND.id));
+        assertThrows(NotFoundException.class, () -> restaurantRepository.get(NOT_FOUND.id));
     }
 
     @Test

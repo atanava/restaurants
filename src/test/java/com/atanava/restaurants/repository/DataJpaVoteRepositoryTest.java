@@ -3,6 +3,7 @@ package com.atanava.restaurants.repository;
 import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.Vote;
 import com.atanava.restaurants.repository.vote.VoteRepository;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,9 +37,9 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     @Test
     public void update() {
         voteRepository.save(getNew(), USER_1.id, RESTAURANT_1.id);
-        Vote saved = voteRepository.getWithUserAndRest(NEW_ITEM.id);
+        Vote saved = voteRepository.getById(NEW_ITEM.id);
         voteRepository.save(getUpdated(), USER_1.id, RESTAURANT_2.id);
-        Vote updated = voteRepository.getWithUserAndRest(NEW_ITEM.id);
+        Vote updated = voteRepository.getById(NEW_ITEM.id);
 
         VOTE_MATCHER.assertMatch(saved, getUpdated());
         VOTE_MATCHER.assertMatch(updated, getUpdated());
@@ -55,8 +56,8 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void getNotFound() {
-        assertNull(voteRepository.get(NOT_FOUND.id, USER_1.id));
-        assertNull(voteRepository.get(VOTE_1.id, USER_2.id));
+        assertThrows(NotFoundException.class, () -> voteRepository.get(NOT_FOUND.id, USER_1.id));
+        assertThrows(NotFoundException.class, () -> voteRepository.get(VOTE_1.id, USER_2.id));
     }
 
     @Test
@@ -94,6 +95,6 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     @Test
     public void delete() {
         assertTrue(voteRepository.delete(VOTE_1.id, ADMIN.id));
-        assertNull(voteRepository.get(VOTE_1.id, ADMIN.id));
+        assertThrows(NotFoundException.class, () -> voteRepository.get(VOTE_1.id, ADMIN.id));
     }
 }

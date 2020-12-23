@@ -3,6 +3,7 @@ package com.atanava.restaurants.repository;
 import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.repository.dish.DishRepository;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -46,7 +47,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
 
     @Test
     public void deactivatedNotFound() {
-        assertFalse(repository.deactivate(NEW_ITEM.id, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> repository.deactivate(NEW_ITEM.id, RESTAURANT_1.id));
     }
 
     @Test
@@ -59,7 +60,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
 
     @Test
     public void activateNotFound() {
-        assertFalse(repository.activate(NEW_ITEM.id, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> repository.activate(NEW_ITEM.id, RESTAURANT_1.id));
     }
 
     @Test
@@ -70,7 +71,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
 
     @Test
     public void getNotFound() {
-        assertNull(repository.get(NOT_FOUND.id, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> repository.get(NOT_FOUND.id, RESTAURANT_1.id));
     }
 
     @Test

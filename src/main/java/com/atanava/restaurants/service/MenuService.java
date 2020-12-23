@@ -34,8 +34,8 @@ public class MenuService {
         checkNotFoundWithId(repository.delete(id, restaurantId), id);
     }
 
-    public Menu get(int id, int restaurantId) {
-        return repository.get(id, restaurantId);
+    public Menu get(int id, int restaurantId) throws NotFoundException {
+        return checkNotFoundWithId(repository.get(id, restaurantId), id);
     }
 
     public Menu getByRestAndDate(int restaurantId, LocalDate date) {

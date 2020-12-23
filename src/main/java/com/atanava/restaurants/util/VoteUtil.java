@@ -5,8 +5,8 @@ import com.atanava.restaurants.model.Vote;
 
 public class VoteUtil {
 
-    //TODO
-    public static Vote createVoteFromTo(VoteTo voteTo) {
-        return null;
+    public static VoteTo createToFromVote(Vote vote) {
+        return new VoteTo(vote.id(), vote.getDate(), vote.getUser().id(), vote.getRestaurant().id());
     }
+
 }

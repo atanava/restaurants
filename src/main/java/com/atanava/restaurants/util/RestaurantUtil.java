@@ -9,7 +9,7 @@ import static com.atanava.restaurants.util.MenuUtil.createToFromMenu;
 public class RestaurantUtil {
 
     public static Restaurant createRestaurantFromTo(RestaurantTo restaurantTo) {
-        return new Restaurant(null, restaurantTo.getName());
+        return new Restaurant(restaurantTo.id(), restaurantTo.getName());
     }
 
     public static Restaurant updateRestaurantFromTo(Restaurant restaurant, RestaurantTo restaurantTo) {

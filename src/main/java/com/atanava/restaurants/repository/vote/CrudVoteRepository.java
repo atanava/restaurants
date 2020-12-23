@@ -18,7 +18,7 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
     @Override
     @EntityGraph(attributePaths = {"user", "restaurant"})
-    Optional<Vote> findById(Integer integer); //Use for tests only
+    Optional<Vote> findById(Integer integer);
 
     @Transactional
     @Modifying

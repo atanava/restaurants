@@ -4,6 +4,7 @@ import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.model.Vote;
 import com.atanava.restaurants.repository.restaurant.CrudRestaurantRepository;
 import com.atanava.restaurants.repository.user.CrudUserRepository;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -50,12 +51,13 @@ public class DataJpaVoteRepository implements VoteRepository {
     public Vote get(int id, int userId) {
         return crudVoteRepository.findById(id)
                 .filter(vote -> vote.getUser().getId() == userId)
-                .orElse(null);
+                .orElseThrow(() -> new NotFoundException("Vote with id=" + id + " and userId=" + userId + " was not found"));
     }
 
     @Override
-    public Vote getWithUserAndRest(int id) {
-        return crudVoteRepository.findById(id).orElse(null);
+    public Vote getById(int id) {
+        return crudVoteRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Vote with id=" + id + " was not found"));
     }
 
     @Override

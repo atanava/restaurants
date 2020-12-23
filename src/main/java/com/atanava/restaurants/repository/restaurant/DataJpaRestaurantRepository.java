@@ -1,6 +1,7 @@
 package com.atanava.restaurants.repository.restaurant;
 
 import com.atanava.restaurants.model.Restaurant;
+import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -30,7 +31,8 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public Restaurant get(int id) {
-        return crudRepository.findById(id).orElse(null);
+        return crudRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Restaurant with id=" + id + " was not found"));
     }
 
     @Override
