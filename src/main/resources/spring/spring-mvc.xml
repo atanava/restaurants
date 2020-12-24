@@ -14,7 +14,13 @@
                 <property name="objectMapper" ref="objectMapper"/>
             </bean>
         </mvc:message-converters>
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver "/>
+        </mvc:argument-resolvers>
     </mvc:annotation-driven>
     <context:component-scan base-package="com.atanava.restaurants.**.web"/>
+
+    <!-- https://stackoverflow.com/a/23615478/548473 -->
+    <bean id="defaultValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
 </beans>
