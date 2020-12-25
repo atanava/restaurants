@@ -11,9 +11,13 @@ public interface VoteRepository {
 
     boolean delete(int id);
 
+    boolean deleteByUserAndDate(int userId, LocalDate date);
+
     Vote get(int id, int userId);
 
     Vote getById(int id);
+
+    Vote getByUserAndDate(int userId, LocalDate date);
 
     Set<Vote> getAll();
 

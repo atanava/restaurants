@@ -7,6 +7,7 @@ import com.atanava.restaurants.repository.user.CrudUserRepository;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -47,6 +48,13 @@ public class DataJpaVoteRepository implements VoteRepository {
         return crudVoteRepository.delete(id) != 0;
     }
 
+    //TODO create test
+    @Override
+    public boolean deleteByUserAndDate(int userId, LocalDate date) {
+        return crudVoteRepository.deleteByUserAndDate(userId, date) != 0;
+    }
+
+    //TODO create particular method in crudRepository
     @Override
     public Vote get(int id, int userId) {
         return crudVoteRepository.findById(id)
@@ -60,12 +68,19 @@ public class DataJpaVoteRepository implements VoteRepository {
                 .orElseThrow(() -> new NotFoundException("Vote with id=" + id + " was not found"));
     }
 
+    //TODO create test
+    @Override
+    public Vote getByUserAndDate(int userId, LocalDate date) {
+        return crudVoteRepository.getByUserAndDate(userId, date);
+    }
+
     @Override
     public Set<Vote> getAll() {
         return new LinkedHashSet<>(crudVoteRepository.findAll(SORT_DATE));
     }
 
     @Override
+    @Transactional
     public Set<Vote> getAllByUser(int userId) {
         return new LinkedHashSet<>(crudVoteRepository.getAllByUser(userId));
     }

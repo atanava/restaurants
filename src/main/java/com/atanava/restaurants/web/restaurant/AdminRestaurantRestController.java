@@ -30,6 +30,7 @@ public class AdminRestaurantRestController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Restaurant> create(@RequestBody Restaurant restaurant) {
         checkNew(restaurant);
         log.info("create restaurant {}", restaurant.getName());

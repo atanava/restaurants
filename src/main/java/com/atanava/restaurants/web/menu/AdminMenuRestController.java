@@ -31,9 +31,10 @@ public class AdminMenuRestController {
     }
 
     @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Menu> create(@RequestBody Menu menu, @PathVariable int restaurantId) {
         checkNew(menu);
-        log.info("create dish {} for restaurant {}", menu, restaurantId);
+        log.info("create menu {} for restaurant {}", menu, restaurantId);
 
         Menu created = service.create(menu, restaurantId);
 

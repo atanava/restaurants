@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import java.net.URI;
 
 import static com.atanava.restaurants.web.SecurityUtil.authUserId;
-import static com.atanava.restaurants.util.ValidationUtil.assureIdConsistent;
 
 @RestController
 @RequestMapping(value = ProfileRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,6 +1,6 @@
 package com.atanava.restaurants.web.vote;
 
-import com.atanava.restaurants.model.Vote;
+import com.atanava.restaurants.dto.VoteTo;
 import com.atanava.restaurants.service.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = AdminVoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -26,45 +27,45 @@ public class AdminVoteRestController {
     }
 
     @GetMapping("/{id}")
-    public Vote get(@PathVariable int id) {
+    public VoteTo get(@PathVariable int id) {
         log.info("get vote {}", id);
         return service.getById(id);
     }
 
     @GetMapping
-    public Set<Vote> getAll() {
+    public List<VoteTo> getAll() {
         log.info("get all votes");
-        return service.getAll();
+        return (List<VoteTo>) service.getAll(new ArrayList<>());
     }
 
     @GetMapping("/by-user/{userId}")
-    public Set<Vote> getAllByUser(@PathVariable int userId) {
+    public List<VoteTo> getAllByUser(@PathVariable int userId) {
         log.info("get all votes by user {}", userId);
-        return service.getAllByUser(userId);
+        return (List<VoteTo>) service.getAllByUser(userId, new ArrayList<>());
     }
 
     @GetMapping("/by-restaurant/{restaurantId}")
-    public Set<Vote> getAllByRestaurant(@PathVariable int restaurantId) {
+    public List<VoteTo> getAllByRestaurant(@PathVariable int restaurantId) {
         log.info("get all votes by restaurant {}", restaurantId);
-        return  service.getAllByRestaurant(restaurantId);
+        return (List<VoteTo>) service.getAllByRestaurant(restaurantId, new ArrayList<>());
     }
 
     @GetMapping("/by-date")
-    public Set<Vote> getAllByDate(@RequestBody LocalDate date) {
+    public List<VoteTo> getAllByDate(@RequestBody LocalDate date) {
         log.info("get all votes by date {}", date);
-        return service.getAllByDate(date);
+        return (List<VoteTo>) service.getAllByDate(date, new ArrayList<>());
     }
 
     @GetMapping("/by-restaurant-and-date/{restaurantId}")
-    public Set<Vote> getAllByRestAndDate(@PathVariable int restaurantId, @RequestBody LocalDate date) {
+    public List<VoteTo> getAllByRestAndDate(@PathVariable int restaurantId, @RequestBody LocalDate date) {
         log.info("get all votes by restaurant {} and date {}", restaurantId, date);
-        return service.getAllByRestAndDate(restaurantId, date);
+        return (List<VoteTo>) service.getAllByRestAndDate(restaurantId, date, new ArrayList<>());
     }
 
     @GetMapping("/by-user-and-restaurant/{userId}/{restaurantId}")
-    public Set<Vote> getAllByUserAndRest(@PathVariable int userId, @PathVariable int restaurantId) {
+    public List<VoteTo> getAllByUserAndRest(@PathVariable int userId, @PathVariable int restaurantId) {
         log.info("get all votes by user {} and restaurant {}", userId, restaurantId);
-        return service.getAllByUserAndRest(userId, restaurantId);
+        return (List<VoteTo>) service.getAllByUserAndRest(userId, restaurantId, new ArrayList<>());
     }
 
     @DeleteMapping("/{id}")

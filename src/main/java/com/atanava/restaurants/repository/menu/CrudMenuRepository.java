@@ -19,11 +19,11 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @Query(name = Menu.DELETE)
     int delete(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
-    @EntityGraph(attributePaths = {"dishes"})
+    @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query(name = Menu.GET)
     Menu get(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
-    @EntityGraph(attributePaths = {"dishes"})
+    @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query(name = Menu.BY_REST_AND_DATE)
     Menu getByRestAndDate(@Param("restaurantId") int restaurantId, @Param("date") LocalDate date);
 
@@ -31,5 +31,6 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     List<Menu> getAllByRestaurant(@Param("restaurantId") int restaurantId);
 
     @Query(name = Menu.BY_DATE)
+    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
     List<Menu> getAllByDate(@Param("date") LocalDate date);
 }

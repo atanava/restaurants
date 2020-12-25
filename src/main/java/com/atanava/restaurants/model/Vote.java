@@ -1,18 +1,17 @@
 package com.atanava.restaurants.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 
 @NamedQueries({
         @NamedQuery(name = Vote.BY_USER, query = "SELECT v FROM Vote v WHERE v.user.id=:userId ORDER BY v.date DESC"),
+        @NamedQuery(name = Vote.BY_USER_AND_DATE, query = "SELECT v FROM Vote v WHERE v.user.id=:userId AND v.date=:date"),
         @NamedQuery(name = Vote.BY_RESTAURANT, query = "SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId ORDER BY v.date DESC"),
         @NamedQuery(name = Vote.BY_DATE, query = "SELECT v FROM Vote v WHERE v.date=:date"),
         @NamedQuery(name = Vote.BY_REST_AND_DATE, query = "SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId AND v.date=:date"),
@@ -26,12 +25,14 @@ import javax.validation.constraints.NotNull;
 public class Vote extends AbstractBaseEntity {
 
     public static final String BY_USER = "Vote.getAllByUser";
+    public static final String BY_USER_AND_DATE = "Vote.getByUserAndDate";
     public static final String BY_RESTAURANT = "Vote.getAllByRestaurant";
     public static final String BY_DATE = "Vote.getAllByDate";
     public static final String BY_REST_AND_DATE = "Vote.getByRestAndDate";
     public static final String BY_USER_AND_REST = "Vote.getAllByUserAndRest";
     public static final String UPDATE = "Vote.update";
     public static final String DELETE = "Vote.delete";
+    public static final String DELETE_BY_USER_AND_DATE = "Vote.deleteByUserAndDate";
 
     @Column(name = "date", columnDefinition = "date default current_date",  nullable = false)
     @NotNull
@@ -41,13 +42,13 @@ public class Vote extends AbstractBaseEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    @JsonBackReference
+//    @JsonBackReference
     private Restaurant restaurant;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
-    @JsonBackReference
+//    @JsonBackReference
     private User user;
 
     public Vote() {

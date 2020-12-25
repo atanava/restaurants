@@ -2,8 +2,8 @@ package com.atanava.restaurants.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.beans.ConstructorProperties;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ public class MenuTo extends AbstractBaseTo {
 
     private final List<DishTo> dishTos;
 
+    @FutureOrPresent
     private final LocalDate date;
 
     @ConstructorProperties({"id", "restaurantTo", "dishTos", "date"})
