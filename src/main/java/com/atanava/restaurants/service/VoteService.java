@@ -17,7 +17,7 @@ import static com.atanava.restaurants.util.VoteUtil.*;
 @Service
 public class VoteService {
 
-    static final LocalTime EXPIRATION_TIME = LocalTime.of(11,00,00,00);
+    static final LocalTime EXPIRATION_TIME = LocalTime.of(11,0,0,0);
 
     private final VoteRepository repository;
 
@@ -25,7 +25,6 @@ public class VoteService {
         this.repository = repository;
     }
 
-    //TODO may be void
     public Vote create(Vote vote, int userId, int restaurantId) {
         Assert.notNull(vote, "vote must not be null");
         checkNew(vote);
@@ -54,10 +53,6 @@ public class VoteService {
         return createToFromVote(repository.getByUserAndDate(userId, date));
     }
 
-//    public Vote get(int id, int userId) {
-//        return repository.get(id, userId);
-//    }
-
     public VoteTo get(int id, int userId) {
         return createToFromVote(repository.get(id, userId));
     }
@@ -73,10 +68,6 @@ public class VoteService {
     public Collection<VoteTo> getAllByUser(int userId, Collection<VoteTo> collection) {
         return createTosFromVotes(repository.getAllByUser(userId), collection);
     }
-
-//    public Collection<VoteTo> getAllByUser(int userId, Collection<VoteTo> collection) {
-//        return repository.getAllByUser(userId);
-//    }
 
     public Collection<VoteTo> getAllByRestaurant(int restaurantId, Collection<VoteTo> collection) {
         return createTosFromVotes(repository.getAllByRestaurant(restaurantId), collection);

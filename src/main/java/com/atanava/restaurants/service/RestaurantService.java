@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import static com.atanava.restaurants.util.ValidationUtil.checkNotFoundWithId;
 import static com.atanava.restaurants.util.RestaurantUtil.createToFromRestaurant;
@@ -23,9 +22,12 @@ public class RestaurantService {
 
     private final MenuRepository menuRepository;
 
-    public RestaurantService(RestaurantRepository restaurantRepository, MenuRepository menuRepository) {
+    private final MenuService menuService;
+
+    public RestaurantService(RestaurantRepository restaurantRepository, MenuRepository menuRepository, MenuService menuService) {
         this.restaurantRepository = restaurantRepository;
         this.menuRepository = menuRepository;
+        this.menuService = menuService;
     }
 
     public Restaurant create(Restaurant restaurant) {
@@ -38,15 +40,11 @@ public class RestaurantService {
     }
 
     public Restaurant get(int id) throws NotFoundException {
-        return restaurantRepository.get(id);
+        return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    public RestaurantTo getTo(int id) throws NotFoundException {
-        Restaurant restaurant = checkNotFoundWithId(getWithVotes(id), id);
-        return createToFromRestaurant(restaurant, null);
-    }
-
-    public RestaurantTo getToWithMenu(int id, LocalDate date) throws NotFoundException {
+    //TODO
+    public RestaurantTo getTo(int id, LocalDate date) throws NotFoundException {
         Restaurant restaurant = checkNotFoundWithId(getWithVotes(id), id);
         Menu menu = menuRepository.getByRestAndDate(id, date);
         return createToFromRestaurant(restaurant, menu);

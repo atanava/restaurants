@@ -22,11 +22,15 @@ public class  Dish extends AbstractNamedEntity {
     public static final String ALL = "Dish.getAllByRestaurant";
     public static final String BY_ACTIVE = "Dish.getByActive";
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Restaurant.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Restaurant restaurant;
+
+    //    https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities
+    @Column(name = "restaurant_id", insertable = false, updatable = false)
+    private Integer restaurantId;
 
     @Column(name = "price", nullable = false)
     @NotNull
@@ -82,6 +86,14 @@ public class  Dish extends AbstractNamedEntity {
 
     public void setMenus(Set<Menu> menus) {
         this.menus = menus;
+    }
+
+    public Integer getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(Integer restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     @Override

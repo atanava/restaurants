@@ -48,13 +48,16 @@ public class DataJpaVoteRepository implements VoteRepository {
         return crudVoteRepository.delete(id) != 0;
     }
 
-    //TODO create test
+    @Override
+    public boolean deleteAllByRestaurant(int restaurantId) {
+        return crudVoteRepository.deleteAllByRestaurant(restaurantId) != 0;
+    }
+
     @Override
     public boolean deleteByUserAndDate(int userId, LocalDate date) {
         return crudVoteRepository.deleteByUserAndDate(userId, date) != 0;
     }
 
-    //TODO create particular method in crudRepository
     @Override
     public Vote get(int id, int userId) {
         return crudVoteRepository.findById(id)

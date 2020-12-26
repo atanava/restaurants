@@ -7,21 +7,14 @@ public class RestaurantTo extends AbstractNamedTo {
 
     private final MenuTo todayMenuTo;
 
-    private final int votesCount;
-
-    @ConstructorProperties({"id", "name", "todayMenuTo", "votesCount"})
-    public RestaurantTo(Integer id, String name, MenuTo todayMenuTo, int votesCount) {
+    @ConstructorProperties({"id", "name", "todayMenuTo"})
+    public RestaurantTo(Integer id, String name, MenuTo todayMenuTo) {
         super(id, name);
         this.todayMenuTo = todayMenuTo;
-        this.votesCount = votesCount;
     }
 
     public MenuTo getTodayMenuTo() {
         return todayMenuTo;
-    }
-
-    public int getVotesCount() {
-        return votesCount;
     }
 
     @Override
@@ -33,13 +26,12 @@ public class RestaurantTo extends AbstractNamedTo {
 
         return Objects.equals(id, restaurantTo.id) &&
                 Objects.equals(name, restaurantTo.name) &&
-                Objects.equals(todayMenuTo, restaurantTo.todayMenuTo) &&
-                Objects.equals(votesCount, restaurantTo.votesCount);
+                Objects.equals(todayMenuTo, restaurantTo.todayMenuTo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, todayMenuTo, votesCount);
+        return Objects.hash(id, name, todayMenuTo);
     }
 
     @Override
@@ -48,7 +40,6 @@ public class RestaurantTo extends AbstractNamedTo {
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", todayMenuTo=" + todayMenuTo +
-                ", votesCount=" + votesCount +
                 '}';
     }
 }

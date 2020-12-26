@@ -8,21 +8,21 @@ import java.util.Objects;
 public class DishTo extends AbstractNamedTo {
 
     @NotNull
-    private final RestaurantTo restaurantTo;
+    private final Integer restaurantId;
 
     @NotNull
     @PositiveOrZero
     private final Integer price;
 
     @ConstructorProperties({"id", "name", "restaurantTo", "price"})
-    public DishTo(Integer id, String name, RestaurantTo restaurantTo, Integer price) {
+    public DishTo(Integer id, String name, Integer restaurantId, Integer price) {
         super(id, name);
         this.price = price;
-        this.restaurantTo = restaurantTo;
+        this.restaurantId = restaurantId;
     }
 
-    public RestaurantTo getRestaurantTo() {
-        return restaurantTo;
+    public Integer getRestaurantId() {
+        return restaurantId;
     }
 
     public Integer getPrice() {
@@ -36,13 +36,13 @@ public class DishTo extends AbstractNamedTo {
         DishTo dishTo = (DishTo) o;
         return Objects.equals(id, dishTo.id) &&
                 Objects.equals(name, dishTo.name) &&
-                Objects.equals(restaurantTo.id, dishTo.restaurantTo.id) &&
+                Objects.equals(restaurantId, dishTo.restaurantId) &&
                 Objects.equals(price, dishTo.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, restaurantTo.id, price);
+        return Objects.hash(id, name, restaurantId, price);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class DishTo extends AbstractNamedTo {
         return "DishTo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", restaurant name='" + restaurantTo.name + '\'' +
+                ", restaurantId='" + restaurantId + '\'' +
                 ", price=" + price +
                 '}';
     }

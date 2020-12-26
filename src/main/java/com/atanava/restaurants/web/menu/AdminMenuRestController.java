@@ -66,7 +66,7 @@ public class AdminMenuRestController {
         return service.get(id, restaurantId);
     }
 
-    @GetMapping(value = "/{restaurantId}/by-date")
+    @GetMapping(value = "/by-date/{restaurantId}")
     public Menu getByRestAndDate(@RequestBody LocalDate date, @PathVariable int restaurantId) {
         log.info("get menu from restaurant {} by date {}", restaurantId, date);
         return service.getByRestAndDate(restaurantId, date);

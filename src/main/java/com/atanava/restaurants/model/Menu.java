@@ -33,12 +33,16 @@ public class Menu extends AbstractBaseEntity {
     public static final String BY_REST_AND_DATE = "Menu.getByRestAndDate";
     public static final String DELETE = "Menu.delete";
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Restaurant.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     @JsonBackReference
     private Restaurant restaurant;
+
+    //    https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities
+    @Column(name = "restaurant_id", insertable = false, updatable = false)
+    private Integer restaurantId;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
     @JoinTable(name = "dishes_menus",
@@ -90,4 +94,11 @@ public class Menu extends AbstractBaseEntity {
         this.date = date;
     }
 
+    public Integer getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(Integer restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 }

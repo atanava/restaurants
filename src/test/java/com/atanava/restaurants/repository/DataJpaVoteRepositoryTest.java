@@ -44,8 +44,8 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
         VOTE_MATCHER.assertMatch(saved, getUpdated());
         VOTE_MATCHER.assertMatch(updated, getUpdated());
 
-        assertEquals(saved.getUser(), updated.getUser());
-        assertNotEquals(saved.getRestaurant(), updated.getRestaurant());
+        assertEquals(saved.getUserId(), updated.getUserId());
+        assertNotEquals(saved.getRestaurantId(), updated.getRestaurantId());
     }
 
     @Test
@@ -58,6 +58,16 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     public void getNotFound() {
         assertThrows(NotFoundException.class, () -> voteRepository.get(NOT_FOUND.id, USER_1.id));
         assertThrows(NotFoundException.class, () -> voteRepository.get(VOTE_1.id, USER_2.id));
+    }
+
+    @Test
+    public void getByUserAndDate() {
+        VOTE_MATCHER.assertMatch(voteRepository.getByUserAndDate(ADMIN.id, LocalDate.of(2020, 11, 19)), vote1);
+    }
+
+    @Test
+    public void getByUserAndDateNotFound() {
+        assertNull(voteRepository.getByUserAndDate(ADMIN.id, LocalDate.now()));
     }
 
     @Test
@@ -96,5 +106,26 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     public void delete() {
         assertTrue(voteRepository.delete(VOTE_1.id));
         assertThrows(NotFoundException.class, () -> voteRepository.get(VOTE_1.id, ADMIN.id));
+    }
+
+    @Test
+    public void deleteNotFound() {
+        assertFalse(voteRepository.delete(NEW_ITEM.id));
+    }
+
+    public void deleteAllByRestaurant() {
+        voteRepository.getAllByRestaurant(RESTAURANT_2.id);
+        VOTE_MATCHER.assertMatch(voteRepository.getAllByRestaurant(RESTAURANT_1.id), getAllExpByRest1());
+        assertNull(voteRepository.getAllByRestaurant(RESTAURANT_2.id));
+    }
+
+    @Test
+    public void deleteByUserAndDate() {
+        assertTrue(voteRepository.deleteByUserAndDate(ADMIN.id, LocalDate.of(2020, 11, 19)));
+    }
+
+    @Test
+    public void deleteByUserAndDateNotFound() {
+        assertFalse(voteRepository.deleteByUserAndDate(ADMIN.id, LocalDate.now()));
     }
 }

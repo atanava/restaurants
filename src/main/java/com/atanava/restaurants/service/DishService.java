@@ -26,18 +26,18 @@ public class DishService {
 
     public void deactivate(int id, int restaurantId) {
         if (! repository.deactivate(id, restaurantId)) {
-            throw new NotFoundException("Dish with id=" + id + "  and restaurantId=" + restaurantId + "  was not found");
+            throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
         }
     }
 
     public void activate(int id, int restaurantId) {
         if (! repository.activate(id, restaurantId)) {
-            throw new NotFoundException("Dish with id=" + id + "  and restaurantId=" + restaurantId + "  was not found");
+            throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
         }
     }
 
     public Dish get(int id, int restaurantId) {
-        return repository.get(id, restaurantId);
+        return checkNotFoundWithId(repository.get(id, restaurantId), id);
     }
 
     public List<Dish> getAll(int restaurantId) {

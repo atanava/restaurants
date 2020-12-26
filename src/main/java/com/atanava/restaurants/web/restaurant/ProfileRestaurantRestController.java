@@ -28,7 +28,7 @@ public class ProfileRestaurantRestController {
 
     @GetMapping("/{id}")
     public RestaurantTo get(@PathVariable int id) {
-        return restaurantService.getToWithMenu(id, LocalDate.now());
+        return restaurantService.getTo(id, LocalDate.now());
     }
 
     @GetMapping

@@ -11,6 +11,8 @@ public interface VoteRepository {
 
     boolean delete(int id);
 
+    boolean deleteAllByRestaurant(int restaurantId);
+
     boolean deleteByUserAndDate(int userId, LocalDate date);
 
     Vote get(int id, int userId);

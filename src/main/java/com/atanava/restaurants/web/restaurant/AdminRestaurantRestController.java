@@ -65,19 +65,19 @@ public class AdminRestaurantRestController {
         return service.get(id);
     }
 
-    @GetMapping("/with-votes/{id}")
+    @GetMapping("/{id}/with-votes")
     public Restaurant getWithVotes(@PathVariable int id) {
         log.info("get restaurant {} with votes", id);
         return service.getWithVotes(id);
     }
 
-    @GetMapping("/with-menus/{id}")
+    @GetMapping("/{id}/with-menus")
     public Restaurant getWithMenus(@PathVariable int id) {
         log.info("get restaurant {} with menus", id);
         return service.getWithMenus(id);
     }
 
-    @GetMapping("/with-votes-and-menus/{id}")
+    @GetMapping("/{id}/with-votes-and-menus")
     public Restaurant getWithVotesAndMenus(@PathVariable int id) {
         log.info("get restaurant {} with votes and menus", id);
         return service.getWithMenusAndVotes(id);
