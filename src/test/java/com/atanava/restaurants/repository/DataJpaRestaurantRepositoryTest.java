@@ -8,6 +8,7 @@ import com.atanava.restaurants.repository.vote.VoteRepository;
 import com.atanava.restaurants.testdata.MenuTestData;
 import com.atanava.restaurants.testdata.VoteTestData;
 import com.atanava.restaurants.util.exception.NotFoundException;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -28,6 +29,14 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
 
     @Autowired
     VoteRepository voteRepository;
+
+    @Autowired
+    protected JpaUtil jpaUtil;
+
+    @Before
+    public void setUp() {
+        jpaUtil.clear2ndLevelHibernateCache();
+    }
 
     @Test
     public void save() {

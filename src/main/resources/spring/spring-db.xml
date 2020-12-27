@@ -61,6 +61,8 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
           p:entityManagerFactory-ref="entityManagerFactory"/>
 
+    <bean class="com.atanava.restaurants.repository.JpaUtil"/>
+
     <context:component-scan base-package="com.atanava.**.repository**"/>
     <jpa:repositories base-package="com.atanava.**.repository**"/>
 

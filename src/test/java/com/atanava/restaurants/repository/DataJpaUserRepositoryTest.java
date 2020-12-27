@@ -4,6 +4,7 @@ import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.repository.user.UserRepository;
 import com.atanava.restaurants.util.exception.NotFoundException;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,6 +19,14 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
 
     @Autowired
     UserRepository repository;
+
+    @Autowired
+    protected JpaUtil jpaUtil;
+
+    @Before
+    public void setUp() {
+        jpaUtil.clear2ndLevelHibernateCache();
+    }
 
     @Test
     public void save() {

@@ -1,10 +1,14 @@
 package com.atanava.restaurants.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
+
 import javax.persistence.*;
 import java.util.Set;
 
 import static java.util.Collections.emptySet;
 
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @NamedQueries({
         @NamedQuery(name = Restaurant.GET_WITH, query = "SELECT r FROM Restaurant r WHERE r.id=?1"),
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
