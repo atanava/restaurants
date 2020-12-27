@@ -1,7 +1,7 @@
 package com.atanava.restaurants.util;
 
 import com.atanava.restaurants.HasId;
-import com.atanava.restaurants.model.AbstractBaseEntity;
+import com.atanava.restaurants.util.exception.IllegalRequestDataException;
 import com.atanava.restaurants.util.exception.NotFoundException;
 
 import javax.validation.*;
@@ -51,9 +51,9 @@ public class ValidationUtil {
         }
     }
 
-    public static void checkNew(AbstractBaseEntity entity) {
-        if (!entity.isNew()) {
-            throw new IllegalArgumentException(entity + " must be new (id=null)");
+    public static void checkNew(HasId bean) {
+        if (!bean.isNew()) {
+            throw new IllegalRequestDataException(bean + " must be new (id=null)");
         }
     }
 
@@ -62,7 +62,7 @@ public class ValidationUtil {
         if (bean.isNew()) {
             bean.setId(id);
         } else if (bean.id() != id) {
-            throw new IllegalArgumentException(bean + " must be with id=" + id);
+            throw new IllegalRequestDataException(bean + " must be with id=" + id);
         }
     }
 
