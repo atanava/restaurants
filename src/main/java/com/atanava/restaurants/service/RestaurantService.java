@@ -1,5 +1,7 @@
 package com.atanava.restaurants.service;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import com.atanava.restaurants.dto.RestaurantTo;
 import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.model.Restaurant;
@@ -11,6 +13,7 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.atanava.restaurants.util.ValidationUtil.checkNotFoundWithId;
 import static com.atanava.restaurants.util.RestaurantUtil.createToFromRestaurant;
@@ -22,19 +25,24 @@ public class RestaurantService {
 
     private final MenuRepository menuRepository;
 
-    private final MenuService menuService;
-
-    public RestaurantService(RestaurantRepository restaurantRepository, MenuRepository menuRepository, MenuService menuService) {
+    public RestaurantService(RestaurantRepository restaurantRepository, MenuRepository menuRepository) {
         this.restaurantRepository = restaurantRepository;
         this.menuRepository = menuRepository;
-        this.menuService = menuService;
     }
 
+    @CacheEvict(value = {"restaurants", "menus"}, allEntries = true)
     public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
         return restaurantRepository.save(restaurant);
     }
 
+    @CacheEvict(value = {"restaurants", "menus"}, allEntries = true)
+    public void update(Restaurant restaurant) throws NotFoundException {
+        Assert.notNull(restaurant, "restaurant must not be null");
+        checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
+    }
+
+    @CacheEvict(value = {"restaurants", "menus"}, allEntries = true)
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
@@ -43,21 +51,24 @@ public class RestaurantService {
         return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    //TODO
+    @Cacheable(value = {"restaurants", "menus"})
     public RestaurantTo getTo(int id, LocalDate date) throws NotFoundException {
-        Restaurant restaurant = checkNotFoundWithId(getWithVotes(id), id);
+        Restaurant restaurant = checkNotFoundWithId(get(id), id);
         Menu menu = menuRepository.getByRestAndDate(id, date);
         return createToFromRestaurant(restaurant, menu);
     }
 
-
-    public void update(Restaurant restaurant) throws NotFoundException {
-        Assert.notNull(restaurant, "restaurant must not be null");
-        checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
-    }
-
+    @Cacheable("restaurants")
     public List<Restaurant> getAll() {
         return restaurantRepository.getAll();
+    }
+
+    @Cacheable("restaurants")
+    public List<RestaurantTo> getAllTos() {
+        return getAll()
+                .stream()
+                .map(r -> createToFromRestaurant(r, null))
+                .collect(Collectors.toList());
     }
 
     public List<Restaurant> getAllWithVotes() {

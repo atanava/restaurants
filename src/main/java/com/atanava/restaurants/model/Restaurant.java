@@ -16,6 +16,7 @@ import static java.util.Collections.emptySet;
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurants_unique_name_idx")})
 public class Restaurant extends AbstractNamedEntity {
+
     public static final String GET_WITH = "Restaurant.getWith*";
     public static final String DELETE = "Restaurant.Delete";
 

@@ -31,6 +31,5 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     List<Menu> getAllByRestaurant(@Param("restaurantId") int restaurantId);
 
     @Query(name = Menu.BY_DATE)
-    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
     List<Menu> getAllByDate(@Param("date") LocalDate date);
 }

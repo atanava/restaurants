@@ -71,7 +71,6 @@ public class DataJpaVoteRepository implements VoteRepository {
                 .orElseThrow(() -> new NotFoundException("Vote with id=" + id + " was not found"));
     }
 
-    //TODO create test
     @Override
     public Vote getByUserAndDate(int userId, LocalDate date) {
         return crudVoteRepository.getByUserAndDate(userId, date);
