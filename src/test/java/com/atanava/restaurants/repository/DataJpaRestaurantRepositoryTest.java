@@ -8,18 +8,17 @@ import com.atanava.restaurants.repository.vote.VoteRepository;
 import com.atanava.restaurants.testdata.MenuTestData;
 import com.atanava.restaurants.testdata.VoteTestData;
 import com.atanava.restaurants.util.exception.NotFoundException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.testdata.RestaurantTestData.*;
-import static org.junit.Assert.assertArrayEquals;
 
 public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     private final Comparator<HasId> comparingById = Comparator.comparing(HasId::getId);
@@ -33,7 +32,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     @Autowired
     protected JpaUtil jpaUtil;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         jpaUtil.clear2ndLevelHibernateCache();
     }

@@ -4,14 +4,14 @@ import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.Vote;
 import com.atanava.restaurants.repository.vote.VoteRepository;
 import com.atanava.restaurants.util.exception.NotFoundException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.testdata.VoteTestData.*;
-import static org.junit.Assert.*;
 
 public class DataJpaVoteRepositoryTest extends AbstractTest {
 

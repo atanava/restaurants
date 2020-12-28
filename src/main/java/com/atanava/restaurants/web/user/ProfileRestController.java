@@ -35,6 +35,10 @@ public class ProfileRestController extends AbstractUserController {
     public User get(@AuthenticationPrincipal AuthorizedUser authUser) {
         return super.get(authUser.getId());
     }
+//    @GetMapping
+//    public User get() {
+//        return super.get(authUserId());
+//    }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)

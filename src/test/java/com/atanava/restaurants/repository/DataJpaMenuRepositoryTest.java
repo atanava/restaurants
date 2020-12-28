@@ -6,7 +6,7 @@ import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.repository.dish.DishRepository;
 import com.atanava.restaurants.repository.menu.MenuRepository;
 import com.atanava.restaurants.testdata.DishTestData;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.TransactionSystemException;
@@ -14,7 +14,7 @@ import org.springframework.transaction.TransactionSystemException;
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.testdata.MenuTestData.*;
 

@@ -4,14 +4,14 @@ import com.atanava.restaurants.AbstractTest;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.repository.user.UserRepository;
 import com.atanava.restaurants.util.exception.NotFoundException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.testdata.UserTestData.*;
 
@@ -23,7 +23,7 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     @Autowired
     protected JpaUtil jpaUtil;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         jpaUtil.clear2ndLevelHibernateCache();
     }

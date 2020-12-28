@@ -3,7 +3,7 @@ package com.atanava.restaurants.web.json;
 import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.testdata.UserTestData;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static com.atanava.restaurants.testdata.DishTestData.*;
 
 public class JsonUtilTest {
