@@ -14,7 +14,7 @@ import static com.atanava.restaurants.testdata.DbSequence.*;
 
 public class MenuTestData {
 
-    public static TestMatcher<Menu> MENU_MATCHER = TestMatcher.usingFieldsComparator("dishes", "restaurant", "restaurantId");
+    public static TestMatcher<Menu> MENU_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Menu.class,"dishes", "restaurant", "restaurantId");
 
     private static final Restaurant rest1 = RestaurantTestData.rest1;
     private static final Restaurant rest2 = RestaurantTestData.rest2;

@@ -13,7 +13,7 @@ import static com.atanava.restaurants.testdata.UserTestData.*;
 import static com.atanava.restaurants.testdata.RestaurantTestData.*;
 
 public class VoteTestData {
-    public static TestMatcher<Vote> VOTE_MATCHER = TestMatcher.usingFieldsComparator("restaurant", "restaurantId", "user", "userId");
+    public static TestMatcher<Vote> VOTE_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Vote.class,"restaurant", "restaurantId", "user", "userId");
 
     public static final Vote vote1 = new Vote(VOTE_1.id, admin, rest1, LocalDate.of(2020, 11, 19));
 

@@ -3,11 +3,12 @@ package com.atanava.restaurants.testdata;
 import com.atanava.restaurants.TestMatcher;
 import com.atanava.restaurants.model.Role;
 import com.atanava.restaurants.model.User;
+import com.atanava.restaurants.web.json.JsonUtil;
 
 import static com.atanava.restaurants.testdata.DbSequence.*;
 
 public class UserTestData {
-    public static TestMatcher<User> USER_MATCHER = TestMatcher.usingFieldsComparator("registered", "roles", "votes");
+    public static TestMatcher<User> USER_MATCHER = TestMatcher.usingIgnoringFieldsComparator(User.class,"registered", "roles", "votes", "password");
 
     public static final User admin = new User(ADMIN.id, "Vasja", "admin@gmail.com", "{noop}admin", Role.ADMIN);
     public static final User user1 = new User(USER_1.id, "Fedja", "user1@yandex.ru", "{noop}password", Role.USER);
@@ -27,4 +28,9 @@ public class UserTestData {
         updated.setEmail("updated@gmail.com");
         return updated;
     }
+
+    public static String jsonWithPassword(User user, String passw) {
+        return JsonUtil.writeAdditionProps(user, "password", passw);
+    }
+
 }

@@ -24,6 +24,9 @@ public class UserTo extends AbstractNamedTo implements Serializable {
     @Size(min = 5, max = 32)
     private String password;
 
+    public UserTo() {
+    }
+
     public UserTo(Integer id, String name, String email, String password) {
         super(id, name);
         this.email = email;
@@ -57,18 +60,18 @@ public class UserTo extends AbstractNamedTo implements Serializable {
                 Objects.equals(password, userTo.password);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, email, password);
-    }
-
-    @Override
-    public String toString() {
-        return "UserTo{" +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, name, email, password);
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "UserTo{" +
+//                ", id=" + id +
+//                ", name='" + name + '\'' +
+//                ", email='" + email + '\'' +
+//                ", password='" + password + '\'' +
+//                '}';
+//    }
 }

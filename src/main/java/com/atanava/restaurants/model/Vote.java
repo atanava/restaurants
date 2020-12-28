@@ -55,7 +55,7 @@ public class Vote extends AbstractBaseEntity {
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
-    @JsonBackReference
+//    @JsonBackReference
     private User user;
 
     @Column(name = "user_id", insertable = false, updatable = false)

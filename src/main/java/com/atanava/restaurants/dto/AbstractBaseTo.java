@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 
 public abstract class AbstractBaseTo implements HasId {
 
-    @NotNull
     protected Integer id;
 
     public AbstractBaseTo() {
