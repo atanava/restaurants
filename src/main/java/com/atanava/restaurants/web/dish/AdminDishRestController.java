@@ -45,6 +45,22 @@ public class AdminDishRestController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
+    @PostMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Dish> update(@RequestBody Dish dish, @PathVariable int restaurantId) {
+        log.info("deactivate dish {} for restaurant {}", dish.getName(), restaurantId);
+
+        Dish replaced = service.update(dish, restaurantId);
+
+        log.info("create new dish {} for restaurant {}", replaced.getName(), restaurantId);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(replaced.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(replaced);
+    }
+
     @PutMapping(value = "/deactivate/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deactivate(@RequestBody Dish dish, @PathVariable int restaurantId, @PathVariable int id) {

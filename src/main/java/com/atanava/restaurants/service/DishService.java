@@ -24,16 +24,20 @@ public class DishService {
         return repository.save(dish, restaurantId);
     }
 
-    public void deactivate(int id, int restaurantId) {
-        if (! repository.deactivate(id, restaurantId)) {
-            throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
-        }
+    public Dish update(Dish dish, int restaurantId) {
+        return create(dish, restaurantId);
     }
 
-    public void activate(int id, int restaurantId) {
+    public boolean deactivate(int id, int restaurantId) {
+        if (! repository.deactivate(id, restaurantId)) {
+            throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
+        } else return true;
+    }
+
+    public boolean activate(int id, int restaurantId) {
         if (! repository.activate(id, restaurantId)) {
             throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
-        }
+        } else return true;
     }
 
     public Dish get(int id, int restaurantId) {
