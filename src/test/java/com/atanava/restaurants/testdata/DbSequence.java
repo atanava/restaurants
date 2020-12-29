@@ -34,10 +34,14 @@ public enum DbSequence {
     VOTE_5(22),
     VOTE_6(23),
 
+//    today data
     MENU_4(24),
     MENU_5(25),
 
-    NEW_ITEM(26),
+    VOTE_7(26),
+    VOTE_8(27),
+
+    NEW_ITEM(28),
     ;
 
     public final int id;

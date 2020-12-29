@@ -20,11 +20,11 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void save() {
-        Vote saved = voteRepository.save(getNew(), USER_1.id, RESTAURANT_1.id);
+        Vote saved = voteRepository.save(getNew(), ADMIN.id, RESTAURANT_1.id);
         int newId = saved.id();
         Vote newVote = getNew();
         newVote.setId(newId);
-        Vote actualFromDB = voteRepository.get(newId, USER_1.id);
+        Vote actualFromDB = voteRepository.get(newId, ADMIN.id);
         VOTE_MATCHER.assertMatch(saved, newVote);
         VOTE_MATCHER.assertMatch(actualFromDB, newVote);
     }
@@ -36,9 +36,9 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void update() {
-        voteRepository.save(getNew(), USER_1.id, RESTAURANT_1.id);
+        voteRepository.save(getNew(), ADMIN.id, RESTAURANT_1.id);
         Vote saved = voteRepository.getById(NEW_ITEM.id);
-        voteRepository.save(getUpdated(), USER_1.id, RESTAURANT_2.id);
+        voteRepository.save(getUpdated(), ADMIN.id, RESTAURANT_2.id);
         Vote updated = voteRepository.getById(NEW_ITEM.id);
 
         VOTE_MATCHER.assertMatch(saved, getUpdated());
@@ -77,7 +77,7 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void getAllByUser() {
-        VOTE_MATCHER.assertMatch(voteRepository.getAllByUser(ADMIN.id), getAllExpByUser());
+        VOTE_MATCHER.assertMatch(voteRepository.getAllByUser(ADMIN.id), getAllExpByAdmin());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
 
     @Test
     public void getAllByUserAndRest() {
-        VOTE_MATCHER.assertMatch(voteRepository.getAllByUserAndRest(ADMIN.id, RESTAURANT_1.id), getAllExpByUserAndRest());
+        VOTE_MATCHER.assertMatch(voteRepository.getAllByUserAndRest(ADMIN.id, RESTAURANT_1.id), getAllExpByAdminAndRest());
     }
 
     @Test

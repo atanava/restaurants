@@ -6,6 +6,7 @@ import com.atanava.restaurants.service.UserService;
 import com.atanava.restaurants.util.UserUtil;
 import com.atanava.restaurants.web.AbstractControllerTest;
 import com.atanava.restaurants.web.json.JsonUtil;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ import static com.atanava.restaurants.testdata.UserTestData.*;
 import static com.atanava.restaurants.testdata.DbSequence.USER_1;
 import static com.atanava.restaurants.web.user.ProfileRestController.REST_URL;
 
+@Disabled("the testcase is under development")
 public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Autowired
