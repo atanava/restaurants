@@ -14,7 +14,8 @@ import javax.validation.Valid;
 
 import java.net.URI;
 
-import static com.atanava.restaurants.web.SecurityUtil.authUserId;
+import static com.atanava.restaurants.AuthorizedUser.*;
+//import static com.atanava.restaurants.web.SecurityUtil.authUserId;
 
 @RestController
 @RequestMapping(value = ProfileRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,15 +36,11 @@ public class ProfileRestController extends AbstractUserController {
     public User get(@AuthenticationPrincipal AuthorizedUser authUser) {
         return super.get(authUser.getId());
     }
-//    @GetMapping
-//    public User get() {
-//        return super.get(authUserId());
-//    }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete() {
-        super.delete(authUserId());
+    public void delete(@AuthenticationPrincipal AuthorizedUser authUser) {
+        super.delete(authUser.getId());
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
