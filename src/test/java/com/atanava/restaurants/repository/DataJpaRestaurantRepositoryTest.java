@@ -33,12 +33,12 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     protected JpaUtil jpaUtil;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         jpaUtil.clear2ndLevelHibernateCache();
     }
 
     @Test
-    public void save() {
+    void save() {
         Restaurant saved = restaurantRepository.save(getNew());
         int newId = saved.id();
         Restaurant newRest = getNew();
@@ -48,47 +48,47 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void duplicateNameSave() {
+    void duplicateNameSave() {
         assertThrows(DataAccessException.class, () -> restaurantRepository.save(getDuplicate()));
     }
 
     @Test
-    public void update() {
+    void update() {
         Restaurant updated = getUpdated();
         restaurantRepository.save(updated);
         RESTAURANT_MATCHER.assertMatch(restaurantRepository.get(RESTAURANT_1.id), getUpdated());
     }
 
     @Test
-    public void delete() {
+    void delete() {
         assertTrue(restaurantRepository.delete(RESTAURANT_1.id));
         assertThrows(NotFoundException.class, () -> restaurantRepository.get(RESTAURANT_1.id));
     }
 
     @Test
-    public void deletedNotFound() {
+    void deletedNotFound() {
         assertFalse(restaurantRepository.delete(NOT_FOUND.id));
     }
 
     @Test
-    public void get() {
+    void get() {
         Restaurant restaurant = restaurantRepository.get(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
     }
 
     @Test
-    public void getNotFound() {
+    void getNotFound() {
         assertThrows(NotFoundException.class, () -> restaurantRepository.get(NOT_FOUND.id));
     }
 
     @Test
-    public void getAll() {
+    void getAll() {
         List<Restaurant> all = restaurantRepository.getAll();
         RESTAURANT_MATCHER.assertMatch(all, rest2, rest1);
     }
 
     @Test
-    public void getAllWithVotes() {
+    void getAllWithVotes() {
         List<Restaurant> allFromDB = restaurantRepository.getAllWithVotes();
         RESTAURANT_MATCHER.assertMatch(allFromDB, rest2, rest1);
 
@@ -103,7 +103,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void getWithVotes() {
+    void getWithVotes() {
         Restaurant restaurant = restaurantRepository.getWithVotes(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
         assertArrayEquals(convertToSortedArray(restaurant.getVotes(), comparingById),
@@ -111,7 +111,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void getWithMenus() {
+    void getWithMenus() {
         Restaurant restaurant = restaurantRepository.getWithMenus(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
         assertArrayEquals(convertToSortedArray(restaurant.getMenus(), comparingById),
@@ -119,7 +119,7 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void getWithVotesAndMenus() {
+    void getWithVotesAndMenus() {
         Restaurant restaurant = restaurantRepository.getWithVotesAndMenus(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
 

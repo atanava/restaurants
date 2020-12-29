@@ -19,11 +19,11 @@ class DishServiceTest extends AbstractServiceTest {
 
     @Test
     void create() {
-        Dish saved = service.create(getNew(), RESTAURANT_1.id);
-        int newId = saved.id();
+        Dish created = service.create(getNew(), RESTAURANT_1.id);
+        int newId = created.id();
         Dish newDish = getNew();
         newDish.setId(newId);
-        DISH_MATCHER.assertMatch(saved, newDish);
+        DISH_MATCHER.assertMatch(created, newDish);
         DISH_MATCHER.assertMatch(service.get(newId, RESTAURANT_1.id), newDish);
     }
 

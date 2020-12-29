@@ -19,7 +19,7 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     VoteRepository voteRepository;
 
     @Test
-    public void save() {
+    void save() {
         Vote saved = voteRepository.save(getNew(), ADMIN.id, RESTAURANT_1.id);
         int newId = saved.id();
         Vote newVote = getNew();
@@ -30,12 +30,12 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void incorrectDateSave() {
+    void incorrectDateSave() {
         assertNull(voteRepository.save(vote1, ADMIN.id, RESTAURANT_2.id));
     }
 
     @Test
-    public void update() {
+    void update() {
         voteRepository.save(getNew(), ADMIN.id, RESTAURANT_1.id);
         Vote saved = voteRepository.getById(NEW_ITEM.id);
         voteRepository.save(getUpdated(), ADMIN.id, RESTAURANT_2.id);
@@ -49,83 +49,84 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void get() {
+    void get() {
         Vote actualFromDB = voteRepository.get(VOTE_1.id, ADMIN.id);
         VOTE_MATCHER.assertMatch(vote1, actualFromDB);
     }
 
     @Test
-    public void getNotFound() {
+    void getNotFound() {
         assertThrows(NotFoundException.class, () -> voteRepository.get(NOT_FOUND.id, USER_1.id));
         assertThrows(NotFoundException.class, () -> voteRepository.get(VOTE_1.id, USER_2.id));
     }
 
     @Test
-    public void getByUserAndDate() {
+    void getByUserAndDate() {
         VOTE_MATCHER.assertMatch(voteRepository.getByUserAndDate(ADMIN.id, LocalDate.of(2020, 11, 19)), vote1);
     }
 
     @Test
-    public void getByUserAndDateNotFound() {
+    void getByUserAndDateNotFound() {
         assertNull(voteRepository.getByUserAndDate(ADMIN.id, LocalDate.now()));
     }
 
     @Test
-    public void getAll() {
+    void getAll() {
         VOTE_MATCHER.assertMatch(voteRepository.getAll(), getAllExpected());
     }
 
     @Test
-    public void getAllByUser() {
+    void getAllByUser() {
         VOTE_MATCHER.assertMatch(voteRepository.getAllByUser(ADMIN.id), getAllExpByAdmin());
     }
 
     @Test
-    public void getAllByRestaurant() {
+    void getAllByRestaurant() {
         VOTE_MATCHER.assertMatch(voteRepository.getAllByRestaurant(RESTAURANT_1.id), getAllExpByRest1());
     }
 
     @Test
-    public void getAllByDate() {
+    void getAllByDate() {
         VOTE_MATCHER.assertMatch(voteRepository.getAllByDate(
                 LocalDate.of(2020, 11, 20)), getAllExpByDate());
     }
 
     @Test
-    public void getAllByRestAndDate() {
+    void getAllByRestAndDate() {
         VOTE_MATCHER.assertMatch(voteRepository.getAllByRestAndDate(
                 RESTAURANT_2.id, LocalDate.of(2020, 11, 20)), getAllExpByRestAndDate());
     }
 
     @Test
-    public void getAllByUserAndRest() {
+    void getAllByUserAndRest() {
         VOTE_MATCHER.assertMatch(voteRepository.getAllByUserAndRest(ADMIN.id, RESTAURANT_1.id), getAllExpByAdminAndRest());
     }
 
     @Test
-    public void delete() {
+    void delete() {
         assertTrue(voteRepository.delete(VOTE_1.id));
         assertThrows(NotFoundException.class, () -> voteRepository.get(VOTE_1.id, ADMIN.id));
     }
 
     @Test
-    public void deleteNotFound() {
+    void deleteNotFound() {
         assertFalse(voteRepository.delete(NEW_ITEM.id));
     }
 
-    public void deleteAllByRestaurant() {
-        voteRepository.getAllByRestaurant(RESTAURANT_2.id);
+    @Test
+    void deleteAllByRestaurant() {
+        voteRepository.deleteAllByRestaurant(RESTAURANT_2.id);
         VOTE_MATCHER.assertMatch(voteRepository.getAllByRestaurant(RESTAURANT_1.id), getAllExpByRest1());
-        assertNull(voteRepository.getAllByRestaurant(RESTAURANT_2.id));
+        assertTrue(voteRepository.getAllByRestaurant(RESTAURANT_2.id).isEmpty());
     }
 
     @Test
-    public void deleteByUserAndDate() {
+    void deleteByUserAndDate() {
         assertTrue(voteRepository.deleteByUserAndDate(ADMIN.id, LocalDate.of(2020, 11, 19)));
     }
 
     @Test
-    public void deleteByUserAndDateNotFound() {
+    void deleteByUserAndDateNotFound() {
         assertFalse(voteRepository.deleteByUserAndDate(ADMIN.id, LocalDate.now()));
     }
 }

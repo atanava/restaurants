@@ -24,12 +24,12 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     protected JpaUtil jpaUtil;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         jpaUtil.clear2ndLevelHibernateCache();
     }
 
     @Test
-    public void save() {
+    void save() {
         User saved = repository.save(getNew());
         int newId = saved.id();
         User newUser = getNew();
@@ -39,47 +39,47 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void duplicateMailSave() {
+    void duplicateMailSave() {
         assertThrows(DataAccessException.class, () -> repository.save(getDuplicate()));
     }
 
     @Test
-    public void update() {
+    void update() {
         User updated = getUpdated();
         repository.save(updated);
         USER_MATCHER.assertMatch(repository.get(USER_1.id), getUpdated());
     }
 
     @Test
-    public void delete() {
+    void delete() {
         assertTrue(repository.delete(USER_1.id));
         assertThrows(NotFoundException.class, () -> repository.get(USER_1.id));
     }
 
     @Test
-    public void deletedNotFound() {
+    void deletedNotFound() {
         assertFalse(repository.delete(NOT_FOUND.id));
     }
 
     @Test
-    public void get() {
+    void get() {
         User user = repository.get(USER_1.id);
         USER_MATCHER.assertMatch(user, user1);
     }
 
     @Test
-    public void getNotFound() {
+    void getNotFound() {
         assertThrows(NotFoundException.class, () -> repository.get(NOT_FOUND.id));
     }
 
     @Test
-    public void getByEmail() {
+    void getByEmail() {
         User user = repository.getByEmail("admin@gmail.com");
         USER_MATCHER.assertMatch(user, admin);
     }
 
     @Test
-    public void getAll() {
+    void getAll() {
         List<User> all = repository.getAll();
         USER_MATCHER.assertMatch(all, user1, admin, user2);
     }
