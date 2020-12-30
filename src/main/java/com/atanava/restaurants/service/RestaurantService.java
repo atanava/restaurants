@@ -9,6 +9,7 @@ import com.atanava.restaurants.repository.menu.MenuRepository;
 import com.atanava.restaurants.repository.restaurant.RestaurantRepository;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
@@ -30,13 +31,14 @@ public class RestaurantService {
         this.menuRepository = menuRepository;
     }
 
-    @CacheEvict(value = {"restaurants", "menus"}, allEntries = true)
+    @CacheEvict(value = {"restaurants"}, allEntries = true)
     public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
         return restaurantRepository.save(restaurant);
     }
 
     @CacheEvict(value = {"restaurants", "menus"}, allEntries = true)
+    @Transactional
     public void update(Restaurant restaurant) throws NotFoundException {
         Assert.notNull(restaurant, "restaurant must not be null");
         checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());

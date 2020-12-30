@@ -29,11 +29,11 @@ class MenuServiceTest extends AbstractServiceTest {
 
     @Test
     void create() {
-        Menu created = service.create(getNew(), RESTAURANT_1.id);
+        Menu created = service.create(getNew(), RESTAURANT_2.id);
         int newId = created.id();
         Menu newMenu = getNew();
         newMenu.setId(newId);
-        Menu actualFromDB = service.get(newId, RESTAURANT_1.id);
+        Menu actualFromDB = service.get(newId, RESTAURANT_2.id);
         MENU_MATCHER.assertMatch(created, newMenu);
         MENU_MATCHER.assertMatch(actualFromDB, newMenu);
 
@@ -52,8 +52,8 @@ class MenuServiceTest extends AbstractServiceTest {
 
     @Test
     void duplicateDateSave() {
-        service.create(getNew(), RESTAURANT_1.id);
-        assertThrows(DataAccessException.class, () ->  service.create(getNew(), RESTAURANT_1.id));
+        service.create(getNew(), RESTAURANT_2.id);
+        assertThrows(DataAccessException.class, () ->  service.create(getNew(), RESTAURANT_2.id));
     }
 
     @Test

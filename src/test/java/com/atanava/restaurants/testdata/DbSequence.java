@@ -25,23 +25,21 @@ public enum DbSequence {
 
     MENU_1(15),
     MENU_2(16),
-    MENU_3(17),
 
-    VOTE_1(18),
-    VOTE_2(19),
-    VOTE_3(20),
-    VOTE_4(21),
-    VOTE_5(22),
-    VOTE_6(23),
+    VOTE_1(17),
+    VOTE_2(18),
+    VOTE_3(19),
+    VOTE_4(20),
+    VOTE_5(21),
+    VOTE_6(22),
 
 //    today data
-    MENU_4(24),
-    MENU_5(25),
+    MENU_3(23),
 
-    VOTE_7(26),
-    VOTE_8(27),
+    VOTE_7(24),
+    VOTE_8(25),
 
-    NEW_ITEM(28),
+    NEW_ITEM(26),
     ;
 
     public final int id;

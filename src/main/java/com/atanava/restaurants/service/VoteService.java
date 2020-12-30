@@ -17,12 +17,16 @@ import static com.atanava.restaurants.util.VoteUtil.*;
 @Service
 public class VoteService {
 
-    static final LocalTime EXPIRATION_TIME = LocalTime.of(11,0,0,0);
+    static LocalTime EXPIRATION_TIME = LocalTime.of(11,0,0,0);
 
     private final VoteRepository repository;
 
     public VoteService(VoteRepository repository) {
         this.repository = repository;
+    }
+
+    public static void setExpirationTime(LocalTime expirationTime) {
+        EXPIRATION_TIME = expirationTime;
     }
 
     public Vote create(Vote vote, int userId, int restaurantId) {

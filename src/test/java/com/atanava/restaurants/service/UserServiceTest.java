@@ -3,9 +3,11 @@ package com.atanava.restaurants.service;
 import com.atanava.restaurants.dto.UserTo;
 import com.atanava.restaurants.model.Role;
 import com.atanava.restaurants.model.User;
+import com.atanava.restaurants.repository.JpaUtil;
 import com.atanava.restaurants.testdata.UserTestData;
 import com.atanava.restaurants.util.UserUtil;
 import com.atanava.restaurants.util.exception.NotFoundException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -21,6 +23,14 @@ class UserServiceTest extends AbstractServiceTest {
 
     @Autowired
     protected UserService service;
+
+    @Autowired
+    protected JpaUtil jpaUtil;
+
+    @BeforeEach
+    void setUp() {
+        jpaUtil.clear2ndLevelHibernateCache();
+    }
 
     @Test
     void create() {

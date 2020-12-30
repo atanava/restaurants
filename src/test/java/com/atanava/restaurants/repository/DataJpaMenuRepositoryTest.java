@@ -28,11 +28,11 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
 
     @Test
     void save() {
-        Menu saved = menuRepository.save(getNew(), RESTAURANT_1.id);
+        Menu saved = menuRepository.save(getNew(), RESTAURANT_2.id);
         int newId = saved.id();
         Menu newMenu = getNew();
         newMenu.setId(newId);
-        Menu actualFromDB = menuRepository.get(newId, RESTAURANT_1.id);
+        Menu actualFromDB = menuRepository.get(newId, RESTAURANT_2.id);
         MENU_MATCHER.assertMatch(saved, newMenu);
         MENU_MATCHER.assertMatch(actualFromDB, newMenu);
 
@@ -45,13 +45,13 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
     void PastDateSave () {
         Menu saved = getNew();
         saved.setDate(today.minusDays(1));
-        assertThrows(TransactionSystemException.class, () -> menuRepository.save(saved, RESTAURANT_1.id));
+        assertThrows(TransactionSystemException.class, () -> menuRepository.save(saved, RESTAURANT_2.id));
     }
 
     @Test
     void duplicateDateSave() {
-        menuRepository.save(getNew(), RESTAURANT_1.id);
-        assertThrows(DataAccessException.class, () ->  menuRepository.save(getNew(), RESTAURANT_1.id));
+        menuRepository.save(getNew(), RESTAURANT_2.id);
+        assertThrows(DataAccessException.class, () ->  menuRepository.save(getNew(), RESTAURANT_2.id));
     }
 
     @Test
