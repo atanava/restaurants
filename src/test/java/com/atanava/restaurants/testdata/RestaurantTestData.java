@@ -1,18 +1,45 @@
 package com.atanava.restaurants.testdata;
 
+import com.atanava.restaurants.HasId;
 import com.atanava.restaurants.TestMatcher;
+import com.atanava.restaurants.dto.RestaurantTo;
 import com.atanava.restaurants.model.Restaurant;
+import com.atanava.restaurants.util.RestaurantUtil;
+
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import static com.atanava.restaurants.testdata.DbSequence.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestaurantTestData {
+
     public static TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Restaurant.class,"dishes", "menus", "votes");
+    public static TestMatcher<Restaurant> REST_WITH_VOTES_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Restaurant.class,"dishes", "menus", "votes");
+
+
+    public static TestMatcher<RestaurantTo> REST_TO_MATCHER = TestMatcher.usingAssertions(RestaurantTo.class,
+//     No need use ignoringAllOverriddenEquals, see https://assertj.github.io/doc/#breaking-changes
+            (a, e) -> assertThat(a).usingRecursiveComparison()
+                    .ignoringFields("todayMenuTo.restaurantId","todayMenuTo.dishTos.restaurantId")
+                    .isEqualTo(e),
+            (a, e) -> {
+                throw new UnsupportedOperationException();
+            });
+
+    public static TestMatcher<RestaurantTo> REST_TO_WITHOUT_MENUS_MATCHER = TestMatcher.usingEqualsComparator(RestaurantTo.class);
+
 
     public static final Restaurant rest1 =  new Restaurant(RESTAURANT_1.id, "Troika");
     public static final Restaurant rest2 =  new Restaurant(RESTAURANT_2.id, "Gloria");
 
     public static Restaurant getNew() {
         return new Restaurant(null, "New");
+    }
+
+    public static RestaurantTo getRestTo() {
+        return RestaurantUtil.createToFromRestaurant(rest1, MenuTestData.menuOfTroika2);
     }
 
     public static Restaurant getDuplicate() {
@@ -24,5 +51,6 @@ public class RestaurantTestData {
         updated.setName("UpdatedName");
         return updated;
     }
+
 
 }

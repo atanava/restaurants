@@ -80,7 +80,7 @@ public class AdminRestaurantRestController {
     @GetMapping("/{id}/with-votes-and-menus")
     public Restaurant getWithVotesAndMenus(@PathVariable int id) {
         log.info("get restaurant {} with votes and menus", id);
-        return service.getWithMenusAndVotes(id);
+        return service.getWithVotesAndMenus(id);
     }
 
     @GetMapping

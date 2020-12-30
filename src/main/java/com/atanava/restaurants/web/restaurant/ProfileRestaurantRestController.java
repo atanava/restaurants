@@ -36,6 +36,6 @@ public class ProfileRestaurantRestController {
     @GetMapping
     public List<RestaurantTo> getAllTos() {
         log.info("get all restaurant TOs");
-        return restaurantService.getAllTos();
+        return restaurantService.getAllTosWithoutMenus();
     }
 }

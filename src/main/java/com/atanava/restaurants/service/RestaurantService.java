@@ -66,7 +66,7 @@ public class RestaurantService {
     }
 
     @Cacheable("restaurants")
-    public List<RestaurantTo> getAllTos() {
+    public List<RestaurantTo> getAllTosWithoutMenus() {
         return getAll()
                 .stream()
                 .map(r -> createToFromRestaurant(r, null))
@@ -85,7 +85,7 @@ public class RestaurantService {
         return checkNotFoundWithId(restaurantRepository.getWithVotes(id), id);
     }
 
-    public Restaurant getWithMenusAndVotes(int id) throws NotFoundException {
+    public Restaurant getWithVotesAndMenus(int id) throws NotFoundException {
         return checkNotFoundWithId(restaurantRepository.getWithVotesAndMenus(id), id);
     }
 }

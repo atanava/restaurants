@@ -10,7 +10,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestUtil {
     public static String getContent(MvcResult result) throws UnsupportedEncodingException {
@@ -41,5 +44,14 @@ public class TestUtil {
     public static RequestPostProcessor userAuth(User user) {
         return SecurityMockMvcRequestPostProcessors.authentication(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
     }
+
+    public static HasId[] convertToSortedArray(Collection<? extends HasId> collection) {
+        return collection == null ? new HasId[0]
+                : collection.stream()
+                .sorted(Comparator.comparing(HasId::getId))
+                .collect(Collectors.toList())
+                .toArray(new HasId[collection.size()]);
+    }
+
 }
 

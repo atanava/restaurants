@@ -14,14 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.testdata.RestaurantTestData.*;
+import static com.atanava.restaurants.TestUtil.convertToSortedArray;
 
 public class DataJpaRestaurantRepositoryTest extends AbstractTest {
-    private final Comparator<HasId> comparingById = Comparator.comparing(HasId::getId);
 
     @Autowired
     RestaurantRepository restaurantRepository;
@@ -97,8 +96,8 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
         List<Restaurant> allExpected = List.of(rest2, rest1);
 
         for (int i = 0; i < allExpected.size(); i++) {
-            assertArrayEquals(convertToSortedArray(allFromDB.get(i).getVotes(), comparingById),
-                    convertToSortedArray(allExpected.get(i).getVotes(), comparingById));
+            assertArrayEquals(convertToSortedArray(allFromDB.get(i).getVotes()),
+                    convertToSortedArray(allExpected.get(i).getVotes()));
         }
     }
 
@@ -106,16 +105,16 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
     void getWithVotes() {
         Restaurant restaurant = restaurantRepository.getWithVotes(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
-        assertArrayEquals(convertToSortedArray(restaurant.getVotes(), comparingById),
-                convertToSortedArray(VoteTestData.getAllExpByRest1(), comparingById));
+        assertArrayEquals(convertToSortedArray(restaurant.getVotes()),
+                convertToSortedArray(VoteTestData.getAllExpByRest1()));
     }
 
     @Test
     void getWithMenus() {
         Restaurant restaurant = restaurantRepository.getWithMenus(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
-        assertArrayEquals(convertToSortedArray(restaurant.getMenus(), comparingById),
-                convertToSortedArray(MenuTestData.getAllExpByRest1(), comparingById));
+        assertArrayEquals(convertToSortedArray(restaurant.getMenus()),
+                convertToSortedArray(MenuTestData.getAllExpByRest1()));
     }
 
     @Test
@@ -123,19 +122,12 @@ public class DataJpaRestaurantRepositoryTest extends AbstractTest {
         Restaurant restaurant = restaurantRepository.getWithVotesAndMenus(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
 
-        assertArrayEquals(convertToSortedArray(restaurant.getVotes(), comparingById),
-                convertToSortedArray(VoteTestData.getAllExpByRest1(), comparingById));
+        assertArrayEquals(convertToSortedArray(restaurant.getVotes()),
+                convertToSortedArray(VoteTestData.getAllExpByRest1()));
 
-        assertArrayEquals(convertToSortedArray(restaurant.getMenus(), comparingById),
-                convertToSortedArray(MenuTestData.getAllExpByRest1(), comparingById));
+        assertArrayEquals(convertToSortedArray(restaurant.getMenus()),
+                convertToSortedArray(MenuTestData.getAllExpByRest1()));
 
     }
 
-    private HasId[] convertToSortedArray(Collection<? extends HasId> collection, Comparator<HasId> comparator) {
-        return collection == null ? new HasId[0]
-                : collection.stream()
-                            .sorted(comparator)
-                            .collect(Collectors.toList())
-                            .toArray(new HasId[collection.size()]);
-    }
 }
