@@ -1,32 +1,51 @@
 package com.atanava.restaurants.testdata;
 
 import com.atanava.restaurants.TestMatcher;
+import com.atanava.restaurants.dto.VoteTo;
 import com.atanava.restaurants.model.Vote;
+import com.atanava.restaurants.util.VoteUtil;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.testdata.UserTestData.*;
 import static com.atanava.restaurants.testdata.RestaurantTestData.*;
 
 public class VoteTestData {
-    public static TestMatcher<Vote> VOTE_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Vote.class,"restaurant", "restaurantId", "user", "userId");
 
-    public static final Vote vote1 = new Vote(VOTE_1.id, admin, rest1, LocalDate.of(2020, 11, 19));
+    public static TestMatcher<Vote> VOTE_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Vote.class, "restaurant", "restaurantId", "user", "userId");
+    public static TestMatcher<VoteTo> VOTE_TO_MATCHER = TestMatcher.usingIgnoringFieldsComparator(VoteTo.class);
 
-    private static final Vote vote2 = new Vote(VOTE_2.id, user1, rest1, LocalDate.of(2020, 11, 19));
-    private static final Vote vote3 = new Vote(VOTE_3.id, user2, rest2, LocalDate.of(2020, 11, 19));
-    private static final Vote vote4 = new Vote(VOTE_4.id, admin, rest1, LocalDate.of(2020, 11, 20));
-    private static final Vote vote5 = new Vote(VOTE_5.id, user1, rest2, LocalDate.of(2020, 11, 20));
-    private static final Vote vote6 = new Vote(VOTE_6.id, user2, rest2, LocalDate.of(2020, 11, 20));
-    private static final Vote vote7 = new Vote(VOTE_7.id, user1, rest1, LocalDate.now());
-    private static final Vote vote8 = new Vote(VOTE_8.id, user2, rest2, LocalDate.now());
+    //    TODO move dates to TestUtil
+    public static final LocalDate date1 = LocalDate.parse("2020-11-19");
+    public static final LocalDate date2 = LocalDate.parse("2020-11-20");
+    public static final LocalDate today = LocalDate.now();
+
+    public static final Vote vote1 = new Vote(VOTE_1.id, admin, rest1, date1);
+
+    private static final Vote vote2 = new Vote(VOTE_2.id, user1, rest1, date1);
+    private static final Vote vote3 = new Vote(VOTE_3.id, user2, rest2, date1);
+    private static final Vote vote4 = new Vote(VOTE_4.id, admin, rest1, date2);
+    private static final Vote vote5 = new Vote(VOTE_5.id, user1, rest2, date2);
+    private static final Vote vote6 = new Vote(VOTE_6.id, user2, rest2, date2);
+    private static final Vote vote7 = new Vote(VOTE_7.id, user1, rest1, today);
+    private static final Vote vote8 = new Vote(VOTE_8.id, user2, rest2, today);
 
     public static Vote getNew() {
-        return new Vote(null, admin, rest1, LocalDate.now());
+        return new Vote(null, admin, rest1, today);
+    }
+
+    public static VoteTo getTo() {
+        return makeTo(vote1);
+    }
+
+    public static VoteTo getTodayTo() {
+        return makeTo(getNew());
     }
 
     public static Vote getUpdated() {
@@ -62,6 +81,18 @@ public class VoteTestData {
 
     public static Set<Vote> getAllExpByAdminAndRest() {
         return new LinkedHashSet<>(Arrays.asList(vote1, vote4));
+    }
+
+    public static Collection<VoteTo> getExpTos(Set<Vote> votes) {
+        votes.forEach(vote -> {
+            vote.setUserId(vote.getUser().id());
+            vote.setRestaurantId(vote.getRestaurant().id());
+        });
+        return VoteUtil.createTosFromVotes(votes, new LinkedHashSet<>());
+    }
+
+    private static VoteTo makeTo(Vote vote) {
+        return new VoteTo(vote.getId(), vote.getUser().id(), vote.getRestaurant().id(), vote.getDate());
     }
 }
 

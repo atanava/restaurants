@@ -61,6 +61,17 @@ public class DataJpaVoteRepositoryTest extends AbstractTest {
     }
 
     @Test
+    void getById() {
+        Vote actualFromDB = voteRepository.getById(VOTE_1.id);
+        VOTE_MATCHER.assertMatch(vote1, actualFromDB);
+    }
+
+    @Test
+    void getByIdNotFound() {
+        assertThrows(NotFoundException.class, () -> voteRepository.getById(NOT_FOUND.id));
+    }
+
+    @Test
     void getByUserAndDate() {
         VOTE_MATCHER.assertMatch(voteRepository.getByUserAndDate(ADMIN.id, LocalDate.of(2020, 11, 19)), vote1);
     }

@@ -5,6 +5,7 @@ import com.atanava.restaurants.model.Vote;
 import com.atanava.restaurants.repository.vote.VoteRepository;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
@@ -25,33 +26,36 @@ public class VoteService {
         this.repository = repository;
     }
 
-    public static void setExpirationTime(LocalTime expirationTime) {
+    static void setExpirationTime(LocalTime expirationTime) {
         EXPIRATION_TIME = expirationTime;
     }
 
-    public Vote create(Vote vote, int userId, int restaurantId) {
+    private Vote create(Vote vote, int userId, int restaurantId) {
         Assert.notNull(vote, "vote must not be null");
         checkNew(vote);
         return repository.save(vote, userId, restaurantId);
     }
 
-    public void createOrUpdate(int userId, int restaurantId) {
+    public VoteTo createOrUpdate(int userId, int restaurantId) {
         Vote vote = repository.getByUserAndDate(userId, LocalDate.now());
         if (vote == null) {
             vote = new Vote();
             vote.setDate(LocalDate.now());
-            create(vote, userId, restaurantId);
+            vote = create(vote, userId, restaurantId);
         } else {
-            update(vote, userId, restaurantId);
+            vote = update(vote, userId, restaurantId);
         }
+        return createToFromVote(vote);
     }
 
-    public void update(Vote vote, int userId, int restaurantId) throws NotFoundException {
+    @Transactional
+    Vote update(Vote vote, int userId, int restaurantId) throws NotFoundException {
         checkTimeExpired(EXPIRATION_TIME);
         Assert.notNull(vote, "vote must not be null");
-        checkNotFoundWithId(repository.save(vote, userId, restaurantId), vote.getId());
+        return checkNotFoundWithId(repository.save(vote, userId, restaurantId), vote.getId());
     }
 
+    //TODO create test
     private VoteTo getByUserAndDate(int userId, LocalDate date) {
         Assert.notNull(date, "date must not be null");
         return createToFromVote(repository.getByUserAndDate(userId, date));
@@ -95,6 +99,7 @@ public class VoteService {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
+//    TODO remove id
     public void deleteByUserByToday(int id, int userId) {
         checkTimeExpired(EXPIRATION_TIME);
         checkNotFoundWithId(repository.deleteByUserAndDate(userId, LocalDate.now()), id);

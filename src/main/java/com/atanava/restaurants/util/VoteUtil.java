@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class VoteUtil {
 
     public static VoteTo createToFromVote(Vote vote) {
-        return new VoteTo(vote.id(), vote.getDate(), vote.getUserId(), vote.getRestaurantId());
+        return new VoteTo(vote.id(), vote.getUserId(), vote.getRestaurantId(), vote.getDate());
     }
 
     public static Collection<VoteTo> createTosFromVotes(Collection<Vote> votes, Collection<VoteTo> col) {

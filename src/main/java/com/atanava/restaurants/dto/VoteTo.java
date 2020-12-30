@@ -14,7 +14,7 @@ public class VoteTo extends AbstractBaseTo {
     @NotNull
     private final Integer restaurantId;
 
-    public VoteTo(Integer id, LocalDate date, Integer userId, Integer restaurantId) {
+    public VoteTo(Integer id, Integer userId, Integer restaurantId, LocalDate date) {
         super(id);
         this.date = date;
         this.userId = userId;
