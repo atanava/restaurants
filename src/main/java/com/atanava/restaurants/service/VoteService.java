@@ -18,7 +18,7 @@ import static com.atanava.restaurants.util.VoteUtil.*;
 @Service
 public class VoteService {
 
-    static LocalTime EXPIRATION_TIME = LocalTime.of(11,0,0,0);
+    private static LocalTime EXPIRATION_TIME = LocalTime.of(11,0,0,0);
 
     private final VoteRepository repository;
 
@@ -53,12 +53,6 @@ public class VoteService {
         checkTimeExpired(EXPIRATION_TIME);
         Assert.notNull(vote, "vote must not be null");
         return checkNotFoundWithId(repository.save(vote, userId, restaurantId), vote.getId());
-    }
-
-    //TODO create test
-    private VoteTo getByUserAndDate(int userId, LocalDate date) {
-        Assert.notNull(date, "date must not be null");
-        return createToFromVote(repository.getByUserAndDate(userId, date));
     }
 
     public VoteTo get(int id, int userId) {
@@ -99,9 +93,10 @@ public class VoteService {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
-//    TODO remove id
-    public void deleteByUserByToday(int id, int userId) {
+    public void deleteByUserByToday(int userId) throws NotFoundException {
         checkTimeExpired(EXPIRATION_TIME);
-        checkNotFoundWithId(repository.deleteByUserAndDate(userId, LocalDate.now()), id);
+        if ( ! repository.deleteByUserAndDate(userId, LocalDate.now())) {
+            throw new NotFoundException("today vote of user " + "userId" + " was not found");
+        }
     }
 }

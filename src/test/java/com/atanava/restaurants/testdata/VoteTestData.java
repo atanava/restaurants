@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.testdata.UserTestData.*;
@@ -21,7 +20,6 @@ public class VoteTestData {
     public static TestMatcher<Vote> VOTE_MATCHER = TestMatcher.usingIgnoringFieldsComparator(Vote.class, "restaurant", "restaurantId", "user", "userId");
     public static TestMatcher<VoteTo> VOTE_TO_MATCHER = TestMatcher.usingIgnoringFieldsComparator(VoteTo.class);
 
-    //    TODO move dates to TestUtil
     public static final LocalDate date1 = LocalDate.parse("2020-11-19");
     public static final LocalDate date2 = LocalDate.parse("2020-11-20");
     public static final LocalDate today = LocalDate.now();

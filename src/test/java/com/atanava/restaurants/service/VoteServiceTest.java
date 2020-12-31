@@ -46,7 +46,7 @@ class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     void updateTimeExpired() {
-        VoteService.setExpirationTime(LocalTime.now());
+        VoteService.setExpirationTime(LocalTime.MIN);
         service.createOrUpdate(ADMIN.id, RESTAURANT_1.id);
         assertThrows(DateTimeException.class, () -> service.createOrUpdate(ADMIN.id, RESTAURANT_2.id));
     }
@@ -120,20 +120,20 @@ class VoteServiceTest extends AbstractServiceTest {
     @Test
     void deleteByUserByToday() {
         VoteService.setExpirationTime(LocalTime.MAX);
-        service.deleteByUserByToday(VOTE_7.id, USER_1.id);
+        service.deleteByUserByToday(USER_1.id);
         assertThrows(NotFoundException.class, () -> service.get(VOTE_7.id, USER_1.id));
     }
 
     @Test
     void deleteByUserByTodayTimeExpired() {
-        VoteService.setExpirationTime(LocalTime.now());
-        assertThrows(DateTimeException.class, () -> service.deleteByUserByToday(VOTE_7.id, USER_1.id));
+        VoteService.setExpirationTime(LocalTime.MIN);
+        assertThrows(DateTimeException.class, () -> service.deleteByUserByToday(USER_1.id));
     }
 
     @Test
     void deleteByUserByTodayNotFound() {
         VoteService.setExpirationTime(LocalTime.MAX);
-        assertThrows(NotFoundException.class, () -> service.deleteByUserByToday(NOT_FOUND.id, ADMIN.id));
+        assertThrows(NotFoundException.class, () -> service.deleteByUserByToday(ADMIN.id));
     }
 
 }

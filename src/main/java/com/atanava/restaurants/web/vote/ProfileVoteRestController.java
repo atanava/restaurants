@@ -34,11 +34,11 @@ public class ProfileVoteRestController {
         service.createOrUpdate(authUser.getId(), restaurantId);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id, @AuthenticationPrincipal AuthorizedUser authUser) {
-        log.info("delete vote {} from user {} ", id, authUser.getId());
-        service.deleteByUserByToday(id, authUser.getId());
+    public void delete(@AuthenticationPrincipal AuthorizedUser authUser) {
+        log.info("delete today vote from user {} ", authUser.getId());
+        service.deleteByUserByToday(authUser.getId());
     }
 
     @GetMapping("/{id}")
