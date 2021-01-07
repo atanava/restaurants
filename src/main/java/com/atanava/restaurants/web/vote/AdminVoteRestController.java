@@ -4,6 +4,7 @@ import com.atanava.restaurants.dto.VoteTo;
 import com.atanava.restaurants.service.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -51,13 +52,14 @@ public class AdminVoteRestController {
     }
 
     @GetMapping("/by-date")
-    public List<VoteTo> getAllByDate(@RequestBody LocalDate date) {
+    public List<VoteTo> getAllByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get all votes by date {}", date);
         return (List<VoteTo>) service.getAllByDate(date, new ArrayList<>());
     }
 
     @GetMapping("/by-restaurant-and-date/{restaurantId}")
-    public List<VoteTo> getAllByRestAndDate(@PathVariable int restaurantId, @RequestBody LocalDate date) {
+    public List<VoteTo> getAllByRestAndDate(@PathVariable int restaurantId,
+                                            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get all votes by restaurant {} and date {}", restaurantId, date);
         return (List<VoteTo>) service.getAllByRestAndDate(restaurantId, date, new ArrayList<>());
     }
