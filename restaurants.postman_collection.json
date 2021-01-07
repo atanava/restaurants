@@ -32,6 +32,117 @@
 					"response": []
 				},
 				{
+					"name": "get all forbidden",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user1@yandex.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all incorrect email",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "aaaadmin@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all incorrect password",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get admin",
 					"request": {
 						"method": "GET",
@@ -55,40 +166,9 @@
 					"response": []
 				},
 				{
-					"name": "create new user",
+					"name": "get user1",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"name\":\"New User\",\"email\":\"test@mail.ru\",\"password\":\"password1\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"restaurants",
-								"rest",
-								"admin",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete user1",
-					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/restaurants/rest/admin/users/100001",
@@ -109,21 +189,12 @@
 					"response": []
 				},
 				{
-					"name": "update user2",
+					"name": "get not found",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"name\": \"Vasja Pupkin\",\"email\": \"vasjapupkin@hot.ee\",\"password\": \"password\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/users/100002",
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -134,7 +205,7 @@
 								"rest",
 								"admin",
 								"users",
-								"100002"
+								"1000"
 							]
 						}
 					},
@@ -164,6 +235,261 @@
 									"key": "email",
 									"value": "admin@gmail.com"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by email not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/by?email=notfound@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users",
+								"by"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "notfound@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"New User\",\"email\":\"test@mail.ru\",\"password\":\"password\",\"roles\":[\"USER\"]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create duplicate email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"New User\",\"email\":\"user1@yandex.ru\",\"password\":\"password\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create incorrect email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"New User\",\"email\":\"testmail.ru\",\"password\":\"password\",\"roles\":[\"USER\"]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete new user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/100026",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users",
+								"100026"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete not found",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/100002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users",
+								"100002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user2",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"100002\",\"name\": \"Vasja Pupkin\",\"email\": \"updated2@hot.ee\",\"password\": \"password\",\"roles\":[\"USER\"]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/100002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users",
+								"100002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update not found",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"100\",\"name\": \"Vasja Pupkin\",\"email\": \"updated@hot.ee\",\"password\": \"password\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users",
+								"100"
 							]
 						}
 					},
@@ -228,7 +554,41 @@
 					"response": []
 				}
 			],
-			"protocolProfileBehavior": {}
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "admin",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "admin@gmail.com",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		},
 		{
 			"name": "ProfileRestController",
@@ -243,7 +603,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\":\"New registered User\",\"email\":\"test2@mail.ru\",\"password\":\"password\"}",
+							"raw": "{\"name\":\"New registered User\",\"email\":\"test4@mail.ru\",\"password\":\"password\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -274,13 +634,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "password",
+									"key": "username",
+									"value": "test4@mail.ru",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "test2@mail.ru",
+									"key": "password",
+									"value": "password",
 									"type": "string"
 								}
 							]
@@ -310,13 +670,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "password",
+									"key": "username",
+									"value": "test4@mail.ru",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "test2@mail.ru",
+									"key": "password",
+									"value": "password",
 									"type": "string"
 								}
 							]
@@ -325,7 +685,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\": \"Pavel Chekhov\",\"email\": \"test2@mail.ru\",\"password\": \"password\"}",
+							"raw": "{\"name\": \"Pavel Chekhov\",\"email\": \"test4@mail.ru\",\"password\": \"password\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -356,7 +716,7 @@
 							"basic": [
 								{
 									"key": "username",
-									"value": "test2@mail.ru",
+									"value": "test4@mail.ru",
 									"type": "string"
 								},
 								{
@@ -370,7 +730,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"id\": 1000,\"name\": \"Pavel Chekhov\",\"email\": \"test2@mail.ru\",\"password\": \"password\"}",
+							"raw": "{\"id\": 100002,\"name\": \"Pavel Chekhov\",\"email\": \"test2@mail.ru\",\"password\": \"password\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -400,13 +760,49 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "password",
+									"key": "username",
+									"value": "test4@mail.ru",
 									"type": "string"
 								},
 								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete unauthorized ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
 									"key": "username",
-									"value": "test2@mail.ru",
+									"value": "notexist@mail.ru",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
 									"type": "string"
 								}
 							]
@@ -429,8 +825,293 @@
 					},
 					"response": []
 				}
+			]
+		},
+		{
+			"name": "AdminVoteRestController",
+			"item": [
+				{
+					"name": "get all votes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get vote 100024",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/100024",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"100024"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get vote not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all votes by user1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user/100001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"by-user",
+								"100001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all votes by restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"by-restaurant",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all votes by date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-date?date=2020-11-19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"by-date"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2020-11-19"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all votes by restaurant and date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant-and-date/100003?date=2020-11-19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"by-restaurant-and-date",
+								"100003"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2020-11-19"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all votes by user and restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user-and-restaurant/100000/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"by-user-and-restaurant",
+								"100000",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/100020",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"100020"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete not found",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"votes",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
 			],
-			"protocolProfileBehavior": {}
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "admin",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "admin@gmail.com",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	],
 	"auth": {
@@ -447,6 +1128,5 @@
 				"type": "string"
 			}
 		]
-	},
-	"protocolProfileBehavior": {}
+	}
 }
