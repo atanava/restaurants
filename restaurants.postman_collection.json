@@ -1112,6 +1112,403 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "ProfileVoteRestController",
+			"item": [
+				{
+					"name": "get all votes from user admin",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get vote 100017 from user admin",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes/100017",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"votes",
+								"100017"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get vote not found",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"votes",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vote for restaurant 100003 as user admin",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"votes",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "re-vote for restaurant 100004 as user1",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user1@yandex.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes/100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"votes",
+								"100004"
+							]
+						},
+						"description": "If time before 11:00 - vote must be accepted.\r\nIf time after 11:00 - vote must be rejected."
+					},
+					"response": []
+				},
+				{
+					"name": "delete today vote of user1",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user1@yandex.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"votes"
+							]
+						},
+						"description": "If time before 11:00 - deletion must be accepted.\r\nIf time after 11:00 - deletion must be rejected."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdminDishRestController",
+			"item": [
+				{
+					"name": "get all dishes from restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deactivate Fish from restaurant 100003",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/deactivate/100008",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"100003",
+								"deactivate",
+								"100008"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all active dishes from restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"100003",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all inactive dishes from restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/inactive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"100003",
+								"inactive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activate Fish from restaurant 100003",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/activate/100008",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"100003",
+								"activate",
+								"100008"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Coffee for restaurant 100003",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "admin",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "admin@gmail.com",
+						"type": "string"
+					}
+				]
+			}
 		}
 	],
 	"auth": {
