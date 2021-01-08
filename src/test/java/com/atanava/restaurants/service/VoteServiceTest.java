@@ -48,7 +48,7 @@ class VoteServiceTest extends AbstractServiceTest {
     void updateTimeExpired() {
         VoteService.setExpirationTime(LocalTime.MIN);
         service.createOrUpdate(ADMIN.id, RESTAURANT_1.id);
-        assertThrows(DateTimeException.class, () -> service.createOrUpdate(ADMIN.id, RESTAURANT_2.id));
+        assertThrows(UnsupportedOperationException.class, () -> service.createOrUpdate(ADMIN.id, RESTAURANT_2.id));
     }
 
     @Test
@@ -127,7 +127,7 @@ class VoteServiceTest extends AbstractServiceTest {
     @Test
     void deleteByUserByTodayTimeExpired() {
         VoteService.setExpirationTime(LocalTime.MIN);
-        assertThrows(DateTimeException.class, () -> service.deleteByUserByToday(USER_1.id));
+        assertThrows(UnsupportedOperationException.class, () -> service.deleteByUserByToday(USER_1.id));
     }
 
     @Test
