@@ -17,6 +17,7 @@ public class DataJpaUserRepository implements UserRepository {
         this.crudRepository = crudRepository;
     }
 
+    //TODO add SELECT COUNT(*) FROM USERS WHERE USERS.ID=:ID for updates
     @Override
     public User save(User user) {
         return crudRepository.save(user);

@@ -44,7 +44,7 @@ CREATE TABLE dishes
     active        BOOLEAN DEFAULT TRUE NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX unique_restaurant_id_dish_name_idx on dishes (restaurant_id, name);
+CREATE UNIQUE INDEX unique_restaurant_id_dish_name_price_idx on dishes (restaurant_id, name, price);
 
 CREATE TABLE menus
 (

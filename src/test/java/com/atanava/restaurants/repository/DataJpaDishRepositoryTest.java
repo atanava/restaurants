@@ -30,7 +30,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     }
 
     @Test
-    void duplicateNameSave() {
+    void duplicateSave() {
         assertThrows(DataAccessException.class, () -> repository.save(getDuplicate(), RESTAURANT_1.id));
     }
 

@@ -22,12 +22,12 @@ public class DishTestData {
     }
 
     public static Dish getDuplicate() {
-        return new Dish(new Dish(null, getAllFromRest1().get(0).getName(), troika, 300));
+        return getAllFromRest1().get(0);
     }
 
     public static Dish getUpdated() {
         Dish updated = getAllFromRest1().get(0);
-        updated.setName("UpdatedName");
+        updated.setPrice(350);
         return updated;
     }
 

@@ -15,8 +15,8 @@ import java.util.Set;
 })
 
 @Entity
-@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "name"},
-        name = "unique_restaurant_id_dish_name_idx")})
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "name", "price"},
+        name = "unique_restaurant_id_dish_name_price_idx")})
 public class  Dish extends AbstractNamedEntity {
 
     public static final String ALL = "Dish.getAllByRestaurant";
