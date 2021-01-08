@@ -28,6 +28,7 @@ public class DishTestData {
     public static Dish getUpdated() {
         Dish updated = getAllFromRest1().get(0);
         updated.setPrice(350);
+        updated.setRestaurantId(updated.getRestaurant().id());
         return updated;
     }
 

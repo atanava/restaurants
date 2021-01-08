@@ -27,8 +27,6 @@
         <slf4j.version>1.7.30</slf4j.version>
 
         <!--    Tests  -->
-<!--        <junit.version>4.13</junit.version>-->
-<!--        <assertj.version>3.16.1</assertj.version>-->
         <jsonassert.version>1.5.0</jsonassert.version>
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <assertj.version>3.17.2</assertj.version>
@@ -221,18 +219,6 @@
         </dependency>
 
         <!--Test-->
-<!--        <dependency>-->
-<!--            <groupId>junit</groupId>-->
-<!--            <artifactId>junit</artifactId>-->
-<!--            <version>${junit.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>hamcrest-core</artifactId>-->
-<!--                    <groupId>org.hamcrest</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -247,13 +233,6 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.hamcrest</groupId>-->
-<!--            <artifactId>hamcrest-all</artifactId>-->
-<!--            <version>${hamcrest.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework</groupId>

@@ -25,6 +25,7 @@ public class DishService {
     }
 
     public Dish update(Dish dish, int restaurantId) {
+        Assert.isTrue(dish.getRestaurantId() == restaurantId, "dish.restaurantId and restaurantId must be equal");
         return create(dish, restaurantId);
     }
 

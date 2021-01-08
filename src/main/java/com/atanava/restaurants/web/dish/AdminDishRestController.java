@@ -23,7 +23,7 @@ public class AdminDishRestController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    static final String REST_URL = "/rest/admin/dishes/{restaurantId}";
+    static final String REST_URL = "/rest/admin/dishes";
 
     private final DishService service;
 
@@ -33,7 +33,7 @@ public class AdminDishRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Dish> create(@RequestBody Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> create(@RequestBody Dish dish, @RequestParam int restaurantId) {
         log.info("create dish {} for restaurant {}", dish.getName(), restaurantId);
 
         Dish created = service.create(dish, restaurantId);
@@ -47,7 +47,7 @@ public class AdminDishRestController {
 
     @PostMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Dish> update(@RequestBody Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> update(@RequestBody Dish dish, @RequestParam int restaurantId) {
         log.info("deactivate dish {} for restaurant {}", dish.getName(), restaurantId);
 
         Dish replaced = service.update(dish, restaurantId);
@@ -61,42 +61,40 @@ public class AdminDishRestController {
         return ResponseEntity.created(uriOfNewResource).body(replaced);
     }
 
-    @PutMapping(value = "/deactivate/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/deactivate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deactivate(@RequestBody Dish dish, @PathVariable int restaurantId, @PathVariable int id) {
-        assureIdConsistent(dish, id);
+    public void deactivate(@RequestParam int restaurantId, @RequestParam int id) {
         log.info("deactivate dish {} from restaurant {}", id, restaurantId);
         service.deactivate(id, restaurantId);
     }
 
-    @PutMapping(value = "/activate/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/activate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void activate(@RequestBody Dish dish, @PathVariable int restaurantId, @PathVariable int id) {
-        assureIdConsistent(dish, id);
+    public void activate(@RequestParam int restaurantId, @RequestParam int id) {
         log.info("activate dish {} from restaurant {}", id, restaurantId);
         service.activate(id, restaurantId);
     }
 
-    @GetMapping(value = "/{id}")
-    public Dish get(@PathVariable int restaurantId, @PathVariable int id) {
+    @GetMapping
+    public Dish get(@RequestParam int restaurantId, @RequestParam int id) {
         log.info("get dish {} from restaurant {}", id, restaurantId);
         return service.get(id, restaurantId);
     }
 
-    @GetMapping
-    public List<Dish> getAll(@PathVariable int restaurantId) {
+    @GetMapping("/all")
+    public List<Dish> getAll(@RequestParam int restaurantId) {
         log.info("get all dishes from restaurant {}", restaurantId);
         return service.getAll(restaurantId);
     }
 
-    @GetMapping(value = "/active")
-    public List<Dish> getAllActive(@PathVariable int restaurantId) {
+    @GetMapping("/active")
+    public List<Dish> getAllActive(@RequestParam int restaurantId) {
         log.info("get all active dishes from restaurant {}", restaurantId);
         return service.getByActive(restaurantId, true);
     }
 
-    @GetMapping(value = "/inactive")
-    public List<Dish> getAllInActive(@PathVariable int restaurantId) {
+    @GetMapping("/inactive")
+    public List<Dish> getAllInActive(@RequestParam int restaurantId) {
         log.info("get all inactive dishes from restaurant {}", restaurantId);
         return service.getByActive(restaurantId, false);
     }
