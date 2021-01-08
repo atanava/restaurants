@@ -79,7 +79,7 @@ public class ValidationUtil {
 
     public static void checkTimeExpired(LocalTime stopTime) {
         if(LocalTime.now().isAfter(stopTime) ){
-            throw new DateTimeException("The time to change vote has expired.");
+            throw new UnsupportedOperationException("The time to change vote has expired.");
         }
     }
 
