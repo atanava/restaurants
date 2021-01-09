@@ -23,7 +23,7 @@ public class MenuService {
         this.repository = repository;
     }
 
-    @CacheEvict(value = "menus", allEntries = true)
+    @CacheEvict(value = {"menus", "restaurants"}, allEntries = true)
     public Menu create(Menu menu, int restaurantId) {
         Assert.notNull(menu, "menu must not be null");
         menu.getDishes().forEach(dish -> {
@@ -34,13 +34,13 @@ public class MenuService {
         return repository.save(menu, restaurantId);
     }
 
-    @CacheEvict(value = "menus", allEntries = true)
+    @CacheEvict(value = {"menus", "restaurants"}, allEntries = true)
     public void update(Menu menu, int restaurantId) throws NotFoundException {
         Assert.notNull(menu, "menu must not be null");
         checkNotFoundWithId(repository.save(menu, restaurantId), menu.id());
     }
 
-    @CacheEvict(value = "menus", allEntries = true)
+    @CacheEvict(value = {"menus", "restaurants"}, allEntries = true)
     public void delete(int id, int restaurantId) {
         checkNotFoundWithId(repository.delete(id, restaurantId), id);
     }
