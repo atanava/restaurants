@@ -464,38 +464,6 @@
 					"response": []
 				},
 				{
-					"name": "update not found",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"id\":\"100\",\"name\": \"Vasja Pupkin\",\"email\": \"updated@hot.ee\",\"password\": \"password\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/users/100",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"restaurants",
-								"rest",
-								"admin",
-								"users",
-								"100"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "disable user2",
 					"request": {
 						"method": "PATCH",
@@ -2457,6 +2425,390 @@
 					{
 						"key": "password",
 						"value": "password",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "AdminRestaurantRestController",
+			"item": [
+				{
+					"name": "get all restaurants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get restaurant 100003 with votes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100003",
+								"with-votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get restaurant 100003 with menus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-menus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100003",
+								"with-menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get restaurant 100003 with votes and menus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes-and-menus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100003",
+								"with-votes-and-menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all restaurants with votes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/all-with-votes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"all-with-votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create restaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Beerhouse\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create with duplicate name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Troika\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update restaurant 100004",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":100004,\"name\":\"Pushkin\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update not found",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":100,\"name\":\"Pushkin\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete restaurant 100004",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete not found",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "admin",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "admin@gmail.com",
 						"type": "string"
 					}
 				]
