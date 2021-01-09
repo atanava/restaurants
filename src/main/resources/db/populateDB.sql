@@ -56,7 +56,7 @@ VALUES (100003, 100000, '2020-11-19'),
         (100004, 100001, '2020-11-20'),
        (100004, 100002, '2020-11-20');
 
--- insert data for today
+-- data for today
 
 INSERT INTO menus (restaurant_id)
 VALUES (100003);

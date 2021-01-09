@@ -83,7 +83,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     @Test
     void getByActive() {
         repository.deactivate(DISH_4.id, RESTAURANT_1.id);
-        List<Dish> dishes =  getAllFromRest1Sorted();
+        List<Dish> dishes = getAllFromRest1Sorted();
         Dish deactivated = dishes.remove(0);
         deactivated.setActive(false);
         DISH_MATCHER.assertMatch(repository.getByActive(RESTAURANT_1.id, true), dishes);

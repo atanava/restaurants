@@ -1,5 +1,6 @@
 package com.atanava.restaurants.web;
 
+import com.atanava.restaurants.util.exception.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -13,10 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import com.atanava.restaurants.util.ValidationUtil;
-import com.atanava.restaurants.util.exception.ErrorInfo;
-import com.atanava.restaurants.util.exception.ErrorType;
-import com.atanava.restaurants.util.exception.IllegalRequestDataException;
-import com.atanava.restaurants.util.exception.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,8 +49,8 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true, APP_ERROR);
     }
 
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(UnsupportedOperationException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(TimeExpiredException.class)
     public ErrorInfo handleTimeExpired(HttpServletRequest req, Exception e) {
         return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR);
     }

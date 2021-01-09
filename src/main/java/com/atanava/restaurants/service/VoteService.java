@@ -18,7 +18,7 @@ import static com.atanava.restaurants.util.VoteUtil.*;
 @Service
 public class VoteService {
 
-    private static LocalTime EXPIRATION_TIME = LocalTime.of(11,0,0,0);
+    private static LocalTime EXPIRATION_TIME = LocalTime.of(11, 0, 0, 0);
 
     private final VoteRepository repository;
 
@@ -95,7 +95,7 @@ public class VoteService {
 
     public void deleteByUserByToday(int userId) throws NotFoundException {
         checkTimeExpired(EXPIRATION_TIME);
-        if ( ! repository.deleteByUserAndDate(userId, LocalDate.now())) {
+        if (!repository.deleteByUserAndDate(userId, LocalDate.now())) {
             throw new NotFoundException("today vote of user " + "userId" + " was not found");
         }
     }

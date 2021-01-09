@@ -1,9 +1,7 @@
 package com.atanava.restaurants.web.dish;
 
 import com.atanava.restaurants.model.Dish;
-import com.atanava.restaurants.model.Vote;
 import com.atanava.restaurants.service.DishService;
-import com.atanava.restaurants.service.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,8 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-
-import static com.atanava.restaurants.util.ValidationUtil.assureIdConsistent;
 
 @RestController
 @RequestMapping(value = AdminDishRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)

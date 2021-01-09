@@ -53,7 +53,7 @@ class MenuServiceTest extends AbstractServiceTest {
     @Test
     void duplicateDateSave() {
         service.create(getNew(), RESTAURANT_2.id);
-        assertThrows(DataAccessException.class, () ->  service.create(getNew(), RESTAURANT_2.id));
+        assertThrows(DataAccessException.class, () -> service.create(getNew(), RESTAURANT_2.id));
     }
 
     @Test
@@ -77,19 +77,19 @@ class MenuServiceTest extends AbstractServiceTest {
     @Test
     void updateNotFound() {
         Menu notExist = new Menu(NOT_FOUND.id, RestaurantTestData.rest1, List.of(), LocalDate.now());
-        assertThrows(NotFoundException.class, () ->  service.update(notExist, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> service.update(notExist, RESTAURANT_1.id));
     }
 
     @Test
     void delete() {
         service.delete(MENU_1.id, RESTAURANT_1.id);
-        assertThrows(NotFoundException.class, () ->  service.get(MENU_1.id, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> service.get(MENU_1.id, RESTAURANT_1.id));
         assertNotNull(dishRepository.get(DISH_1.id, RESTAURANT_1.id));
     }
 
     @Test
-    void deleteNotFound(){
-        assertThrows(NotFoundException.class, () ->  service.delete(NOT_FOUND.id, RESTAURANT_1.id));
+    void deleteNotFound() {
+        assertThrows(NotFoundException.class, () -> service.delete(NOT_FOUND.id, RESTAURANT_1.id));
     }
 
     @Test
@@ -104,7 +104,7 @@ class MenuServiceTest extends AbstractServiceTest {
 
     @Test
     void getNotFound() {
-        assertThrows(NotFoundException.class, () ->  service.get(NOT_FOUND.id, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> service.get(NOT_FOUND.id, RESTAURANT_1.id));
     }
 
     @Test

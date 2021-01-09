@@ -3,9 +3,9 @@ package com.atanava.restaurants.util;
 import com.atanava.restaurants.HasId;
 import com.atanava.restaurants.util.exception.IllegalRequestDataException;
 import com.atanava.restaurants.util.exception.NotFoundException;
+import com.atanava.restaurants.util.exception.TimeExpiredException;
 
 import javax.validation.*;
-import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -79,7 +79,7 @@ public class ValidationUtil {
 
     public static void checkTimeExpired(LocalTime stopTime) {
         if(LocalTime.now().isAfter(stopTime) ){
-            throw new UnsupportedOperationException("The time to change vote has expired.");
+            throw new TimeExpiredException("The time to change vote has expired.");
         }
     }
 

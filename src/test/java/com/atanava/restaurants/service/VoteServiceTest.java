@@ -2,10 +2,10 @@ package com.atanava.restaurants.service;
 
 import com.atanava.restaurants.dto.VoteTo;
 import com.atanava.restaurants.util.exception.NotFoundException;
+import com.atanava.restaurants.util.exception.TimeExpiredException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.LinkedHashSet;
 
@@ -48,7 +48,7 @@ class VoteServiceTest extends AbstractServiceTest {
     void updateTimeExpired() {
         VoteService.setExpirationTime(LocalTime.MIN);
         service.createOrUpdate(ADMIN.id, RESTAURANT_1.id);
-        assertThrows(UnsupportedOperationException.class, () -> service.createOrUpdate(ADMIN.id, RESTAURANT_2.id));
+        assertThrows(TimeExpiredException.class, () -> service.createOrUpdate(ADMIN.id, RESTAURANT_2.id));
     }
 
     @Test
@@ -127,7 +127,7 @@ class VoteServiceTest extends AbstractServiceTest {
     @Test
     void deleteByUserByTodayTimeExpired() {
         VoteService.setExpirationTime(LocalTime.MIN);
-        assertThrows(UnsupportedOperationException.class, () -> service.deleteByUserByToday(USER_1.id));
+        assertThrows(TimeExpiredException.class, () -> service.deleteByUserByToday(USER_1.id));
     }
 
     @Test

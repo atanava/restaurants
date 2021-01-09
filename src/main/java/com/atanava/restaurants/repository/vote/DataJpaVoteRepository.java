@@ -29,8 +29,8 @@ public class DataJpaVoteRepository implements VoteRepository {
 
     @Override
     public Vote save(Vote vote, int userId, int restaurantId) {
-        if ( ! vote.isNew()) {
-            if (get(vote.getId(), userId) == null || ! vote.getDate().equals(LocalDate.now())) {
+        if (!vote.isNew()) {
+            if (get(vote.getId(), userId) == null || !vote.getDate().equals(LocalDate.now())) {
                 return null;
             } else {
                 Restaurant restaurant = crudRestaurantRepository.getOne(restaurantId);

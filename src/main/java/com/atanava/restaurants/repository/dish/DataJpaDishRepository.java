@@ -23,7 +23,7 @@ public class DataJpaDishRepository implements DishRepository {
     @Transactional
     public Dish save(Dish dish, int restaurantId) {
         if (!dish.isNew()) {
-            throw new UnsupportedOperationException("You cannot modify existing dish, please create new");
+            throw new UnsupportedOperationException("You cannot modify existing dish, please create new one");
         }
         dish.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
         return crudDishRepository.save(dish);

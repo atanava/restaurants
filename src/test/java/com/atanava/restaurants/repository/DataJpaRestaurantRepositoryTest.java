@@ -1,7 +1,6 @@
 package com.atanava.restaurants.repository;
 
 import com.atanava.restaurants.AbstractTest;
-import com.atanava.restaurants.HasId;
 import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.repository.restaurant.RestaurantRepository;
 import com.atanava.restaurants.repository.vote.VoteRepository;

@@ -25,13 +25,13 @@ public class DishService {
     }
 
     public boolean deactivate(int id, int restaurantId) {
-        if (! repository.deactivate(id, restaurantId)) {
+        if (!repository.deactivate(id, restaurantId)) {
             throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
         } else return true;
     }
 
     public boolean activate(int id, int restaurantId) {
-        if (! repository.activate(id, restaurantId)) {
+        if (!repository.activate(id, restaurantId)) {
             throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
         } else return true;
     }
@@ -45,6 +45,6 @@ public class DishService {
     }
 
     public List<Dish> getByActive(int restaurantId, boolean active) {
-        return  repository.getByActive(restaurantId, active);
+        return repository.getByActive(restaurantId, active);
     }
 }

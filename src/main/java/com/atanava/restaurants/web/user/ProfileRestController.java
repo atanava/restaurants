@@ -14,9 +14,6 @@ import javax.validation.Valid;
 
 import java.net.URI;
 
-import static com.atanava.restaurants.AuthorizedUser.*;
-//import static com.atanava.restaurants.web.SecurityUtil.authUserId;
-
 @RestController
 @RequestMapping(value = ProfileRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileRestController extends AbstractUserController {

@@ -77,7 +77,7 @@ class DishServiceTest extends AbstractServiceTest {
     @Test
     void getByActive() {
         service.deactivate(DISH_4.id, RESTAURANT_1.id);
-        List<Dish> dishes =  getAllFromRest1Sorted();
+        List<Dish> dishes = getAllFromRest1Sorted();
         Dish deactivated = dishes.remove(0);
         deactivated.setActive(false);
         DISH_MATCHER.assertMatch(service.getByActive(RESTAURANT_1.id, true), dishes);

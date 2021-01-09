@@ -1,7 +1,6 @@
 package com.atanava.restaurants.web;
 
 import com.atanava.restaurants.AuthorizedUser;
-import com.atanava.restaurants.model.AbstractBaseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
