@@ -4,6 +4,7 @@ import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.service.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +68,7 @@ public class AdminMenuRestController {
     }
 
     @GetMapping(value = "/{restaurantId}/by-date")
-    public Menu getByRestAndDate(@PathVariable int restaurantId, @RequestParam LocalDate date) {
+    public Menu getByRestAndDate(@PathVariable int restaurantId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get menu from restaurant {} by date {}", restaurantId, date);
         return service.getByRestAndDate(restaurantId, date);
     }
@@ -85,7 +86,7 @@ public class AdminMenuRestController {
     }
 
     @GetMapping(value = "/by-date")
-    public List<Menu> getAllByDate(@RequestBody LocalDate date) {
+    public List<Menu> getAllByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get all menus by date {}", date);
         return service.getAllByDate(date);
     }

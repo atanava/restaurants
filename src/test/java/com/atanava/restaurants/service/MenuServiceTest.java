@@ -47,7 +47,7 @@ class MenuServiceTest extends AbstractServiceTest {
     void PastDateCreate() {
         Menu created = getNew();
         created.setDate(today.minusDays(1));
-        assertThrows(TransactionSystemException.class, () -> service.create(created, RESTAURANT_1.id));
+        assertThrows(TransactionSystemException.class, () -> service.create(created, RESTAURANT_2.id));
     }
 
     @Test

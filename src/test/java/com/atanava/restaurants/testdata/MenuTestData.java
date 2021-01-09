@@ -29,7 +29,7 @@ public class MenuTestData {
 
 
     public static Menu getNew() {
-        return new Menu(null, rest2, DishTestData.getAllFromRest1(), today);
+        return new Menu(null, rest2, DishTestData.getAllFromRest2(), today);
     }
 
     public static Menu getDuplicate() {

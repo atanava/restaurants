@@ -1,5 +1,6 @@
 package com.atanava.restaurants.service;
 
+import com.atanava.restaurants.util.exception.IllegalRequestDataException;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import com.atanava.restaurants.model.Menu;
@@ -25,6 +26,11 @@ public class MenuService {
     @CacheEvict(value = "menus", allEntries = true)
     public Menu create(Menu menu, int restaurantId) {
         Assert.notNull(menu, "menu must not be null");
+        menu.getDishes().forEach(dish -> {
+            if (dish.getRestaurantId() != restaurantId) {
+                throw new IllegalRequestDataException("dish.restaurantId must be " + restaurantId);
+            }
+        });
         return repository.save(menu, restaurantId);
     }
 
