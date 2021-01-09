@@ -75,16 +75,6 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     }
 
     @Test
-    void update() {
-        Dish updated = getUpdated();
-        repository.save(updated, RESTAURANT_1.id);
-        updated = getUpdated();
-        updated.setId(NEW_ITEM.id);
-        DISH_MATCHER.assertMatch(repository.get(NEW_ITEM.id, RESTAURANT_1.id), updated);
-        DISH_MATCHER.assertMatch(repository.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
-    }
-
-    @Test
     void getAll() {
         List<Dish> all = repository.getAll(RESTAURANT_1.id);
         DISH_MATCHER.assertMatch(all, getAllFromRest1Sorted());

@@ -18,18 +18,15 @@ public class DishTestData {
     private static final Restaurant gloria = RestaurantTestData.rest2;
 
     public static Dish getNew() {
-        return new Dish(null, "New", troika, 800);
+        Dish dish = new Dish(null, "New", troika, 800);
+        dish.setRestaurantId(RESTAURANT_1.id);
+        return dish;
     }
 
     public static Dish getDuplicate() {
-        return getAllFromRest1().get(0);
-    }
-
-    public static Dish getUpdated() {
-        Dish updated = getAllFromRest1().get(0);
-        updated.setPrice(350);
-        updated.setRestaurantId(updated.getRestaurant().id());
-        return updated;
+        Dish duplicate = getAllFromRest1().get(0);
+        duplicate.setId(null);
+        return duplicate;
     }
 
     public static Dish getDeactivated() {
@@ -45,6 +42,8 @@ public class DishTestData {
         expectedList.add(new Dish(DISH_3.id, "Meat", troika, 750));
         expectedList.add(new Dish(DISH_4.id, "Fish", troika, 960));
         expectedList.add(new Dish(DISH_5.id, "Juice", troika, 200));
+
+        expectedList.forEach(dish -> dish.setRestaurantId(RESTAURANT_1.id));
         return expectedList;
     }
 
@@ -55,6 +54,8 @@ public class DishTestData {
         expectedList.add(new Dish(DISH_8.id, "Meat", gloria, 550));
         expectedList.add(new Dish(DISH_9.id, "Fish", gloria, 650));
         expectedList.add(new Dish(DISH_10.id, "Juice", gloria, 120));
+
+        expectedList.forEach(dish -> dish.setRestaurantId(RESTAURANT_2.id));
         return expectedList;
     }
 

@@ -28,16 +28,6 @@ class DishServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void update() {
-        Dish updated = getUpdated();
-        service.update(updated, RESTAURANT_1.id);
-        updated = getUpdated();
-        updated.setId(NEW_ITEM.id);
-        DISH_MATCHER.assertMatch(service.get(NEW_ITEM.id, RESTAURANT_1.id), updated);
-        DISH_MATCHER.assertMatch(service.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
-    }
-
-    @Test
     void duplicateNameCreate() {
         assertThrows(DataAccessException.class, () -> service.create(getDuplicate(), RESTAURANT_1.id));
     }

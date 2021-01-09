@@ -24,11 +24,6 @@ public class DishService {
         return repository.save(dish, restaurantId);
     }
 
-    public Dish update(Dish dish, int restaurantId) {
-        Assert.isTrue(dish.getRestaurantId() == restaurantId, "dish.restaurantId and restaurantId must be equal");
-        return create(dish, restaurantId);
-    }
-
     public boolean deactivate(int id, int restaurantId) {
         if (! repository.deactivate(id, restaurantId)) {
             throw new NotFoundException("Dish with id=" + id + " and restaurantId=" + restaurantId + "  was not found");
