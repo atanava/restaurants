@@ -1355,7 +1355,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1366,7 +1366,77 @@
 								"rest",
 								"admin",
 								"dishes",
-								"100003"
+								"all"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Juice from restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003&id=100009",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "id",
+									"value": "100009"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get not found from restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003&id=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "id",
+									"value": "100"
+								}
 							]
 						}
 					},
@@ -1378,7 +1448,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/deactivate/100008",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100008",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1389,9 +1459,50 @@
 								"rest",
 								"admin",
 								"dishes",
-								"100003",
-								"deactivate",
-								"100008"
+								"deactivate"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "id",
+									"value": "100008"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deactivate not found from restaurant 100003",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"deactivate"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "id",
+									"value": "100"
+								}
 							]
 						}
 					},
@@ -1403,7 +1514,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/active",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/active?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1414,8 +1525,13 @@
 								"rest",
 								"admin",
 								"dishes",
-								"100003",
 								"active"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
 							]
 						}
 					},
@@ -1427,7 +1543,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/inactive",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/inactive?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1438,8 +1554,13 @@
 								"rest",
 								"admin",
 								"dishes",
-								"100003",
 								"inactive"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
 							]
 						}
 					},
@@ -1451,7 +1572,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003/activate/100008",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100008",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1462,9 +1583,50 @@
 								"rest",
 								"admin",
 								"dishes",
-								"100003",
-								"activate",
-								"100008"
+								"activate"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "id",
+									"value": "100008"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activate not found from restaurant 100003",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"activate"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "id",
+									"value": "100"
+								}
 							]
 						}
 					},
@@ -1475,8 +1637,91 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Coffee\",\"restaurantId\": 100003,\"price\": 300}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create duplicate for restaurant 100003",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Meat\",\"restaurantId\": 100003,\"price\": 750}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Soup for restaurant 100003",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": 100006,\"name\": \"Soup\",\"restaurantId\": 100003,\"price\": 500}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/update?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1487,7 +1732,118 @@
 								"rest",
 								"admin",
 								"dishes",
-								"100003"
+								"update"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update not found for restaurant 100003",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": 100,\"name\": \"Soup\",\"restaurantId\": 100003,\"price\": 500}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/update?restaurantId=100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"update"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Soup with incorrect restaurant id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": 100006,\"name\": \"Soup\",\"restaurantId\": 100004,\"price\": 500}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/update?restaurantId=100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"update"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all dishes from restaurant 100004",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes",
+								"all"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100004"
+								}
 							]
 						}
 					},
@@ -1509,6 +1865,456 @@
 					}
 				]
 			}
+		},
+		{
+			"name": "AdminMenuRestController",
+			"item": [
+				{
+					"name": "get all menus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all menus by restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get menu 100023 from restaurant 100003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100023",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003",
+								"100023"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/by-date?date=2020-11-19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"by-date"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2020-11-19"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by restaurant and date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/by-date?date=2020-11-19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003",
+								"by-date"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2020-11-19"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create menu for restaurant 100004",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// const moment = require('moment');\r",
+									"// pm.globals.set(\"today\", moment().format(\"yyyy-MM-dd\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"restaurantId\": 100004,\r\n\"dishes\": [\r\n    {\"id\": 100013,\"restaurantId\": 100004},\r\n    {\"id\": 100014,\"restaurantId\": 100004},\r\n    {\"id\": 100012,\"restaurantId\": 100004},\r\n    {\"id\": 100010,\"restaurantId\": 100004},\r\n    {\"id\": 100011,\"restaurantId\": 100004}\r\n],\r\n\"date\": \"2021-01-09\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create past date",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"restaurantId\": 100004,\"dishes\": [],\"date\": \"2020-01-09\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100004"
+							]
+						},
+						"description": "unable to create menu with past date"
+					},
+					"response": []
+				},
+				{
+					"name": "create with duplicate date",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// const moment = require('moment');\r",
+									"// pm.globals.set(\"today\", moment().format(\"yyyy-MM-dd\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"restaurantId\": 100003,\"dishes\": [],\"date\": \"2020-01-09\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100004"
+							]
+						},
+						"description": "only one menu allowed per day for each restaurant"
+					},
+					"response": []
+				},
+				{
+					"name": "update menu for restaurant 100003",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": 100023,\"restaurantId\": 100003,\r\n\"dishes\": [\r\n    {\"id\": 100005,\"restaurantId\": 100003},\r\n    {\"id\": 100006,\"restaurantId\": 100003},\r\n    {\"id\": 100007,\"restaurantId\": 100003},\r\n    {\"id\": 100008,\"restaurantId\": 100003}\r\n],\r\n\"date\": \"2021-01-09\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100023",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003",
+								"100023"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update not found",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": 100,\"restaurantId\": 100003,\r\n\"dishes\": [\r\n    {\"id\": 100005,\"restaurantId\": 100003},\r\n    {\"id\": 100006,\"restaurantId\": 100003},\r\n    {\"id\": 100007,\"restaurantId\": 100003},\r\n    {\"id\": 100008,\"restaurantId\": 100003}\r\n],\r\n\"date\": \"2021-01-09\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete menu 100015 from restaurant 100003",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100015",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003",
+								"100015"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete not found",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"menus",
+								"100003",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "admin",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "admin@gmail.com",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	],
 	"auth": {
