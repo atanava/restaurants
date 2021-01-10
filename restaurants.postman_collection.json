@@ -194,7 +194,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/users/1000",
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -205,7 +205,7 @@
 								"rest",
 								"admin",
 								"users",
-								"1000"
+								"100"
 							]
 						}
 					},
@@ -217,7 +217,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/users/by?email=admin@gmail.com",
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/by?email=user1@yandex.ru",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -233,7 +233,7 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "admin@gmail.com"
+									"value": "user1@yandex.ru"
 								}
 							]
 						}
