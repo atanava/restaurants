@@ -153,3 +153,29 @@
 #### delete not found
 `curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/votes/100'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+### ProfileVoteRestController
+
+#### get all Votes from User admin
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/votes'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Vote 100017 from User admin
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/votes/100017'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Vote not found
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/votes/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### vote for Restaurant 100003 as User admin
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/profile/votes/100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### re-vote for Restaurant 100004 as user1
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/profile/votes/100004'
+ --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
+ 
+#### delete today Vote of user1
+`curl --location --request DELETE 'http://localhost:8080/restaurants/rest/profile/votes'
+ --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
