@@ -112,4 +112,44 @@
 `curl --location --request DELETE 'http://localhost:8080/restaurants/rest/profile'
  --header 'Authorization: Basic dGVzdDRAbWFpbC5ydTpwYXNzd29yZA=='`
 
+### AdminVoteRestController
 
+#### get all Votes
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Vote 100024
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/100024'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Vote not found 
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all Votes by user1
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-user/100001'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all Votes by Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-restaurant/100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all Votes by date
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-date?date=2020-11-19'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all Votes by Restaurant and date
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-restaurant-and-date/100003?date=2020-11-19'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all Votes by User and Restaurant
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-user-and-restaurant/100000/100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### delete Vote 100020
+`curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/votes/100020'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### delete not found
+`curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/votes/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
