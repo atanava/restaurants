@@ -1448,7 +1448,7 @@
 				{
 					"name": "deactivate Fish from restaurant 100003",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100008",
@@ -1481,7 +1481,7 @@
 				{
 					"name": "deactivate not found from restaurant 100003",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100",
@@ -1572,7 +1572,7 @@
 				{
 					"name": "activate Fish from restaurant 100003",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100008",
@@ -1605,7 +1605,7 @@
 				{
 					"name": "activate not found from restaurant 100003",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100",
@@ -1698,120 +1698,6 @@
 								"rest",
 								"admin",
 								"dishes"
-							],
-							"query": [
-								{
-									"key": "restaurantId",
-									"value": "100003"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update Soup for restaurant 100003",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"id\": 100006,\"name\": \"Soup\",\"restaurantId\": 100003,\"price\": 500}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/update?restaurantId=100003",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"restaurants",
-								"rest",
-								"admin",
-								"dishes",
-								"update"
-							],
-							"query": [
-								{
-									"key": "restaurantId",
-									"value": "100003"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update not found for restaurant 100003",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"id\": 100,\"name\": \"Soup\",\"restaurantId\": 100003,\"price\": 500}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/update?restaurantId=100003",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"restaurants",
-								"rest",
-								"admin",
-								"dishes",
-								"update"
-							],
-							"query": [
-								{
-									"key": "restaurantId",
-									"value": "100003"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update Soup with incorrect restaurant id",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"id\": 100006,\"name\": \"Soup\",\"restaurantId\": 100004,\"price\": 500}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/update?restaurantId=100003",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"restaurants",
-								"rest",
-								"admin",
-								"dishes",
-								"update"
 							],
 							"query": [
 								{
@@ -2043,7 +1929,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"restaurantId\": 100004,\r\n\"dishes\": [\r\n    {\"id\": 100013,\"restaurantId\": 100004},\r\n    {\"id\": 100014,\"restaurantId\": 100004},\r\n    {\"id\": 100012,\"restaurantId\": 100004},\r\n    {\"id\": 100010,\"restaurantId\": 100004},\r\n    {\"id\": 100011,\"restaurantId\": 100004}\r\n],\r\n\"date\": \"2021-01-09\"}",
+							"raw": "{\"restaurantId\": 100004,\r\n\"dishes\": [\r\n    {\"id\": 100013,\"restaurantId\": 100004},\r\n    {\"id\": 100014,\"restaurantId\": 100004},\r\n    {\"id\": 100012,\"restaurantId\": 100004},\r\n    {\"id\": 100010,\"restaurantId\": 100004},\r\n    {\"id\": 100011,\"restaurantId\": 100004}\r\n]}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2120,7 +2006,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"restaurantId\": 100003,\"dishes\": [],\"date\": \"2020-01-09\"}",
+							"raw": "{\"restaurantId\": 100003,\"dishes\": []}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2164,7 +2050,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"id\": 100023,\"restaurantId\": 100003,\r\n\"dishes\": [\r\n    {\"id\": 100005,\"restaurantId\": 100003},\r\n    {\"id\": 100006,\"restaurantId\": 100003},\r\n    {\"id\": 100007,\"restaurantId\": 100003},\r\n    {\"id\": 100008,\"restaurantId\": 100003}\r\n],\r\n\"date\": \"2021-01-09\"}",
+							"raw": "{\"id\": 100023,\"restaurantId\": 100003,\r\n\"dishes\": [\r\n    {\"id\": 100005,\"restaurantId\": 100003},\r\n    {\"id\": 100006,\"restaurantId\": 100003},\r\n    {\"id\": 100007,\"restaurantId\": 100003}\r\n]}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2208,7 +2094,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"id\": 100,\"restaurantId\": 100003,\r\n\"dishes\": [\r\n    {\"id\": 100005,\"restaurantId\": 100003},\r\n    {\"id\": 100006,\"restaurantId\": 100003},\r\n    {\"id\": 100007,\"restaurantId\": 100003},\r\n    {\"id\": 100008,\"restaurantId\": 100003}\r\n],\r\n\"date\": \"2021-01-09\"}",
+							"raw": "{\"id\": 100,\"restaurantId\": 100003,\"dishes\": []}",
 							"options": {
 								"raw": {
 									"language": "json"

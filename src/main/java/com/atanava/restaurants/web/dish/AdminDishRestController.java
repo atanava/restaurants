@@ -41,14 +41,14 @@ public class AdminDishRestController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @PutMapping(value = "/deactivate")
+    @PatchMapping(value = "/deactivate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deactivate(@RequestParam int restaurantId, @RequestParam int id) {
         log.info("deactivate dish {} from restaurant {}", id, restaurantId);
         service.deactivate(id, restaurantId);
     }
 
-    @PutMapping(value = "/activate")
+    @PatchMapping(value = "/activate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void activate(@RequestParam int restaurantId, @RequestParam int id) {
         log.info("activate dish {} from restaurant {}", id, restaurantId);

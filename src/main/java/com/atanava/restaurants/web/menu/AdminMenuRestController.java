@@ -35,6 +35,9 @@ public class AdminMenuRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Menu> create(@RequestBody Menu menu, @PathVariable int restaurantId) {
         checkNew(menu);
+        if (menu.getDate() == null) {
+            menu.setDate(LocalDate.now());
+        }
         log.info("create menu {} for restaurant {}", menu, restaurantId);
 
         Menu created = service.create(menu, restaurantId);
@@ -50,6 +53,9 @@ public class AdminMenuRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Menu menu, @PathVariable int restaurantId, @PathVariable int id) {
         assureIdConsistent(menu, id);
+        if (menu.getDate() == null) {
+            menu.setDate(LocalDate.now());
+        }
         log.info("update menu {} from restaurant {}", id, restaurantId);
         service.update(menu, restaurantId);
     }
