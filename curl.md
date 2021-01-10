@@ -309,3 +309,21 @@
 #### delete not found
 `curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/menus/100003/100'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+### ProfileRestaurantRestController
+
+#### get all Restaurants
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/restaurants'
+ --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
+ 
+#### get Restaurant 100003 with today Menu
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/restaurants/100003'
+ --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
+ 
+#### get Restaurant 100004 with today Menu
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/restaurants/100004'
+ --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
+ 
+#### get not found
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/restaurants/100'
+ --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
