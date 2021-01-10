@@ -179,3 +179,57 @@
 #### delete today Vote of user1
 `curl --location --request DELETE 'http://localhost:8080/restaurants/rest/profile/votes'
  --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
+ 
+### AdminDishRestController
+
+#### get all Dishes from Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Juice from Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003&id=100009'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Dish not found from Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003&id=100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### deactivate Fish from Restaurant 100003
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100008'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### deactivate not found from Restaurant 100003
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all active Dishes from Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/active?restaurantId=100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all inactive Dishes from Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/inactive?restaurantId=100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### activate Fish from Restaurant 100003
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100008'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### activate not found from Restaurant 100003
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### create Coffee for Restaurant 100003
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"name": "Coffee","restaurantId": 100003,"price": 300}'`
+ 
+#### create duplicated Dish for restaurant 100003
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"name": "Meat","restaurantId": 100003,"price": 750}'`
+ 
+#### get all Dishes from Restaurant 100004
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100004'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
