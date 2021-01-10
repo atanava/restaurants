@@ -327,3 +327,65 @@
 #### get not found
 `curl --location --request GET 'http://localhost:8080/restaurants/rest/profile/restaurants/100'
  --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
+ 
+### AdminRestaurantRestController
+
+#### get all Restaurants
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Restaurant 100003 with Votes
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Restaurant 100003 with Menus
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-menus'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Restaurant 100003 with Votes and Menus
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes-and-menus'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all Restaurants with Votes
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/all-with-votes'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get not found
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### create new Restaurant
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/restaurants'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json' --data-raw '{"name":"Beerhouse"}'`
+ 
+#### create with duplicate name
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/restaurants'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"name":"Troika"}'`
+ 
+#### update Restaurant 100004
+`curl --location --request PUT 'http://localhost:8080/restaurants/rest/admin/restaurants/100004'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"id":100004,"name":"Pushkin"}'`
+ 
+#### update not found
+`curl --location --request PUT 'http://localhost:8080/restaurants/rest/admin/restaurants/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"id":100,"name":"Pushkin"}'`
+ 
+#### delete Restaurant 100004
+`curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/restaurants/100004'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --data-raw ''`
+ 
+#### delete not found
+`curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/restaurants/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
