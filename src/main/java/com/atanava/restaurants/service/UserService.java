@@ -56,6 +56,7 @@ public class UserService implements UserDetailsService {
         return repository.getAll();
     }
 
+    @Transactional
     public void update(User user) throws NotFoundException {
         Assert.notNull(user, "user must not be null");
         prepareAndSave(user);
