@@ -224,7 +224,7 @@
  --header 'Content-Type: application/json'
  --data-raw '{"name": "Coffee","restaurantId": 100003,"price": 300}'`
  
-#### create duplicated Dish for restaurant 100003
+#### create duplicated Dish for Restaurant 100003
 `curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
  --header 'Content-Type: application/json'
@@ -232,4 +232,80 @@
  
 #### get all Dishes from Restaurant 100004
 `curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100004'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+### AdminMenuRestController
+
+#### get all Menus
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get all Menus by Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/100003'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get Menu 100023 from Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/100003/100023'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get not found
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/100003/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get by date
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/by-date?date=2020-11-19'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### get by Restaurant and date
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/100003/by-date?date=2020-11-19'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### create Menu for Restaurant 100004
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/menus/100004'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"restaurantId": 100004,
+ "dishes": [
+     {"id": 100013,"restaurantId": 100004},
+     {"id": 100014,"restaurantId": 100004},
+     {"id": 100012,"restaurantId": 100004},
+     {"id": 100010,"restaurantId": 100004},
+     {"id": 100011,"restaurantId": 100004}
+ ]}'`
+ 
+#### create Menu with past date
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/menus/100004'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"restaurantId": 100004,"dishes": [],"date": "2020-01-09"}'`
+ 
+#### create Menu with duplicated date
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/admin/menus/100004'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"restaurantId": 100003,"dishes": []}'`
+ 
+#### update Menu 100023 for Restaurant 100003
+`curl --location --request PUT 'http://localhost:8080/restaurants/rest/admin/menus/100003/100023'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"id": 100023,"restaurantId": 100003,
+ "dishes": [
+     {"id": 100005,"restaurantId": 100003},
+     {"id": 100006,"restaurantId": 100003},
+     {"id": 100007,"restaurantId": 100003}
+ ]}'`
+ 
+#### update not found
+`curl --location --request PUT 'http://localhost:8080/restaurants/rest/admin/menus/100003/100'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'
+ --header 'Content-Type: application/json'
+ --data-raw '{"id": 100,"restaurantId": 100003,"dishes": []}'`
+  
+#### delete Menu 100015 from Restaurant 100003
+`curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/menus/100003/100015'
+ --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
+ 
+#### delete not found
+`curl --location --request DELETE 'http://localhost:8080/restaurants/rest/admin/menus/100003/100'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
