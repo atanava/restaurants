@@ -30,12 +30,12 @@ public class ProfileRestaurantRestController {
     @GetMapping("/{id}")
     public RestaurantTo getTo(@PathVariable int id) {
         log.info("get restaurant {} with today menu", id);
-        return restaurantService.getTo(id, LocalDate.now());
+        return restaurantService.getToWithMenu(id, LocalDate.now());
     }
 
     @GetMapping
     public List<RestaurantTo> getAllTos() {
         log.info("get all restaurant TOs");
-        return restaurantService.getAllTosWithoutMenus();
+        return restaurantService.getAllTos();
     }
 }

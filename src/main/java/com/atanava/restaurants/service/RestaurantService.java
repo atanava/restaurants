@@ -54,7 +54,7 @@ public class RestaurantService {
     }
 
     @Cacheable(value = {"restaurants", "menus"})
-    public RestaurantTo getTo(int id, LocalDate date) throws NotFoundException {
+    public RestaurantTo getToWithMenu(int id, LocalDate date) throws NotFoundException {
         Restaurant restaurant = checkNotFoundWithId(get(id), id);
         Menu menu = menuRepository.getByRestAndDate(id, date);
         return createToFromRestaurant(restaurant, menu);
@@ -66,7 +66,7 @@ public class RestaurantService {
     }
 
     @Cacheable("restaurants")
-    public List<RestaurantTo> getAllTosWithoutMenus() {
+    public List<RestaurantTo> getAllTos() {
         return getAll()
                 .stream()
                 .map(r -> createToFromRestaurant(r, null))

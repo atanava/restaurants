@@ -86,19 +86,19 @@ class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void getTo() {
-        RestaurantTo actual = service.getTo(RESTAURANT_1.id, LocalDate.now());
+    void getToWithMenu() {
+        RestaurantTo actual = service.getToWithMenu(RESTAURANT_1.id, LocalDate.now());
         REST_TO_MATCHER.assertMatch(actual, getRestTo());
     }
 
     @Test
     void getToNotFound() {
-        assertThrows(NotFoundException.class, () -> service.getTo(NOT_FOUND.id, LocalDate.now()));
+        assertThrows(NotFoundException.class, () -> service.getToWithMenu(NOT_FOUND.id, LocalDate.now()));
     }
 
     @Test
     void getToWithNullMenu() {
-        assertNull(service.getTo(RESTAURANT_1.id, LocalDate.now().minusDays(1)).getTodayMenuTo());
+        assertNull(service.getToWithMenu(RESTAURANT_1.id, LocalDate.now().minusDays(1)).getTodayMenuTo());
     }
 
     @Test
@@ -108,12 +108,12 @@ class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void getAllTosWithoutMenus() {
+    void getAllTos() {
         List<RestaurantTo> allTos = Stream.of(rest2, rest1)
                 .map(r -> RestaurantUtil.createToFromRestaurant(r, null))
                 .collect(Collectors.toList());
 
-        REST_TO_WITHOUT_MENUS_MATCHER.assertMatch(allTos, service.getAllTosWithoutMenus());
+        REST_TO_WITHOUT_MENUS_MATCHER.assertMatch(allTos, service.getAllTos());
     }
 
     @Test
