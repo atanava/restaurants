@@ -39,14 +39,14 @@ public class AdminVoteRestController {
         return (List<VoteTo>) service.getAll(new ArrayList<>());
     }
 
-    @GetMapping("/by-user/{userId}")
-    public List<VoteTo> getAllByUser(@PathVariable int userId) {
+    @GetMapping("/by-user")
+    public List<VoteTo> getAllByUser(@RequestParam int userId) {
         log.info("get all votes by user {}", userId);
         return (List<VoteTo>) service.getAllByUser(userId, new ArrayList<>());
     }
 
-    @GetMapping("/by-restaurant/{restaurantId}")
-    public List<VoteTo> getAllByRestaurant(@PathVariable int restaurantId) {
+    @GetMapping("/by-restaurant")
+    public List<VoteTo> getAllByRestaurant(@RequestParam int restaurantId) {
         log.info("get all votes by restaurant {}", restaurantId);
         return (List<VoteTo>) service.getAllByRestaurant(restaurantId, new ArrayList<>());
     }
@@ -57,15 +57,15 @@ public class AdminVoteRestController {
         return (List<VoteTo>) service.getAllByDate(date, new ArrayList<>());
     }
 
-    @GetMapping("/by-restaurant-and-date/{restaurantId}")
-    public List<VoteTo> getAllByRestAndDate(@PathVariable int restaurantId,
+    @GetMapping("/by-restaurant-and-date")
+    public List<VoteTo> getAllByRestAndDate(@RequestParam int restaurantId,
                                             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get all votes by restaurant {} and date {}", restaurantId, date);
         return (List<VoteTo>) service.getAllByRestAndDate(restaurantId, date, new ArrayList<>());
     }
 
-    @GetMapping("/by-user-and-restaurant/{userId}/{restaurantId}")
-    public List<VoteTo> getAllByUserAndRest(@PathVariable int userId, @PathVariable int restaurantId) {
+    @GetMapping("/by-user-and-restaurant")
+    public List<VoteTo> getAllByUserAndRest(@RequestParam int userId, @RequestParam int restaurantId) {
         log.info("get all votes by user {} and restaurant {}", userId, restaurantId);
         return (List<VoteTo>) service.getAllByUserAndRest(userId, restaurantId, new ArrayList<>());
     }

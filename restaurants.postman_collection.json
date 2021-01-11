@@ -907,7 +907,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user/100001",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user?userId=100001",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -918,8 +918,13 @@
 								"rest",
 								"admin",
 								"votes",
-								"by-user",
-								"100001"
+								"by-user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "100001"
+								}
 							]
 						}
 					},
@@ -931,7 +936,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant/100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -942,8 +947,13 @@
 								"rest",
 								"admin",
 								"votes",
-								"by-restaurant",
-								"100003"
+								"by-restaurant"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
 							]
 						}
 					},
@@ -984,7 +994,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant-and-date/100003?date=2020-11-19",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant-and-date?restaurantId=100003&date=2020-11-19",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -995,10 +1005,13 @@
 								"rest",
 								"admin",
 								"votes",
-								"by-restaurant-and-date",
-								"100003"
+								"by-restaurant-and-date"
 							],
 							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
 								{
 									"key": "date",
 									"value": "2020-11-19"
@@ -1014,7 +1027,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user-and-restaurant/100000/100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user-and-restaurant?userId=100000&restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1025,9 +1038,17 @@
 								"rest",
 								"admin",
 								"votes",
-								"by-user-and-restaurant",
-								"100000",
-								"100003"
+								"by-user-and-restaurant"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "100000"
+								},
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
 							]
 						}
 					},
@@ -1917,8 +1938,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"// const moment = require('moment');\r",
-									"// pm.globals.set(\"today\", moment().format(\"yyyy-MM-dd\"));"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1994,8 +2014,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"// const moment = require('moment');\r",
-									"// pm.globals.set(\"today\", moment().format(\"yyyy-MM-dd\"));"
+									""
 								],
 								"type": "text/javascript"
 							}
