@@ -80,16 +80,16 @@ The user must be authorized and have the ADMIN role
 - _`update`_ allows you to change user data by its unique id
 - _`enable`_ allows you to enable or disable the user based on the received boolean request parameter
 
-####_ProfileRestController_
+#### _ProfileRestController_
 
-#####_Methods_
+##### _Methods_
 
 - _`register`_ allows you to create an account for a new user based on a unique email. If a user with this email already exists in the database, then an exception is thrown
 - _`get`_ allows an authorized user to view their account details
 - _`update`_ allows an authorized user to change their account details
 - _`delete`_ allows an authorized user to delete their account
 
-####_ProfileRestaurantRestController_
+#### _ProfileRestaurantRestController_
 
 The user must be authorized and have the USER or ADMIN role
 
@@ -117,7 +117,7 @@ The user must be authorized and have the ADMIN role
 
 The user must be authorized and have the ADMIN role
 
-#####_Methods_
+##### _Methods_
 
 - _`create`_ creates a new dish with a unique combination of restaurant id, dish name and price. If a dish with such a combination already exists in the database, an exception is thrown
 - _`deactivate`_ deactivates the dish in the food catalog, while the dish remains in the menu. It uses unique restaurant id and dish id to identify the dish
