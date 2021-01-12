@@ -1785,7 +1785,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/all",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1795,7 +1795,8 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus"
+								"menus",
+								"all"
 							]
 						}
 					},
@@ -1807,7 +1808,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/all/by?restaurantId=100004",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1818,7 +1819,14 @@
 								"rest",
 								"admin",
 								"menus",
-								"100003"
+								"all",
+								"by"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100004"
+								}
 							]
 						}
 					},
@@ -1830,7 +1838,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100023",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100003&menuId=100023",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1840,9 +1848,17 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100003",
-								"100023"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "menuId",
+									"value": "100023"
+								}
 							]
 						}
 					},
@@ -1854,7 +1870,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100003&menuId=100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1864,9 +1880,17 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100003",
-								"100"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "menuId",
+									"value": "100"
+								}
 							]
 						}
 					},
@@ -1878,7 +1902,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/by-date?date=2020-11-19",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/all/by-date?date=2020-11-19",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1889,6 +1913,7 @@
 								"rest",
 								"admin",
 								"menus",
+								"all",
 								"by-date"
 							],
 							"query": [
@@ -1907,7 +1932,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/by-date?date=2020-11-19",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus/by-date?restaurantId=100004&date=2020-11-19",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1918,10 +1943,13 @@
 								"rest",
 								"admin",
 								"menus",
-								"100003",
 								"by-date"
 							],
 							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100004"
+								},
 								{
 									"key": "date",
 									"value": "2020-11-19"
@@ -1949,7 +1977,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"restaurantId\": 100004,\r\n\"dishes\": [\r\n    {\"id\": 100013,\"restaurantId\": 100004},\r\n    {\"id\": 100014,\"restaurantId\": 100004},\r\n    {\"id\": 100012,\"restaurantId\": 100004},\r\n    {\"id\": 100010,\"restaurantId\": 100004},\r\n    {\"id\": 100011,\"restaurantId\": 100004}\r\n]}",
+							"raw": "{\"dishes\": [\r\n    {\"id\": 100013},\r\n    {\"id\": 100014},\r\n    {\"id\": 100012},\r\n    {\"id\": 100010},\r\n    {\"id\": 100011}\r\n]}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1957,7 +1985,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100004",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100004",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1967,8 +1995,13 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100004"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100004"
+								}
 							]
 						}
 					},
@@ -1981,7 +2014,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"restaurantId\": 100004,\"dishes\": [],\"date\": \"2020-01-09\"}",
+							"raw": "{\"dishes\": [{\"id\": 100010}],\"date\": \"2020-01-09\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1989,7 +2022,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100004",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100004",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1999,8 +2032,13 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100004"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100004"
+								}
 							]
 						},
 						"description": "unable to create menu with past date"
@@ -2008,7 +2046,7 @@
 					"response": []
 				},
 				{
-					"name": "create with duplicate date",
+					"name": "create with duplicated date",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -2025,7 +2063,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"restaurantId\": 100003,\"dishes\": []}",
+							"raw": "{\"dishes\": [{\"id\": 100005}]}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2033,7 +2071,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100004",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2043,8 +2081,13 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100004"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
 							]
 						},
 						"description": "only one menu allowed per day for each restaurant"
@@ -2069,7 +2112,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"id\": 100023,\"restaurantId\": 100003,\r\n\"dishes\": [\r\n    {\"id\": 100005,\"restaurantId\": 100003},\r\n    {\"id\": 100006,\"restaurantId\": 100003},\r\n    {\"id\": 100007,\"restaurantId\": 100003}\r\n]}",
+							"raw": "{\"dishes\": [\r\n    {\"id\": 100005},\r\n    {\"id\": 100006},\r\n    {\"id\": 100007}\r\n]}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2077,7 +2120,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100023",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100003&menuId=100023",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2087,9 +2130,17 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100003",
-								"100023"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "menuId",
+									"value": "100023"
+								}
 							]
 						}
 					},
@@ -2113,7 +2164,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"id\": 100,\"restaurantId\": 100003,\"dishes\": []}",
+							"raw": "{\"dishes\": [{\"id\": 100005}]}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2121,7 +2172,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100003&menuId=100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2131,9 +2182,17 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100003",
-								"100"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "menuId",
+									"value": "100"
+								}
 							]
 						}
 					},
@@ -2145,7 +2204,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100015",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100003&menuId=100015",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2155,9 +2214,17 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100003",
-								"100015"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "menuId",
+									"value": "100015"
+								}
 							]
 						}
 					},
@@ -2169,7 +2236,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/menus/100003/100",
+							"raw": "http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100003&menuId=100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2179,9 +2246,17 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"menus",
-								"100003",
-								"100"
+								"menus"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								},
+								{
+									"key": "menuId",
+									"value": "100"
+								}
 							]
 						}
 					},

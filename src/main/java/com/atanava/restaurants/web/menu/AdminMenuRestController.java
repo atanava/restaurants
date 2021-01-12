@@ -2,6 +2,7 @@ package com.atanava.restaurants.web.menu;
 
 import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.service.MenuService;
+import com.atanava.restaurants.util.exception.IllegalRequestDataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,10 +32,13 @@ public class AdminMenuRestController {
         this.service = service;
     }
 
-    @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Menu> create(@RequestBody Menu menu, @PathVariable int restaurantId) {
+    public ResponseEntity<Menu> create(@RequestBody Menu menu, @RequestParam int restaurantId) {
         checkNew(menu);
+        if (menu.getDishes() == null || menu.getDishes().isEmpty()) {
+            throw new IllegalRequestDataException("Menu must contain dishes");
+        }
         if (menu.getDate() == null) {
             menu.setDate(LocalDate.now());
         }
@@ -49,49 +53,52 @@ public class AdminMenuRestController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @PutMapping(value = "/{restaurantId}/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Menu menu, @PathVariable int restaurantId, @PathVariable int id) {
-        assureIdConsistent(menu, id);
+    public void update(@RequestBody Menu menu, @RequestParam int restaurantId, @RequestParam int menuId) {
+        assureIdConsistent(menu, menuId);
+        if (menu.getDishes() == null || menu.getDishes().isEmpty()) {
+            throw new IllegalRequestDataException("Menu must contain dishes");
+        }
         if (menu.getDate() == null) {
             menu.setDate(LocalDate.now());
         }
-        log.info("update menu {} from restaurant {}", id, restaurantId);
+        log.info("update menu {} from restaurant {}", menuId, restaurantId);
         service.update(menu, restaurantId);
     }
 
-    @DeleteMapping(value = "/{restaurantId}/{id}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int restaurantId, @PathVariable int id) {
-        log.info("delete menu {} from restaurant {}", id, restaurantId);
-        service.delete(id, restaurantId);
+    public void delete(@RequestParam int restaurantId, @RequestParam int menuId) {
+        log.info("delete menu {} from restaurant {}", menuId, restaurantId);
+        service.delete(menuId, restaurantId);
     }
 
-    @GetMapping(value = "/{restaurantId}/{id}")
-    public Menu get(@PathVariable int restaurantId, @PathVariable int id) {
-        log.info("get menu {} from restaurant {}", id, restaurantId);
-        return service.get(id, restaurantId);
+    @GetMapping
+    public Menu get(@RequestParam int restaurantId, @RequestParam int menuId) {
+        log.info("get menu {} from restaurant {}", menuId, restaurantId);
+        return service.get(menuId, restaurantId);
     }
 
-    @GetMapping(value = "/{restaurantId}/by-date")
-    public Menu getByRestAndDate(@PathVariable int restaurantId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+    @GetMapping(value = "/by-date")
+    public Menu getByRestAndDate(@RequestParam int restaurantId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get menu from restaurant {} by date {}", restaurantId, date);
         return service.getByRestAndDate(restaurantId, date);
     }
 
-    @GetMapping
+    @GetMapping(value = "/all")
     public List<Menu> getAll() {
         log.info("get all menus");
         return service.getAll();
     }
 
-    @GetMapping(value = "/{restaurantId}")
-    public List<Menu> getAllByRestaurant(@PathVariable int restaurantId) {
+    @GetMapping(value = "/all/by")
+    public List<Menu> getAllByRestaurant(@RequestParam int restaurantId) {
         log.info("get all menus from restaurant {}", restaurantId);
         return service.getAllByRestaurant(restaurantId);
     }
 
-    @GetMapping(value = "/by-date")
+    @GetMapping(value = "/all/by-date")
     public List<Menu> getAllByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get all menus by date {}", date);
         return service.getAllByDate(date);
