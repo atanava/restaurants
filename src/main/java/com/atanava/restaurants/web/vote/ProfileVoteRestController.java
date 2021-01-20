@@ -7,9 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +30,26 @@ public class ProfileVoteRestController {
         this.service = service;
     }
 
-    @PostMapping("/{restaurantId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void createOrUpdate(@AuthenticationPrincipal AuthorizedUser authUser, @PathVariable("restaurantId") int restaurantId) {
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<VoteTo> create(@AuthenticationPrincipal AuthorizedUser authUser, @RequestParam("restaurantId") int restaurantId) {
         log.info("create vote for user {} and restaurant {}", authUser.getId(), restaurantId);
+        VoteTo created = service.createOrUpdate(authUser.getId(), restaurantId);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(created.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@AuthenticationPrincipal AuthorizedUser authUser, @RequestParam("restaurantId") int restaurantId) {
+        log.info("update vote for user {} and restaurant {}", authUser.getId(), restaurantId);
         service.createOrUpdate(authUser.getId(), restaurantId);
     }
+
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -169,11 +169,11 @@
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### vote for Restaurant 100003 as User admin
-`curl --location --request POST 'http://localhost:8080/restaurants/rest/profile/votes/100003'
+`curl --location --request POST 'http://localhost:8080/restaurants/rest/profile/votes?restaurantId=100003'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### re-vote for Restaurant 100004 as user1
-`curl --location --request POST 'http://localhost:8080/restaurants/rest/profile/votes/100004'
+`curl --location --request PUT 'http://localhost:8080/restaurants/rest/profile/votes?restaurantId=100004'
  --header 'Authorization: Basic dXNlcjFAeWFuZGV4LnJ1OnBhc3N3b3Jk'`
  
 #### delete today Vote of user1

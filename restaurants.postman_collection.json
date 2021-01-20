@@ -1274,7 +1274,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/profile/votes/100003",
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1284,8 +1284,13 @@
 								"restaurants",
 								"rest",
 								"profile",
-								"votes",
-								"100003"
+								"votes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
 							]
 						}
 					},
@@ -1309,10 +1314,10 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/profile/votes/100004",
+							"raw": "http://localhost:8080/restaurants/rest/profile/votes?restaurantId=100004",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1322,8 +1327,13 @@
 								"restaurants",
 								"rest",
 								"profile",
-								"votes",
-								"100004"
+								"votes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100004"
+								}
 							]
 						},
 						"description": "If time before 11:00 - vote must be accepted.\r\nIf time after 11:00 - vote must be rejected."
