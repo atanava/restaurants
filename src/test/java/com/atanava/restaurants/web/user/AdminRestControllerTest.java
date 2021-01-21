@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static com.atanava.restaurants.testdata.UserTestData.*;
 import static com.atanava.restaurants.TestUtil.*;
 
-@Disabled("the testcase is under development")
+//@Disabled("the testcase is under development")
 class AdminRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminRestController.REST_URL + '/';
@@ -41,7 +41,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
     @Test
     void getByEmail() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + "by?email=" + admin.getEmail())
-                .with(userHttpBasic(admin)))
+                .with(userAuth(admin)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(USER_MATCHER.contentJson(admin));

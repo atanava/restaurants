@@ -10,9 +10,9 @@ import static com.atanava.restaurants.testdata.DbSequence.*;
 public class UserTestData {
     public static TestMatcher<User> USER_MATCHER = TestMatcher.usingIgnoringFieldsComparator(User.class, "registered", "roles", "votes", "password");
 
-    public static final User admin = new User(ADMIN.id, "Vasja", "admin@gmail.com", "{noop}admin", Role.ADMIN);
-    public static final User user1 = new User(USER_1.id, "Fedja", "user1@yandex.ru", "{noop}password", Role.USER);
-    public static final User user2 = new User(USER_2.id, "Vasja", "user2@hot.ee", "{noop}password", Role.USER);
+    public static final User admin = new User(ADMIN.id, "Vasja", "admin@gmail.com", "admin", Role.ADMIN);
+    public static final User user1 = new User(USER_1.id, "Fedja", "user1@yandex.ru", "password", Role.USER);
+    public static final User user2 = new User(USER_2.id, "Vasja", "user2@hot.ee", "password", Role.USER);
 
     public static User getNew() {
         return new User(null, "New", "new@gmail.com", "newPass", Role.USER);
