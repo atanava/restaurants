@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static com.atanava.restaurants.testdata.UserTestData.*;
 import static com.atanava.restaurants.TestUtil.*;
 
-@Disabled("the testcase is under development")
+//@Disabled("the testcase is under development")
 class AdminRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminRestController.REST_URL + '/';

@@ -22,7 +22,7 @@ import static com.atanava.restaurants.testdata.UserTestData.*;
 import static com.atanava.restaurants.testdata.DbSequence.USER_1;
 import static com.atanava.restaurants.web.user.ProfileRestController.REST_URL;
 
-@Disabled("the testcase is under development")
+//@Disabled("the testcase is under development")
 public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Autowired

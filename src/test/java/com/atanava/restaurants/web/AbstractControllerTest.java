@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 //@ExtendWith(SpringExtension.class)
 @Transactional
-@Disabled("the testcase is under development")
+//@Disabled("the testcase is under development")
 public abstract class AbstractControllerTest {
 
     private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
