@@ -21,7 +21,7 @@
         <appender-ref ref="result"/>
     </logger>
 
-    <logger name="ru.atanava.restaurants" level="debug"/>
+    <logger name="com.atanava.restaurants" level="debug"/>
 
     <root level="INFO">
         <appender-ref ref="console"/>

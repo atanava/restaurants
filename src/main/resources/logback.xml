@@ -21,7 +21,7 @@
         </encoder>
     </appender>
 
-    <logger name="ru.atanava.restaurants" level="debug"/>
+    <logger name="com.atanava.restaurants" level="debug"/>
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/>
     <logger name="org.springframework.security" level="debug"/>
 
