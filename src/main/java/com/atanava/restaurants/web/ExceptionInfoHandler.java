@@ -17,12 +17,25 @@ import com.atanava.restaurants.util.ValidationUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Map;
+
 import static com.atanava.restaurants.util.exception.ErrorType.*;
 
 @RestControllerAdvice(annotations = RestController.class)
 @Order(Ordered.HIGHEST_PRECEDENCE + 5)
 public class ExceptionInfoHandler {
     private static final Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
+
+    public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
+    public static final String EXCEPTION_DUPLICATE_REST_NAME = "exception.restaurant.duplicateName";
+    public static final String EXCEPTION_DUPLICATE_REST_ID_DISH_NAME_PRICE = "exception.dish.duplicateDish";
+    public static final String EXCEPTION_DUPLICATE_REST_ID_DATE = "exception.menu.duplicateDateMenu";
+
+    private static final Map<String, String> CONSTRAINS_MAP = Map.of(
+            "users_unique_email_idx", EXCEPTION_DUPLICATE_EMAIL,
+            "restaurants_unique_name_idx", EXCEPTION_DUPLICATE_REST_NAME,
+            "unique_restaurant_id_dish_name_price_idx", EXCEPTION_DUPLICATE_REST_ID_DISH_NAME_PRICE,
+            "restaurant_id_date_idx", EXCEPTION_DUPLICATE_REST_ID_DATE);
 
     //  http://stackoverflow.com/a/22358422/548473
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
