@@ -33,6 +33,20 @@
     </mvc:annotation-driven>
     <context:component-scan base-package="com.atanava.restaurants.**.web"/>
 
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:cacheSeconds="60"
+          p:defaultEncoding="UTF-8">
+        <property name="basenames">
+            <list>
+                <value>messages.app</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.context.support.MessageSourceAccessor">
+        <constructor-arg ref="messageSource"/>
+    </bean>
+
     <!-- https://stackoverflow.com/a/23615478/548473 -->
     <bean id="defaultValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
