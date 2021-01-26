@@ -1,5 +1,6 @@
 package com.atanava.restaurants.dto;
 
+import com.atanava.restaurants.HasIdAndEmail;
 import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.Email;
@@ -11,7 +12,7 @@ import java.util.Objects;
 
 import static org.hibernate.validator.constraints.SafeHtml.WhiteListType.NONE;
 
-public class UserTo extends AbstractNamedTo implements Serializable {
+public class UserTo extends AbstractNamedTo implements HasIdAndEmail, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Email
@@ -33,6 +34,7 @@ public class UserTo extends AbstractNamedTo implements Serializable {
         this.password = password;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

@@ -2,6 +2,7 @@ package com.atanava.restaurants.model;
 
 import javax.persistence.Entity;
 
+import com.atanava.restaurants.HasIdAndEmail;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
@@ -18,7 +19,7 @@ import java.util.*;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
-public class User extends AbstractNamedEntity {
+public class User extends AbstractNamedEntity implements HasIdAndEmail {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -76,6 +77,7 @@ public class User extends AbstractNamedEntity {
         setVotes(votes);
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
