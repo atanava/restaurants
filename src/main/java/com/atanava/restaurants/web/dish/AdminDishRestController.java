@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class AdminDishRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Dish> create(@RequestBody Dish dish, @RequestParam int restaurantId) {
+    public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish, @RequestParam int restaurantId) {
         log.info("create dish {} for restaurant {}", dish.getName(), restaurantId);
 
         Dish created = service.create(dish, restaurantId);

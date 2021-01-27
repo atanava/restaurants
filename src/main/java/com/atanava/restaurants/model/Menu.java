@@ -1,5 +1,6 @@
 package com.atanava.restaurants.model;
 
+import com.atanava.restaurants.View;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.*;
 
@@ -35,7 +36,7 @@ public class Menu extends AbstractBaseEntity {
     @ManyToOne(targetEntity = Restaurant.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     @JsonBackReference
     private Restaurant restaurant;
 
@@ -50,7 +51,7 @@ public class Menu extends AbstractBaseEntity {
     private List<Dish> dishes;
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     @FutureOrPresent
     private LocalDate date;
 

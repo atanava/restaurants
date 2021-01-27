@@ -1,10 +1,12 @@
 package com.atanava.restaurants.model;
 
+import com.atanava.restaurants.View;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.Collections;
 import java.util.Set;
 
@@ -24,7 +26,7 @@ public class  Dish extends AbstractNamedEntity {
     @ManyToOne(targetEntity = Restaurant.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     private Restaurant restaurant;
 
     //    https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities
@@ -33,6 +35,7 @@ public class  Dish extends AbstractNamedEntity {
 
     @Column(name = "price", nullable = false)
     @NotNull
+    @PositiveOrZero
     private Integer price;
 
     @Column(name = "active", nullable = false, columnDefinition = "bool default true")

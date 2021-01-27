@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +35,7 @@ public class AdminMenuRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Menu> create(@RequestBody Menu menu, @RequestParam int restaurantId) {
+    public ResponseEntity<Menu> create(@Valid @RequestBody Menu menu, @RequestParam int restaurantId) {
         checkNew(menu);
         if (menu.getDishes() == null || menu.getDishes().isEmpty()) {
             throw new IllegalRequestDataException("Menu must contain dishes");
@@ -55,7 +56,7 @@ public class AdminMenuRestController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Menu menu, @RequestParam int restaurantId, @RequestParam int menuId) {
+    public void update(@Valid @RequestBody Menu menu, @RequestParam int restaurantId, @RequestParam int menuId) {
         assureIdConsistent(menu, menuId);
         if (menu.getDishes() == null || menu.getDishes().isEmpty()) {
             throw new IllegalRequestDataException("Menu must contain dishes");
