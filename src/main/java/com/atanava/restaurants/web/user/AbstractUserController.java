@@ -1,5 +1,6 @@
 package com.atanava.restaurants.web.user;
 
+import com.atanava.restaurants.HasId;
 import com.atanava.restaurants.dto.UserTo;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.service.UserService;
@@ -8,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.validation.BindException;
+import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -62,15 +65,13 @@ public abstract class AbstractUserController {
         service.delete(id);
     }
 
-    public void update(User user, int id) {
+    public void update(User user, int id) throws BindException {
         log.info("update {} with id={}", user, id);
-        assureIdConsistent(user, id);
         service.update(user);
     }
 
     public void update(UserTo userTo, int id) {
         log.info("update {} with id={}", userTo, id);
-        assureIdConsistent(userTo, id);
         service.update(userTo);
     }
 
@@ -83,4 +84,15 @@ public abstract class AbstractUserController {
         log.info(enabled ? "enable {}" : "disable {}", id);
         service.enable(id, enabled);
     }
+
+    protected void validateBeforeUpdate(HasId user, int id) throws BindException {
+        assureIdConsistent(user, id);
+        DataBinder binder = new DataBinder(user);
+        binder.addValidators(emailValidator, validator);
+        binder.validate();
+        if (binder.getBindingResult().hasErrors()) {
+            throw new BindException(binder.getBindingResult());
+        }
+    }
+
 }
