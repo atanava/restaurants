@@ -1,5 +1,6 @@
 package com.atanava.restaurants.web.dish;
 
+import com.atanava.restaurants.View;
 import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.service.DishService;
 import org.slf4j.Logger;
@@ -7,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class AdminDishRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish, @RequestParam int restaurantId) {
+    public ResponseEntity<Dish> create(@Validated(View.Web.class) @RequestBody Dish dish, @RequestParam int restaurantId) {
         log.info("create dish {} for restaurant {}", dish.getName(), restaurantId);
 
         Dish created = service.create(dish, restaurantId);

@@ -18,7 +18,7 @@ public class UserTo extends AbstractNamedTo implements HasIdAndEmail, Serializab
     @Email
     @NotBlank
     @Size(max = 254) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
-    @SafeHtml(whitelistType = NONE) // https://stackoverflow.com/questions/2147958/how-do-i-prevent-people-from-doing-xss-in-spring-mvc/40644276#40644276
+    @SafeHtml(whitelistType = NONE) // https://stackoverflow.com/questions/17480809
     private String email;
 
     @NotBlank

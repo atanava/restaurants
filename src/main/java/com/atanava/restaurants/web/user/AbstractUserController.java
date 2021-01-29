@@ -1,6 +1,7 @@
 package com.atanava.restaurants.web.user;
 
 import com.atanava.restaurants.HasId;
+import com.atanava.restaurants.View;
 import com.atanava.restaurants.dto.UserTo;
 import com.atanava.restaurants.model.User;
 import com.atanava.restaurants.service.UserService;
@@ -89,7 +90,7 @@ public abstract class AbstractUserController {
         assureIdConsistent(user, id);
         DataBinder binder = new DataBinder(user);
         binder.addValidators(emailValidator, validator);
-        binder.validate();
+        binder.validate(View.Web.class);
         if (binder.getBindingResult().hasErrors()) {
             throw new BindException(binder.getBindingResult());
         }
