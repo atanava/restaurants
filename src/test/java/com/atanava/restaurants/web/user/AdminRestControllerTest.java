@@ -5,7 +5,6 @@ import com.atanava.restaurants.service.UserService;
 import com.atanava.restaurants.testdata.UserTestData;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import com.atanava.restaurants.web.AbstractControllerTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,7 +19,6 @@ import static com.atanava.restaurants.testdata.UserTestData.*;
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.TestUtil.*;
 
-//@Disabled("the testcase is under development")
 class AdminRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminRestController.REST_URL + '/';
