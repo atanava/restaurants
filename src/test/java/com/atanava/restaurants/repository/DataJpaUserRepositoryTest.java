@@ -45,9 +45,9 @@ public class DataJpaUserRepositoryTest extends AbstractTest {
 
     @Test
     void update() {
-        User updated = getUpdated();
+        User updated = getUpdatedByAdmin();
         repository.save(updated);
-        USER_MATCHER.assertMatch(repository.get(USER_1.id), getUpdated());
+        USER_MATCHER.assertMatch(repository.get(USER_1.id), getUpdatedByAdmin());
     }
 
     @Test

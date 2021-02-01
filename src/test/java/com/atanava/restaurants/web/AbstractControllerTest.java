@@ -1,11 +1,14 @@
 package com.atanava.restaurants.web;
 
+import com.atanava.restaurants.util.exception.ErrorType;
 import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +43,9 @@ public abstract class AbstractControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    protected MessageSourceAccessor messageSourceAccessor;
+
     @PostConstruct
     private void postConstruct() {
         mockMvc = MockMvcBuilders
@@ -52,5 +58,18 @@ public abstract class AbstractControllerTest {
     protected ResultActions perform(MockHttpServletRequestBuilder builder) throws Exception {
         return mockMvc.perform(builder);
     }
+
+    private String getMessage(String code) {
+        return messageSourceAccessor.getMessage(code);
+    }
+
+    public ResultMatcher errorType(ErrorType type) {
+        return jsonPath("$.type").value(type.name());
+    }
+
+    public ResultMatcher detailMessage(String code) {
+        return jsonPath("$.details").value(getMessage(code));
+    }
+
 
 }
