@@ -18,7 +18,7 @@ public class DishTestData {
     private static final Restaurant gloria = RestaurantTestData.rest2;
 
     public static Dish getNew() {
-        Dish dish = new Dish(null, "New", troika, 800);
+        Dish dish = new Dish(null, "New", null, 800);
         dish.setRestaurantId(RESTAURANT_1.id);
         return dish;
     }

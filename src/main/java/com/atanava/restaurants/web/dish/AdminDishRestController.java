@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -43,6 +44,7 @@ public class AdminDishRestController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
+    //TODO replace two activation methods with one (in all layers)
     @PatchMapping(value = "/deactivate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deactivate(@RequestParam int restaurantId, @RequestParam int id) {
@@ -64,21 +66,9 @@ public class AdminDishRestController {
     }
 
     @GetMapping("/all")
-    public List<Dish> getAll(@RequestParam int restaurantId) {
-        log.info("get all dishes from restaurant {}", restaurantId);
-        return service.getAll(restaurantId);
-    }
-
-    @GetMapping("/active")
-    public List<Dish> getAllActive(@RequestParam int restaurantId) {
-        log.info("get all active dishes from restaurant {}", restaurantId);
-        return service.getByActive(restaurantId, true);
-    }
-
-    @GetMapping("/inactive")
-    public List<Dish> getAllInActive(@RequestParam int restaurantId) {
-        log.info("get all inactive dishes from restaurant {}", restaurantId);
-        return service.getByActive(restaurantId, false);
+    public List<Dish> getAll(@RequestParam int restaurantId, @Nullable Boolean active) {
+        log.info("get all dishes from restaurant {} by active = {}", restaurantId, active);
+        return active == null ? service.getAll(restaurantId) : service.getByActive(restaurantId, true);
     }
 
 }
