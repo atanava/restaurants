@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -58,7 +57,16 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .andExpect(errorType(VALIDATION_ERROR));
     }
 
-
+    @Test
+    void registerWithXSS() throws Exception {
+        UserTo newTo = new UserTo(null,"<script>alert('XSS')</script>", "newemail@ya.ru", "newPassword");
+        perform(MockMvcRequestBuilders.post(REST_URL + "/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newTo)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(errorType(VALIDATION_ERROR));
+    }
 
     @Test
     public void get() throws Exception {
@@ -107,6 +115,19 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(errorType(VALIDATION_ERROR));
     }
+
+    @Test
+    void updateWithXSS() throws Exception {
+        UserTo updatedTo = new UserTo(null,"<script>alert('XSS')</script>", "newemail@ya.ru", "newPassword");
+        perform(MockMvcRequestBuilders.put(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(user1))
+                .content(JsonUtil.writeValue(updatedTo)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(errorType(VALIDATION_ERROR));
+    }
+
 
     @Test
     @Transactional(propagation = Propagation.NEVER)
