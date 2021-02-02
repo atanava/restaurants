@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cc4b455f-5774-4855-903b-53253fec838f",
+		"_postman_id": "9de7311e-7a1a-45e8-8ec8-1b7b82df9ab0",
 		"name": "restaurants",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -520,6 +520,69 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update incorrect name",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"100002\",\"name\": \"V\",\"email\": \"updated2@hot.ee\",\"password\": \"password\",\"roles\":[\"USER\"]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users/100002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users",
+								"100002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create wih XSS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"New User\",\"email\":\"<script>alert('XSS')</script>\",\"password\":\"password\",\"roles\":[\"USER\"]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -572,6 +635,40 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\"name\":\"New registered User\",\"email\":\"test4@mail.ru\",\"password\":\"password\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register with incorrect email",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"New registered User\",\"email\":\"testmail.ru\",\"password\":\"password\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -788,6 +885,85 @@
 								"restaurants",
 								"rest",
 								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update incorrect name",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "test4@mail.ru",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"P\",\"email\": \"test4@mail.ru\",\"password\": \"password\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register with XSS",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"New registered User\",\"email\":\"<script>alert('XSS')</script>\",\"password\":\"password\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/profile/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"profile",
+								"register"
 							]
 						}
 					},
@@ -1548,7 +1724,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/active?restaurantId=100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100003&active=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1559,12 +1735,16 @@
 								"rest",
 								"admin",
 								"dishes",
-								"active"
+								"all"
 							],
 							"query": [
 								{
 									"key": "restaurantId",
 									"value": "100003"
+								},
+								{
+									"key": "active",
+									"value": "true"
 								}
 							]
 						}
@@ -1577,7 +1757,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/inactive?restaurantId=100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100003&active=false",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1588,12 +1768,16 @@
 								"rest",
 								"admin",
 								"dishes",
-								"inactive"
+								"all"
 							],
 							"query": [
 								{
 									"key": "restaurantId",
 									"value": "100003"
+								},
+								{
+									"key": "active",
+									"value": "false"
 								}
 							]
 						}
@@ -1673,7 +1857,44 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\": \"Coffee\",\"restaurantId\": 100003,\"price\": 300}",
+							"raw": "{\"name\": \"Coffee\",\"price\": 300}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create with negative price",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Coffee\",\"price\": -300}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1710,7 +1931,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\": \"Meat\",\"restaurantId\": 100003,\"price\": 750}",
+							"raw": "{\"name\": \"Meat\",\"price\": 750}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1763,6 +1984,80 @@
 								{
 									"key": "restaurantId",
 									"value": "100004"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create incorrect name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"C\",\"restaurantId\": 100003,\"price\": 300}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create with XSS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"<script>alert('XSS')</script>\",\"restaurantId\": 100003,\"price\": 300}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/dishes?restaurantId=100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "restaurantId",
+									"value": "100003"
 								}
 							]
 						}
@@ -2782,6 +3077,69 @@
 								"admin",
 								"restaurants",
 								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create with XSS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"<script>alert('XSS')</script>\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update with XSS",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":100004,\"name\":\"<script>alert('XSS')</script>\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"rest",
+								"admin",
+								"restaurants",
+								"100004"
 							]
 						}
 					},

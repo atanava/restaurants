@@ -203,11 +203,11 @@
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all active Dishes from Restaurant 100003
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/active?restaurantId=100003'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100003&active=true'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all inactive Dishes from Restaurant 100003
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/inactive?restaurantId=100003'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/dishes/all?restaurantId=100003&active=false'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### activate Fish from Restaurant 100003
