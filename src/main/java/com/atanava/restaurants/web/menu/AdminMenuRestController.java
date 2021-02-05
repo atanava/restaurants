@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -76,32 +77,19 @@ public class AdminMenuRestController {
     }
 
     @GetMapping
-    public Menu get(@RequestParam int restaurantId, @RequestParam int menuId) {
-        log.info("get menu {} from restaurant {}", menuId, restaurantId);
-        return service.get(menuId, restaurantId);
-    }
-
-    @GetMapping(value = "/by-date")
-    public Menu getByRestAndDate(@RequestParam int restaurantId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        log.info("get menu from restaurant {} by date {}", restaurantId, date);
-        return service.getByRestAndDate(restaurantId, date);
+    public Menu get(@RequestParam int restaurantId, @Nullable @RequestParam Integer menuId,
+                    @Nullable @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        log.info("get menu {} from restaurant {} by date {}", menuId, restaurantId, date);
+        return menuId != null ? service.get(menuId, restaurantId) : service.getByRestAndDate(restaurantId, date);
     }
 
     @GetMapping(value = "/all")
-    public List<Menu> getAll() {
-        log.info("get all menus");
-        return service.getAll();
+    public List<Menu> getAll(@Nullable @RequestParam Integer restaurantId,
+                             @Nullable @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        log.info("get all menus from restaurant {} by date {}", restaurantId, date);
+        return restaurantId != null ? service.getAllByRestaurant(restaurantId)
+                : date != null ? service.getAllByDate(date)
+                : service.getAll();
     }
 
-    @GetMapping(value = "/all/by")
-    public List<Menu> getAllByRestaurant(@RequestParam int restaurantId) {
-        log.info("get all menus from restaurant {}", restaurantId);
-        return service.getAllByRestaurant(restaurantId);
-    }
-
-    @GetMapping(value = "/all/by-date")
-    public List<Menu> getAllByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        log.info("get all menus by date {}", date);
-        return service.getAllByDate(date);
-    }
 }
