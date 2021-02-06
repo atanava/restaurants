@@ -1,8 +1,8 @@
 package com.atanava.restaurants.web.menu;
 
+import com.atanava.restaurants.View;
 import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.service.MenuService;
-import com.atanava.restaurants.util.exception.IllegalRequestDataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,10 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
@@ -36,11 +36,8 @@ public class AdminMenuRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Menu> create(@Valid @RequestBody Menu menu, @RequestParam int restaurantId) {
+    public ResponseEntity<Menu> create(@Validated(View.Web.class) @RequestBody Menu menu, @RequestParam int restaurantId) {
         checkNew(menu);
-        if (menu.getDishes() == null || menu.getDishes().isEmpty()) {
-            throw new IllegalRequestDataException("Menu must contain dishes");
-        }
         if (menu.getDate() == null) {
             menu.setDate(LocalDate.now());
         }
@@ -57,11 +54,8 @@ public class AdminMenuRestController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody Menu menu, @RequestParam int restaurantId, @RequestParam int menuId) {
+    public void update(@Validated(View.Web.class) @RequestBody Menu menu, @RequestParam int restaurantId, @RequestParam int menuId) {
         assureIdConsistent(menu, menuId);
-        if (menu.getDishes() == null || menu.getDishes().isEmpty()) {
-            throw new IllegalRequestDataException("Menu must contain dishes");
-        }
         if (menu.getDate() == null) {
             menu.setDate(LocalDate.now());
         }

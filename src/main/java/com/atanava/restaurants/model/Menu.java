@@ -10,6 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -48,6 +49,7 @@ public class Menu extends AbstractBaseEntity {
     @JoinTable(name = "dishes_menus",
             joinColumns = @JoinColumn(name = "menu_id"),
             inverseJoinColumns = @JoinColumn(name = "dish_id"))
+    @NotEmpty(groups = View.Web.class)
     private List<Dish> dishes;
 
     @Column(name = "date", columnDefinition = "date default current_date", nullable = false)
