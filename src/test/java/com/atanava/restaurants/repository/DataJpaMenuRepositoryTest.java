@@ -6,11 +6,14 @@ import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.repository.dish.DishRepository;
 import com.atanava.restaurants.repository.menu.MenuRepository;
 import com.atanava.restaurants.testdata.DishTestData;
+import com.atanava.restaurants.testdata.RestaurantTestData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.TransactionSystemException;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,6 +58,11 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
     }
 
     @Test
+    void incorrectRestaurantDishesSave() {
+        assertThrows(IllegalArgumentException.class, () -> menuRepository.save(getWithWrongDishes(), RESTAURANT_2.id));
+    }
+
+    @Test
     void update() {
         Dish newDish = dishRepository.save(DishTestData.getNew(), RESTAURANT_1.id);
         Menu updated = menuRepository.save(getUpdated(), RESTAURANT_1.id);
@@ -69,6 +77,17 @@ public class DataJpaMenuRepositoryTest extends AbstractTest {
                 expected.getDishes().toArray());
 
         assertTrue(Objects.deepEquals(actualFromDB.getDishes().get(4), newDish));
+    }
+
+    @Test
+    void updateNotFound() {
+        Menu notExist = new Menu(NOT_FOUND.id, RestaurantTestData.rest1, Collections.emptyList(), LocalDate.now());
+        assertNull(menuRepository.save(notExist, RESTAURANT_1.id));
+    }
+
+    @Test
+    void incorrectRestaurantDishesUpdate() {
+        assertThrows(IllegalArgumentException.class, () -> menuRepository.save(getWithWrongDishes(), RESTAURANT_2.id));
     }
 
     @Test

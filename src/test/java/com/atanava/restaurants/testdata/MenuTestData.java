@@ -48,6 +48,12 @@ public class MenuTestData {
         return updated;
     }
 
+    public static Menu getWithWrongDishes() {
+        Menu newMenu = new Menu(null, null, DishTestData.getAllFromRest1(), today);
+        newMenu.setRestaurantId(RESTAURANT_2.id);
+        return newMenu;
+    }
+
     public static List<Menu> getAllExpected() {
         return List.of(menuOfTroika2, menuOfTroika1, menuOfGloria1);
     }

@@ -6,6 +6,7 @@ import com.atanava.restaurants.repository.restaurant.CrudRestaurantRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +31,9 @@ public class DataJpaMenuRepository implements MenuRepository {
         if (!menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;
         }
+        //TODO rework DB for restaurant ids consistence
+        menu.getDishes().forEach(dish -> Assert.isTrue(dish.getRestaurantId() == restaurantId,
+                "dish.restaurantId must be " + restaurantId));
         menu.getDishes().forEach(dish -> dish = crudDishRepository.getOne(dish.id()));
         menu.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
         return crudMenuRepository.save(menu);

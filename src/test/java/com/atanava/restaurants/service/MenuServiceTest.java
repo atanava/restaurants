@@ -4,7 +4,6 @@ import com.atanava.restaurants.model.Dish;
 import com.atanava.restaurants.model.Menu;
 import com.atanava.restaurants.repository.dish.DishRepository;
 import com.atanava.restaurants.testdata.DishTestData;
-import com.atanava.restaurants.testdata.RestaurantTestData;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.TransactionSystemException;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,9 +51,14 @@ class MenuServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void duplicateDateSave() {
+    void duplicateDateCreate() {
         service.create(getNew(), RESTAURANT_2.id);
         assertThrows(DataAccessException.class, () -> service.create(getNew(), RESTAURANT_2.id));
+    }
+
+    @Test
+    void incorrectRestaurantDishesCreate() {
+        assertThrows(IllegalArgumentException.class, () -> service.create(getWithWrongDishes(), RESTAURANT_2.id));
     }
 
     @Test
@@ -76,8 +81,13 @@ class MenuServiceTest extends AbstractServiceTest {
 
     @Test
     void updateNotFound() {
-        Menu notExist = new Menu(NOT_FOUND.id, RestaurantTestData.rest1, List.of(), LocalDate.now());
+        Menu notExist = new Menu(NOT_FOUND.id, null, Collections.emptyList(), LocalDate.now());
         assertThrows(NotFoundException.class, () -> service.update(notExist, RESTAURANT_1.id));
+    }
+
+    @Test
+    void incorrectRestaurantDishesUpdate() {
+        assertThrows(IllegalArgumentException.class, () -> service.update(getWithWrongDishes(), RESTAURANT_2.id));
     }
 
     @Test
