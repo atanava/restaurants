@@ -36,13 +36,13 @@ public class MenuTestData {
     }
 
     public static Menu getUpdated() {
-        List<Dish> dishes = new ArrayList<>(List.copyOf(menuOfTroika1.getDishes()));
+        List<Dish> dishes = new ArrayList<>(List.copyOf(menuOfTroika2.getDishes()));
         if ("Salad".equals(dishes.get(0).getName())) {
             dishes.remove(0);
             dishes.add(DishTestData.getNew());
             dishes.get(4).setId(NEW_ITEM.id);
         }
-        Menu updated = new Menu(MENU_1.id, null, Collections.emptyList(), date1);
+        Menu updated = new Menu(MENU_3.id, null, Collections.emptyList(), today);
         updated.setDishes(dishes);
         updated.setRestaurantId(RESTAURANT_1.id);
         return updated;
