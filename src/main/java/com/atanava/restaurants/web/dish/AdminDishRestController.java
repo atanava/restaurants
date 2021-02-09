@@ -46,7 +46,7 @@ public class AdminDishRestController {
     @PatchMapping(value = "/activate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void activate(@RequestParam int restaurantId, @RequestParam int id, @RequestParam boolean active) {
-        log.info("set dish {} from restaurant {} active={}", id, restaurantId, active);
+        log.info("set active={} for dish {} from restaurant {}", active, id, restaurantId);
         service.activate(id, restaurantId, active);
     }
 
