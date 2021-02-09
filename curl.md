@@ -195,11 +195,11 @@
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### deactivate Fish from Restaurant 100003
-`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100008'
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100008&active=false'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### deactivate not found from Restaurant 100003
-`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/deactivate?restaurantId=100003&id=100'
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100&active=false'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all active Dishes from Restaurant 100003
@@ -211,11 +211,11 @@
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### activate Fish from Restaurant 100003
-`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100008'
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100008&active=true'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### activate not found from Restaurant 100003
-`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100'
+`curl --location --request PATCH 'http://localhost:8080/restaurants/rest/admin/dishes/activate?restaurantId=100003&id=100&active=true'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### create Coffee for Restaurant 100003
