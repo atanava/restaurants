@@ -35,32 +35,16 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
     }
 
     @Test
-    void delete() {
-        assertThrows(UnsupportedOperationException.class, () -> repository.delete(DISH_1.id, RESTAURANT_1.id));
-    }
-
-    @Test
-    void deactivate() {
-        assertTrue(repository.deactivate(DISH_1.id, RESTAURANT_1.id));
-        DISH_MATCHER.assertMatch(repository.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
-    }
-
-    @Test
-    void deactivatedNotFound() {
-        assertThrows(NotFoundException.class, () -> repository.deactivate(NEW_ITEM.id, RESTAURANT_1.id));
-    }
-
-    @Test
     void activate() {
-        repository.deactivate(DISH_1.id, RESTAURANT_1.id);
+        assertTrue(repository.activate(DISH_1.id, RESTAURANT_1.id, false));
         DISH_MATCHER.assertMatch(repository.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
-        assertTrue(repository.activate(DISH_1.id, RESTAURANT_1.id));
+        assertTrue(repository.activate(DISH_1.id, RESTAURANT_1.id, true));
         DISH_MATCHER.assertMatch(repository.get(DISH_1.id, RESTAURANT_1.id), getAllFromRest1().get(0));
     }
 
     @Test
     void activateNotFound() {
-        assertThrows(NotFoundException.class, () -> repository.activate(NEW_ITEM.id, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> repository.activate(NEW_ITEM.id, RESTAURANT_1.id, true));
     }
 
     @Test
@@ -82,7 +66,7 @@ public class DataJpaDishRepositoryTest extends AbstractTest {
 
     @Test
     void getByActive() {
-        repository.deactivate(DISH_4.id, RESTAURANT_1.id);
+        repository.activate(DISH_4.id, RESTAURANT_1.id, false);
         List<Dish> dishes = getAllFromRest1Sorted();
         Dish deactivated = dishes.remove(0);
         deactivated.setActive(false);

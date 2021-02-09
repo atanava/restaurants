@@ -31,23 +31,12 @@ public class DataJpaDishRepository implements DishRepository {
 
     @Override
     @Transactional
-    public boolean deactivate(int id, int restaurantId) {
-        Dish deactivated = get(id, restaurantId);
-        if (deactivated == null) {
-            return false;
-        }
-        deactivated.setActive(false);
-        return true;
-    }
-
-    @Override
-    @Transactional
-    public boolean activate(int id, int restaurantId) {
+    public boolean activate(int id, int restaurantId, boolean active) {
         Dish activated = get(id, restaurantId);
         if (activated == null) {
             return false;
         }
-        activated.setActive(true);
+        activated.setActive(active);
         return true;
     }
 

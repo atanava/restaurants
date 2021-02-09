@@ -70,7 +70,7 @@ class AdminDishRestControllerTest extends AbstractControllerTest {
 
     @Test
     void deactivate() throws Exception {
-        perform(MockMvcRequestBuilders.patch(REST_URL + "deactivate?restaurantId=" + RESTAURANT_1.id + "&id=" + DISH_1.id)
+        perform(MockMvcRequestBuilders.patch(REST_URL + "activate?restaurantId=" + RESTAURANT_1.id + "&id=" + DISH_1.id + "&active=false")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin)))
                 .andDo(print())
@@ -80,17 +80,9 @@ class AdminDishRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void deactivatedNotFound() throws Exception {
-        perform(MockMvcRequestBuilders.patch(REST_URL + "deactivate?restaurantId=" + RESTAURANT_1.id + "&id=" + NOT_FOUND.id)
-                .with(userHttpBasic(admin)))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
-    }
-
-    @Test
     void activate() throws Exception {
-        dishService.deactivate(DISH_1.id, RESTAURANT_1.id);
-        perform(MockMvcRequestBuilders.patch(REST_URL + "activate?restaurantId=" + RESTAURANT_1.id + "&id=" + DISH_1.id)
+        dishService.activate(DISH_1.id, RESTAURANT_1.id, false);
+        perform(MockMvcRequestBuilders.patch(REST_URL + "activate?restaurantId=" + RESTAURANT_1.id + "&id=" + DISH_1.id + "&active=true")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin)))
                 .andDo(print())
@@ -101,7 +93,7 @@ class AdminDishRestControllerTest extends AbstractControllerTest {
 
     @Test
     void activatedNotFound() throws Exception {
-        perform(MockMvcRequestBuilders.patch(REST_URL + "activate?restaurantId=" + RESTAURANT_1.id + "&id=" + NOT_FOUND.id)
+        perform(MockMvcRequestBuilders.patch(REST_URL + "activate?restaurantId=" + RESTAURANT_1.id + "&id=" + NOT_FOUND.id + "&active=true")
                 .with(userHttpBasic(admin)))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
@@ -137,7 +129,7 @@ class AdminDishRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getAllActive() throws Exception {
-        dishService.deactivate(DISH_4.id, RESTAURANT_1.id);
+        dishService.activate(DISH_4.id, RESTAURANT_1.id, false);
         List<Dish> allActive = getAllFromRest1Sorted();
         allActive.remove(0);
         perform(MockMvcRequestBuilders.get(REST_URL + "all?restaurantId=" + RESTAURANT_1.id + "&active=true")

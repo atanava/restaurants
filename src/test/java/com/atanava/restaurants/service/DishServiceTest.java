@@ -32,29 +32,17 @@ class DishServiceTest extends AbstractServiceTest {
         assertThrows(DataAccessException.class, () -> service.create(getDuplicate(), RESTAURANT_1.id));
     }
 
-
-    @Test
-    void deactivate() {
-        assertTrue(service.deactivate(DISH_1.id, RESTAURANT_1.id));
-        DISH_MATCHER.assertMatch(service.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
-    }
-
-    @Test
-    void deactivatedNotFound() {
-        assertThrows(NotFoundException.class, () -> service.deactivate(NEW_ITEM.id, RESTAURANT_1.id));
-    }
-
     @Test
     void activate() {
-        service.deactivate(DISH_1.id, RESTAURANT_1.id);
+        assertTrue(service.activate(DISH_1.id, RESTAURANT_1.id, false));
         DISH_MATCHER.assertMatch(service.get(DISH_1.id, RESTAURANT_1.id), getDeactivated());
-        assertTrue(service.activate(DISH_1.id, RESTAURANT_1.id));
+        assertTrue(service.activate(DISH_1.id, RESTAURANT_1.id, true));
         DISH_MATCHER.assertMatch(service.get(DISH_1.id, RESTAURANT_1.id), getAllFromRest1().get(0));
     }
 
     @Test
     void activateNotFound() {
-        assertThrows(NotFoundException.class, () -> service.activate(NEW_ITEM.id, RESTAURANT_1.id));
+        assertThrows(NotFoundException.class, () -> service.activate(NEW_ITEM.id, RESTAURANT_1.id, true));
     }
 
     @Test
@@ -76,7 +64,7 @@ class DishServiceTest extends AbstractServiceTest {
 
     @Test
     void getByActive() {
-        service.deactivate(DISH_4.id, RESTAURANT_1.id);
+        service.activate(DISH_4.id, RESTAURANT_1.id, false);
         List<Dish> dishes = getAllFromRest1Sorted();
         Dish deactivated = dishes.remove(0);
         deactivated.setActive(false);
