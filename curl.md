@@ -337,19 +337,19 @@
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get Restaurant 100003 with Votes
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003?votes=true'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get Restaurant 100003 with Menus
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-menus'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003?menus=true'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get Restaurant 100003 with Votes and Menus
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes-and-menus'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/100003?votes=true&menus=true'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all Restaurants with Votes
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants/all-with-votes'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/restaurants?votes=true'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get not found

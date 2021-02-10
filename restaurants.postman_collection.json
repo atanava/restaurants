@@ -2802,7 +2802,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes",
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003?votes=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2813,8 +2813,13 @@
 								"rest",
 								"admin",
 								"restaurants",
-								"100003",
-								"with-votes"
+								"100003"
+							],
+							"query": [
+								{
+									"key": "votes",
+									"value": "true"
+								}
 							]
 						}
 					},
@@ -2826,7 +2831,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-menus",
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003/?menus=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2838,7 +2843,13 @@
 								"admin",
 								"restaurants",
 								"100003",
-								"with-menus"
+								""
+							],
+							"query": [
+								{
+									"key": "menus",
+									"value": "true"
+								}
 							]
 						}
 					},
@@ -2850,7 +2861,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003/with-votes-and-menus",
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/100003?votes=true&menus=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2861,8 +2872,17 @@
 								"rest",
 								"admin",
 								"restaurants",
-								"100003",
-								"with-votes-and-menus"
+								"100003"
+							],
+							"query": [
+								{
+									"key": "votes",
+									"value": "true"
+								},
+								{
+									"key": "menus",
+									"value": "true"
+								}
 							]
 						}
 					},
@@ -2874,7 +2894,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/all-with-votes",
+							"raw": "http://localhost:8080/restaurants/rest/admin/restaurants/?votes=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2885,7 +2905,13 @@
 								"rest",
 								"admin",
 								"restaurants",
-								"all-with-votes"
+								""
+							],
+							"query": [
+								{
+									"key": "votes",
+									"value": "true"
+								}
 							]
 						}
 					},
