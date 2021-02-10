@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import static com.atanava.restaurants.util.ValidationUtil.*;
 
@@ -62,38 +63,29 @@ public class AdminRestaurantRestController {
     }
 
     @GetMapping("/{id}")
-    public Restaurant get(@PathVariable int id) {
-        log.info("get restaurant {}", id);
+    public Restaurant get(@PathVariable int id,
+                          @RequestParam(required = false) Optional<Boolean> votes,
+                          @RequestParam(required = false) Optional<Boolean> menus) {
+
+        boolean withVotes = votes.orElse(false);
+        boolean withMenus = menus.orElse(false);
+        log.info("get restaurant {} with votes={} and menus={}", id, withVotes, withMenus);
+
+        if (withVotes && withMenus) {
+            return service.getWithVotesAndMenus(id);
+        } else if (withVotes) {
+            return service.getWithVotes(id);
+        } else if (withMenus) {
+            return service.getWithMenus(id);
+        }
         return service.get(id);
     }
 
-    @GetMapping("/{id}/with-votes")
-    public Restaurant getWithVotes(@PathVariable int id) {
-        log.info("get restaurant {} with votes", id);
-        return service.getWithVotes(id);
-    }
-
-    @GetMapping("/{id}/with-menus")
-    public Restaurant getWithMenus(@PathVariable int id) {
-        log.info("get restaurant {} with menus", id);
-        return service.getWithMenus(id);
-    }
-
-    @GetMapping("/{id}/with-votes-and-menus")
-    public Restaurant getWithVotesAndMenus(@PathVariable int id) {
-        log.info("get restaurant {} with votes and menus", id);
-        return service.getWithVotesAndMenus(id);
-    }
-
     @GetMapping
-    public List<Restaurant> getAll() {
-        log.info("get all restaurants");
-        return service.getAll();
-    }
+    public List<Restaurant> getAll(@RequestParam(required = false) Optional<Boolean> votes) {
+        boolean withVotes = votes.orElse(false);
+        log.info("get all restaurants with votes={}", withVotes);
 
-    @GetMapping("/all-with-votes")
-    public List<Restaurant> getAllWithVotes() {
-        log.info("get all restaurants with votes");
-        return service.getAllWithVotes();
+        return withVotes ? service.getAllWithVotes() : service.getAll();
     }
 }
