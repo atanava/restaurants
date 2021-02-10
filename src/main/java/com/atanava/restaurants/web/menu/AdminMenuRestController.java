@@ -9,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -71,15 +70,15 @@ public class AdminMenuRestController {
     }
 
     @GetMapping
-    public Menu get(@RequestParam int restaurantId, @Nullable @RequestParam Integer menuId,
-                    @Nullable @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+    public Menu get(@RequestParam int restaurantId, @RequestParam(required = false) Integer menuId,
+                    @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get menu {} from restaurant {} by date {}", menuId, restaurantId, date);
         return menuId != null ? service.get(menuId, restaurantId) : service.getByRestAndDate(restaurantId, date);
     }
 
     @GetMapping(value = "/all")
-    public List<Menu> getAll(@Nullable @RequestParam Integer restaurantId,
-                             @Nullable @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+    public List<Menu> getAll(@RequestParam(required = false) Integer restaurantId,
+                             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get all menus from restaurant {} by date {}", restaurantId, date);
         return restaurantId != null ? service.getAllByRestaurant(restaurantId)
                 : date != null ? service.getAllByDate(date)
