@@ -240,8 +240,8 @@
 `curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/all'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
-#### get all Menus by Restaurant 100004
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/all/by?restaurantId=100004'
+#### get all Menus by Restaurant 100003
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/all?restaurantId=100003'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get Menu 100023 from Restaurant 100003
@@ -253,11 +253,11 @@
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get by date
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/all/by-date?date=2020-11-19'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/all?date=2020-11-19'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get by Restaurant and date
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus/by-date?restaurantId=100004&date=2020-11-19'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/menus?restaurantId=100004&date=2020-11-19'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### create Menu for Restaurant 100004
