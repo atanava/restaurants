@@ -109,11 +109,11 @@ class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     void getAllTos() {
-        List<RestaurantTo> allTos = Stream.of(rest2, rest1)
+        List<RestaurantTo> allExpected = Stream.of(rest2, rest1)
                 .map(r -> RestaurantUtil.createToFromRestaurant(r, null))
                 .collect(Collectors.toList());
 
-        REST_TO_WITHOUT_MENUS_MATCHER.assertMatch(allTos, service.getAllTos());
+        REST_TO_WITHOUT_MENUS_MATCHER.assertMatch(service.getAllTos(), allExpected);
     }
 
     @Test
@@ -121,22 +121,19 @@ class RestaurantServiceTest extends AbstractServiceTest {
         List<Restaurant> all = service.getAllWithVotes();
         RESTAURANT_MATCHER.assertMatch(all, rest2, rest1);
 
-        rest1.setVotes(VoteTestData.getAllExpByRest1());
-        rest2.setVotes(VoteTestData.getAllExpByRest2());
-        List<Restaurant> allExpected = List.of(rest2, rest1);
+        assertArrayEquals(convertToSortedArray(VoteTestData.getAllExpByRest2()),
+                convertToSortedArray(all.get(0).getVotes()));
 
-        for (int i = 0; i < allExpected.size(); i++) {
-            assertArrayEquals(convertToSortedArray(all.get(i).getVotes()),
-                    convertToSortedArray(allExpected.get(i).getVotes()));
-        }
+        assertArrayEquals(convertToSortedArray(VoteTestData.getAllExpByRest1()),
+                convertToSortedArray(all.get(1).getVotes()));
     }
 
     @Test
     void getWithMenus() {
         Restaurant restaurant = service.getWithMenus(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
-        assertArrayEquals(convertToSortedArray(restaurant.getMenus()),
-                convertToSortedArray(MenuTestData.getAllExpByRest1()));
+        assertArrayEquals(convertToSortedArray(MenuTestData.getAllExpByRest1()),
+                convertToSortedArray(restaurant.getMenus()));
     }
 
 
@@ -154,11 +151,10 @@ class RestaurantServiceTest extends AbstractServiceTest {
         Restaurant restaurant = service.getWithVotesAndMenus(RESTAURANT_1.id);
         RESTAURANT_MATCHER.assertMatch(restaurant, rest1);
 
-        assertArrayEquals(convertToSortedArray(restaurant.getVotes()),
-                convertToSortedArray(VoteTestData.getAllExpByRest1()));
+        assertArrayEquals(convertToSortedArray(VoteTestData.getAllExpByRest1()),
+                convertToSortedArray(restaurant.getVotes()));
 
-        assertArrayEquals(convertToSortedArray(restaurant.getMenus()),
-                convertToSortedArray(MenuTestData.getAllExpByRest1()));
-
+        assertArrayEquals(convertToSortedArray(MenuTestData.getAllExpByRest1()),
+                convertToSortedArray(restaurant.getMenus()));
     }
 }

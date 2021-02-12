@@ -38,8 +38,8 @@ class MenuServiceTest extends AbstractServiceTest {
         MENU_MATCHER.assertMatch(actualFromDB, newMenu);
 
         //https://stackoverflow.com/questions/55621145/how-to-work-with-hibernates-persistentbag-not-obeying-list-equals-contract
-        assertArrayEquals(actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
-                newMenu.getDishes().toArray());
+        assertArrayEquals(newMenu.getDishes().toArray(),
+                actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray());
 
     }
 
@@ -72,8 +72,8 @@ class MenuServiceTest extends AbstractServiceTest {
         MENU_MATCHER.assertMatch(updated, expected);
         MENU_MATCHER.assertMatch(actualFromDB, expected);
 
-        assertArrayEquals(actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
-                expected.getDishes().toArray());
+        assertArrayEquals(expected.getDishes().toArray(),
+                actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray());
 
         assertTrue(Objects.deepEquals(actualFromDB.getDishes().get(4), newDish));
 
@@ -108,8 +108,8 @@ class MenuServiceTest extends AbstractServiceTest {
         Menu actualFromDB = service.get(MENU_1.id, RESTAURANT_1.id);
         MENU_MATCHER.assertMatch(actualFromDB, expected);
 
-        assertArrayEquals(actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray(),
-                expected.getDishes().toArray());
+        assertArrayEquals(expected.getDishes().toArray(),
+                actualFromDB.getDishes() == null ? new Dish[0] : actualFromDB.getDishes().toArray());
     }
 
     @Test
