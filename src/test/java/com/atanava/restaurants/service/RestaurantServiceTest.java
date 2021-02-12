@@ -5,7 +5,6 @@ import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.repository.JpaUtil;
 import com.atanava.restaurants.testdata.MenuTestData;
 import com.atanava.restaurants.testdata.VoteTestData;
-import com.atanava.restaurants.util.RestaurantUtil;
 import com.atanava.restaurants.util.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +13,6 @@ import org.springframework.dao.DataAccessException;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.atanava.restaurants.testdata.DbSequence.NOT_FOUND;
 import static com.atanava.restaurants.testdata.DbSequence.RESTAURANT_1;
@@ -109,11 +106,7 @@ class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     void getAllTos() {
-        List<RestaurantTo> allExpected = Stream.of(rest2, rest1)
-                .map(r -> RestaurantUtil.createToFromRestaurant(r, null))
-                .collect(Collectors.toList());
-
-        REST_TO_WITHOUT_MENUS_MATCHER.assertMatch(service.getAllTos(), allExpected);
+        REST_TO_WITHOUT_MENUS_MATCHER.assertMatch(service.getAllTos(), getAllExpRestTos());
     }
 
     @Test

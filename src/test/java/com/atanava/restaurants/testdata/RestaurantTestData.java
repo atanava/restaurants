@@ -5,6 +5,10 @@ import com.atanava.restaurants.dto.RestaurantTo;
 import com.atanava.restaurants.model.Restaurant;
 import com.atanava.restaurants.util.RestaurantUtil;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,6 +37,12 @@ public class RestaurantTestData {
 
     public static RestaurantTo getRestTo() {
         return RestaurantUtil.createToFromRestaurant(rest1, MenuTestData.menuOfTroika2);
+    }
+
+    public static List<RestaurantTo> getAllExpRestTos() {
+        return Stream.of(rest2, rest1)
+                .map(r -> RestaurantUtil.createToFromRestaurant(r, null))
+                .collect(Collectors.toList());
     }
 
     public static Restaurant getDuplicate() {
