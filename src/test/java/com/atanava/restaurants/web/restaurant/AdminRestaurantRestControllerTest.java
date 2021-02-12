@@ -10,6 +10,7 @@ import com.atanava.restaurants.web.json.JsonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,11 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.atanava.restaurants.TestUtil.convertToSortedArray;
 import static org.junit.jupiter.api.Assertions.*;
 import static com.atanava.restaurants.testdata.RestaurantTestData.*;
 import static com.atanava.restaurants.testdata.UserTestData.admin;
 import static com.atanava.restaurants.testdata.DbSequence.*;
 import static com.atanava.restaurants.TestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -180,8 +183,8 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
                 .andExpect(RESTAURANT_MATCHER.contentJson(rest1));
 
         Restaurant witVotes = readFromJson(action, Restaurant.class);
-        assertArrayEquals(convertToSortedArray(witVotes.getVotes()),
-                convertToSortedArray(VoteTestData.getAllExpByRest1()));
+        assertArrayEquals(convertToSortedArray(VoteTestData.getAllExpByRest1()),
+                convertToSortedArray(witVotes.getVotes()));
     }
 
     @Test
@@ -194,8 +197,8 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
                 .andExpect(RESTAURANT_MATCHER.contentJson(rest1));
 
         Restaurant witMenus = readFromJson(action, Restaurant.class);
-        assertArrayEquals(convertToSortedArray(witMenus.getMenus()),
-                convertToSortedArray(MenuTestData.getAllExpByRest1()));
+        assertArrayEquals(convertToSortedArray(MenuTestData.getAllExpByRest1()),
+                convertToSortedArray(witMenus.getMenus()));
     }
 
     @Test
@@ -209,13 +212,11 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
 
         Restaurant witVotesAndMenus = readFromJson(action, Restaurant.class);
 
-        assertArrayEquals(convertToSortedArray(witVotesAndMenus.getVotes()),
-                convertToSortedArray(VoteTestData.getAllExpByRest1()));
+        assertArrayEquals(convertToSortedArray(VoteTestData.getAllExpByRest1()),
+                convertToSortedArray(witVotesAndMenus.getVotes()));
 
-        assertArrayEquals(convertToSortedArray(witVotesAndMenus.getMenus()),
-                convertToSortedArray(MenuTestData.getAllExpByRest1()));
-
-
+        assertArrayEquals(convertToSortedArray(MenuTestData.getAllExpByRest1()),
+                convertToSortedArray(witVotesAndMenus.getMenus()));
     }
 
     @Test
@@ -229,13 +230,20 @@ class AdminRestaurantRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getAllWithVotes() throws Exception {
-        ResultActions action = perform(MockMvcRequestBuilders.get(REST_URL + "?votes=true")
+        MvcResult result = perform(MockMvcRequestBuilders.get(REST_URL + "?votes=true")
                 .with(userHttpBasic(admin)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(RESTAURANT_MATCHER.contentJson(rest2, rest1));
+                .andExpect(RESTAURANT_MATCHER.contentJson(rest2, rest1))
+                .andReturn();
 
+        List<Restaurant> restaurants = readListFromJsonMvcResult(result, Restaurant.class);
+
+        assertArrayEquals(convertToSortedArray(VoteTestData.getAllExpByRest2()),
+                convertToSortedArray(restaurants.get(0).getVotes()));
+
+        assertArrayEquals(convertToSortedArray(VoteTestData.getAllExpByRest1()),
+                convertToSortedArray(restaurants.get(1).getVotes()));
     }
-
 
 }
