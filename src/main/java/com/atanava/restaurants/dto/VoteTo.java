@@ -1,6 +1,7 @@
 package com.atanava.restaurants.dto;
 
 import javax.validation.constraints.NotNull;
+import java.beans.ConstructorProperties;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class VoteTo extends AbstractBaseTo {
     @NotNull
     private final Integer restaurantId;
 
+    @ConstructorProperties({"id", "userId", "restaurantId", "date"})
     public VoteTo(Integer id, Integer userId, Integer restaurantId, LocalDate date) {
         super(id);
         this.date = date;
