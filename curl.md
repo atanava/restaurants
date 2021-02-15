@@ -127,23 +127,23 @@
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all Votes by user1
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-user?userId=100001'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes?userId=100001'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all Votes by Restaurant 100003
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-restaurant?restaurantId=100003'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes?restaurantId=100003'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all Votes by date
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-date?date=2020-11-19'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes?date=2020-11-19'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all Votes by Restaurant and date
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-restaurant-and-date?restaurantId=100003&date=2020-11-19'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes?restaurantId=100003&date=2020-11-19'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### get all Votes by User and Restaurant
-`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes/by-user-and-restaurant?userId=100000&restaurantId=100003'
+`curl --location --request GET 'http://localhost:8080/restaurants/rest/admin/votes?userId=100000&restaurantId=100003'
  --header 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu'`
  
 #### delete Vote 100020

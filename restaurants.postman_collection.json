@@ -1083,7 +1083,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user?userId=100001",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes?userId=100001",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1093,8 +1093,7 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"votes",
-								"by-user"
+								"votes"
 							],
 							"query": [
 								{
@@ -1112,7 +1111,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant?restaurantId=100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes?restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1122,8 +1121,7 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"votes",
-								"by-restaurant"
+								"votes"
 							],
 							"query": [
 								{
@@ -1141,7 +1139,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-date?date=2020-11-19",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes?date=2020-11-19",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1151,8 +1149,7 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"votes",
-								"by-date"
+								"votes"
 							],
 							"query": [
 								{
@@ -1170,7 +1167,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-restaurant-and-date?restaurantId=100003&date=2020-11-19",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes?restaurantId=100003&date=2020-11-19",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1180,8 +1177,7 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"votes",
-								"by-restaurant-and-date"
+								"votes"
 							],
 							"query": [
 								{
@@ -1203,7 +1199,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/restaurants/rest/admin/votes/by-user-and-restaurant?userId=100000&restaurantId=100003",
+							"raw": "http://localhost:8080/restaurants/rest/admin/votes?userId=100000&restaurantId=100003",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1213,8 +1209,7 @@
 								"restaurants",
 								"rest",
 								"admin",
-								"votes",
-								"by-user-and-restaurant"
+								"votes"
 							],
 							"query": [
 								{
