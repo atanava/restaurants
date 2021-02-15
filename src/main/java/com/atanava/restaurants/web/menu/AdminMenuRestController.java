@@ -73,7 +73,9 @@ public class AdminMenuRestController {
     public Menu get(@RequestParam int restaurantId, @RequestParam(required = false) Integer menuId,
                     @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         log.info("get menu {} from restaurant {} by date {}", menuId, restaurantId, date);
-        return menuId != null ? service.get(menuId, restaurantId) : service.getByRestAndDate(restaurantId, date);
+        return menuId != null ? service.get(menuId, restaurantId)
+                : date != null ? service.getByRestAndDate(restaurantId, date)
+                : null;
     }
 
     @GetMapping(value = "/all")

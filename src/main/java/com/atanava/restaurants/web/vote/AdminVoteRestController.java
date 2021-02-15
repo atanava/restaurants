@@ -10,8 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = AdminVoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,40 +33,19 @@ public class AdminVoteRestController {
     }
 
     @GetMapping
-    public List<VoteTo> getAll() {
-        log.info("get all votes");
-        return (List<VoteTo>) service.getAll(new ArrayList<>());
-    }
+    public List<VoteTo> getAll(@RequestParam(required = false) Integer userId,
+                               @RequestParam(required = false) Integer restaurantId,
+                               @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        log.info("get all votes by user={} and restaurant={} and date={}", userId, restaurantId, date);
 
-    @GetMapping("/by-user")
-    public List<VoteTo> getAllByUser(@RequestParam int userId) {
-        log.info("get all votes by user {}", userId);
-        return (List<VoteTo>) service.getAllByUser(userId, new ArrayList<>());
-    }
-
-    @GetMapping("/by-restaurant")
-    public List<VoteTo> getAllByRestaurant(@RequestParam int restaurantId) {
-        log.info("get all votes by restaurant {}", restaurantId);
-        return (List<VoteTo>) service.getAllByRestaurant(restaurantId, new ArrayList<>());
-    }
-
-    @GetMapping("/by-date")
-    public List<VoteTo> getAllByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        log.info("get all votes by date {}", date);
-        return (List<VoteTo>) service.getAllByDate(date, new ArrayList<>());
-    }
-
-    @GetMapping("/by-restaurant-and-date")
-    public List<VoteTo> getAllByRestAndDate(@RequestParam int restaurantId,
-                                            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        log.info("get all votes by restaurant {} and date {}", restaurantId, date);
-        return (List<VoteTo>) service.getAllByRestAndDate(restaurantId, date, new ArrayList<>());
-    }
-
-    @GetMapping("/by-user-and-restaurant")
-    public List<VoteTo> getAllByUserAndRest(@RequestParam int userId, @RequestParam int restaurantId) {
-        log.info("get all votes by user {} and restaurant {}", userId, restaurantId);
-        return (List<VoteTo>) service.getAllByUserAndRest(userId, restaurantId, new ArrayList<>());
+        List<VoteTo> voteTos = new ArrayList<>();
+        return    (userId != null && restaurantId != null && date == null) ? (List<VoteTo>) service.getAllByUserAndRest(userId, restaurantId, voteTos)
+                : (userId == null && restaurantId != null && date != null) ? (List<VoteTo>) service.getAllByRestAndDate(restaurantId, date, voteTos)
+                : (userId == null && restaurantId != null && date == null) ? (List<VoteTo>) service.getAllByRestaurant(restaurantId, voteTos)
+                : (userId != null && restaurantId == null && date == null) ? (List<VoteTo>) service.getAllByUser(userId, voteTos)
+                : (userId == null && restaurantId == null && date != null) ? (List<VoteTo>) service.getAllByDate(date, voteTos)
+                : (userId == null && restaurantId == null && date == null) ? (List<VoteTo>) service.getAll(voteTos)
+                : null;
     }
 
     @DeleteMapping("/{id}")
